@@ -11,6 +11,9 @@ export default function(floor, step) {
     },
     ceil: function(date) {
       return floor(date = new Date(date - 1)), step(date, 1), date;
+    },
+    offset: function(date, count) {
+      return step(date = new Date(+date), count == null ? 1 : count), date;
     }
   };
 };

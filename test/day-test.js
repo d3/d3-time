@@ -1,0 +1,128 @@
+var tape = require("tape"),
+    time = require("../"),
+    date = require("./date");
+
+require("./dateEqual");
+
+tape("day.floor(date) returns the latest day boundary", function(test) {
+  test.dateEqual(time.day.floor(date.local(2010, 11, 31, 23)), date.local(2010, 11, 31));
+  test.dateEqual(time.day.floor(date.local(2011, 00, 01, 00)), date.local(2011, 00, 01));
+  test.dateEqual(time.day.floor(date.local(2011, 00, 01, 01)), date.local(2011, 00, 01));
+  test.end();
+});
+
+tape("day.floor(date) observes start of daylight savings time", function(test) {
+  test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 12));
+  test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
+  test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
+  test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 10)), date.local(2011, 02, 13));
+  test.end();
+});
+
+tape("day.floor(date) observes end of daylight savings time", function(test) {
+  test.dateEqual(time.day.floor(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
+  test.dateEqual(time.day.floor(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 06));
+  test.dateEqual(time.day.floor(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 06));
+  test.dateEqual(time.day.floor(date.utc(2011, 10, 06, 10)), date.local(2011, 10, 06));
+  test.end();
+});
+
+tape("day.floor(date) correctly handles years in the first century", function(test) {
+  test.dateEqual(time.day.floor(date.local(0011, 10, 06, 07)), date.local(0011, 10, 06));
+  test.end();
+});
+
+tape("day.round(date) returns the nearest day boundary", function(test) {
+  test.dateEqual(time.day.round(date.local(2010, 11, 30, 13)), date.local(2010, 11, 31));
+  test.dateEqual(time.day.round(date.local(2010, 11, 30, 11)), date.local(2010, 11, 30));
+  test.end();
+});
+
+tape("day.round(date) observes start of daylight savings time", function(test) {
+  test.dateEqual(time.day.round(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 13));
+  test.dateEqual(time.day.round(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
+  test.dateEqual(time.day.round(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
+  test.dateEqual(time.day.round(date.utc(2011, 02, 13, 20)), date.local(2011, 02, 14));
+  test.end();
+});
+
+tape("day.round(date) observes end of daylight savings time", function(test) {
+  test.dateEqual(time.day.round(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
+  test.dateEqual(time.day.round(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 06));
+  test.dateEqual(time.day.round(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 06));
+  test.dateEqual(time.day.round(date.utc(2011, 10, 06, 20)), date.local(2011, 10, 07));
+  test.end();
+});
+
+tape("day.round(date) handles midnight for leap years", function(test) {
+  test.dateEqual(time.day.round(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
+  test.dateEqual(time.day.round(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
+  test.end();
+});
+
+tape("day.ceil(date) returns midnights", function(test) {
+  test.dateEqual(time.day.ceil(date.local(2010, 11, 30, 23)), date.local(2010, 11, 31));
+  test.dateEqual(time.day.ceil(date.local(2010, 11, 31, 00)), date.local(2010, 11, 31));
+  test.dateEqual(time.day.ceil(date.local(2010, 11, 31, 01)), date.local(2011, 00, 01));
+  test.end();
+});
+
+tape("day.ceil(date) observes start of daylight savings time", function(test) {
+  test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 13));
+  test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
+  test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 14));
+  test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 10)), date.local(2011, 02, 14));
+  test.end();
+});
+
+tape("day.ceil(date) observes end of daylight savings time", function(test) {
+  test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
+  test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 07));
+  test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 07));
+  test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 10)), date.local(2011, 10, 07));
+  test.end();
+});
+
+tape("day.ceil(date) handles midnight for leap years", function(test) {
+  test.dateEqual(time.day.ceil(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
+  test.dateEqual(time.day.ceil(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
+  test.end();
+});
+
+tape("day.offset(date) is an alias for day.offset(date, 1)", function(test) {
+  test.dateEqual(time.day.offset(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2011, 00, 01, 23, 59, 59, 999));
+  test.end();
+});
+
+tape("day.offset(date, count) does not modify the passed-in date", function(test) {
+  var d = date.local(2010, 11, 31, 23, 59, 59, 999);
+  time.day.offset(date, +1);
+  test.dateEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
+  test.end();
+});
+
+tape("day.offset(date, count) does not round the passed-in-date", function(test) {
+  test.dateEqual(time.day.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011, 00, 01, 23, 59, 59, 999));
+  test.dateEqual(time.day.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 11, 29, 23, 59, 59, 456));
+  test.end();
+});
+
+tape("day.offset(date, count) allows negative offsets", function(test) {
+  test.dateEqual(time.day.offset(date.local(2010, 11, 31), -1), date.local(2010, 11, 30));
+  test.dateEqual(time.day.offset(date.local(2011, 00, 01), -2), date.local(2010, 11, 30));
+  test.dateEqual(time.day.offset(date.local(2011, 00, 01), -1), date.local(2010, 11, 31));
+  test.end();
+});
+
+tape("day.offset(date, count) allows positive offsets", function(test) {
+  test.dateEqual(time.day.offset(date.local(2010, 11, 31), +1), date.local(2011, 00, 01));
+  test.dateEqual(time.day.offset(date.local(2010, 11, 30), +2), date.local(2011, 00, 01));
+  test.dateEqual(time.day.offset(date.local(2010, 11, 30), +1), date.local(2010, 11, 31));
+  test.end();
+});
+
+tape("day.offset(date, count) allows zero offset", function(test) {
+  test.dateEqual(time.day.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
+  test.dateEqual(time.day.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
+  test.end();
+});

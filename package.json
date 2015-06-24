@@ -1,28 +1,29 @@
 {
-  "name": "d3-time-interval",
+  "name": "d3-time",
   "version": "0.0.1",
   "description": "",
   "keywords": [
     "d3",
     "time",
+    "interval",
     "calendar"
   ],
-  "homepage": "https://github.com/d3/d3-time-interval",
+  "homepage": "https://github.com/d3/d3-time",
   "license": "BSD-3-Clause",
   "author": {
     "name": "Mike Bostock",
     "url": "http://bost.ocks.org/mike"
   },
-  "main": "build/time-interval",
+  "main": "build/time",
   "jsnext:main": "index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/d3/d3-time-interval.git"
+    "url": "https://github.com/d3/d3-time.git"
   },
   "scripts": {
-    "pretest": "mkdir -p build && d3-bundler --format=umd --name=interval -- index.js > build/time-interval.js",
+    "pretest": "mkdir -p build && d3-bundler --format=umd --name=time -- index.js > build/time.js",
     "test": "faucet `find test -name '*-test.js'`",
-    "prepublish": "npm run test && uglifyjs build/time-interval.js -c -m -o build/time-interval.min.js && rm -f build/time-interval.zip && zip -j build/time-interval.zip -- LICENSE README.md build/time-interval.js build/time-interval.min.js"
+    "prepublish": "npm run test && uglifyjs build/time.js -c -m -o build/time.min.js && rm -f build/time.zip && zip -j build/time.zip -- LICENSE README.md build/time.js build/time.min.js"
   },
   "devDependencies": {
     "d3-bundler": "~0.2.5",

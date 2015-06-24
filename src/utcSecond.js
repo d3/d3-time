@@ -1,9 +1,9 @@
 import interval from "./interval";
 
 export function floor(date) {
-  date.setSeconds(0, 0);
+  date.setUTCMilliseconds(0);
 };
 
 export default interval(floor, function(date, offset) {
-  date.setTime(+date + Math.floor(offset) * 6e4);
+  date.setTime(+date + Math.floor(offset) * 1e3);
 });

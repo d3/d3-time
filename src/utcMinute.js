@@ -1,7 +1,7 @@
 import interval from "./interval";
 
 export function floor(date) {
-  date.setSeconds(0, 0);
+  date.setUTCSeconds(0, 0);
 };
 
 export default interval(floor, function(date, offset) {

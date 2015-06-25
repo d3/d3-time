@@ -61,7 +61,7 @@ tape("week.offset(date, count) does not modify the passed-in date", function(tes
   test.end();
 });
 
-tape("week.offset(date, count) does not round the passed-in-date", function(test) {
+tape("week.offset(date, count) does not round the passed-in date", function(test) {
   test.dateEqual(time.week.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011, 00, 07, 23, 59, 59, 999));
   test.dateEqual(time.week.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 11, 17, 23, 59, 59, 456));
   test.end();

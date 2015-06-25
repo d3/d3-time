@@ -61,7 +61,7 @@ tape("utcWeek.offset(date, count) does not modify the passed-in date", function(
   test.end();
 });
 
-tape("utcWeek.offset(date, count) does not round the passed-in-date", function(test) {
+tape("utcWeek.offset(date, count) does not round the passed-in date", function(test) {
   test.dateEqual(time.utcWeek.offset(date.utc(2010, 11, 31, 23, 59, 59, 999), +1), date.utc(2011, 00, 07, 23, 59, 59, 999));
   test.dateEqual(time.utcWeek.offset(date.utc(2010, 11, 31, 23, 59, 59, 456), -2), date.utc(2010, 11, 17, 23, 59, 59, 456));
   test.end();

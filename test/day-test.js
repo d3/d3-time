@@ -101,7 +101,7 @@ tape("day.offset(date, count) does not modify the passed-in date", function(test
   test.end();
 });
 
-tape("day.offset(date, count) does not round the passed-in-date", function(test) {
+tape("day.offset(date, count) does not round the passed-in date", function(test) {
   test.dateEqual(time.day.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011, 00, 01, 23, 59, 59, 999));
   test.dateEqual(time.day.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 11, 29, 23, 59, 59, 456));
   test.end();
@@ -124,5 +124,49 @@ tape("day.offset(date, count) allows positive offsets", function(test) {
 tape("day.offset(date, count) allows zero offset", function(test) {
   test.dateEqual(time.day.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
   test.dateEqual(time.day.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
+  test.end();
+});
+
+tape("day.range(start, stop) returns the days between start (inclusive) and stop (exclusive)", function(test) {
+  var days = time.day.range(date.local(2011, 10, 04), date.local(2011, 10, 10));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.local(2011, 10, 04));
+  test.dateEqual(days[1], date.local(2011, 10, 05));
+  test.dateEqual(days[2], date.local(2011, 10, 06));
+  test.dateEqual(days[3], date.local(2011, 10, 07));
+  test.dateEqual(days[4], date.local(2011, 10, 08));
+  test.dateEqual(days[5], date.local(2011, 10, 09));
+  test.end();
+});
+
+tape("day.range(start, stop) only returns day boundaries", function(test) {
+  var days = time.day.range(date.local(2011, 10, 04, 02), date.local(2011, 10, 10, 13));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.local(2011, 10, 05));
+  test.dateEqual(days[1], date.local(2011, 10, 06));
+  test.dateEqual(days[2], date.local(2011, 10, 07));
+  test.dateEqual(days[3], date.local(2011, 10, 08));
+  test.dateEqual(days[4], date.local(2011, 10, 09));
+  test.dateEqual(days[5], date.local(2011, 10, 10));
+  test.end();
+});
+
+tape("day.range(start, stop) coerces start and stop to dates", function(test) {
+  var days = time.day.range(+date.local(2011, 10, 04), +date.local(2011, 10, 07));
+  test.equal(days.length, 3);
+  test.dateEqual(days[0], date.local(2011, 10, 04));
+  test.dateEqual(days[1], date.local(2011, 10, 05));
+  test.dateEqual(days[2], date.local(2011, 10, 06));
+  test.end();
+});
+
+tape("day.range(start, stop) returns the empty array for invalid dates", function(test) {
+  test.deepEqual(time.day.range(new Date(NaN), Infinity), []);
+  test.end();
+});
+
+tape("day.range(start, stop) returns the empty array if start >= stop", function(test) {
+  test.deepEqual(time.day.range(date.local(2011, 10, 10), date.local(2011, 10, 04)), []);
+  test.deepEqual(time.day.range(date.local(2011, 10, 10), date.local(2011, 10, 10)), []);
   test.end();
 });

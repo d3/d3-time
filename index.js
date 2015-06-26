@@ -13,21 +13,28 @@ import utcSecond from "./src/utcSecond";
 import {default as utcWeek, utcSunday, utcMonday, utcTuesday, utcWednesday, utcThursday, utcFriday, utcSaturday} from "./src/utcWeek";
 import utcYear from "./src/utcYear";
 import {default as week, sunday, monday, tuesday, wednesday, thursday, friday, saturday} from "./src/week";
+import {default as weekOfYear, sundayOfYear, mondayOfYear, tuesdayOfYear, wednesdayOfYear, thursdayOfYear, fridayOfYear, saturdayOfYear} from "./src/weekOfYear";
 import year from "./src/year";
 
 export {
   day,
   dayOfYear,
   friday,
+  fridayOfYear,
   hour,
   minute,
   monday,
+  mondayOfYear,
   month,
   saturday,
+  saturdayOfYear,
   second,
   sunday,
+  sundayOfYear,
   thursday,
+  thursdayOfYear,
   tuesday,
+  tuesdayOfYear,
   utcDay,
   utcDayOfYear,
   utcFriday,
@@ -44,6 +51,8 @@ export {
   utcWeek,
   utcYear,
   wednesday,
+  wednesdayOfYear,
   week,
+  weekOfYear,
   year
 };

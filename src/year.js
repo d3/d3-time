@@ -7,5 +7,5 @@ export function floor(date) {
 };
 
 export default interval(floor, function(date, offset) {
-  date.setFullYear(date.getFullYear() + Math.floor(offset));
+  date.setFullYear(date.getFullYear() + offset);
 });

@@ -7,5 +7,5 @@ export function floor(date) {
 };
 
 export default interval(floor, function(date, offset) {
-  date.setDate(date.getDate() + Math.floor(offset) * 7);
+  date.setDate(date.getDate() + offset * 7);
 });

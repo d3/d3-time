@@ -5,5 +5,5 @@ export function floor(date) {
 };
 
 export default interval(floor, function(date, offset) {
-  date.setTime(+date + Math.floor(offset) * 36e5);
+  date.setTime(+date + offset * 36e5);
 });

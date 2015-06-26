@@ -5,5 +5,5 @@ export function floor(date) {
 };
 
 export default interval(floor, function(date, offset) {
-  date.setUTCDate(date.getUTCDate() + Math.floor(offset));
+  date.setUTCDate(date.getUTCDate() + offset);
 });

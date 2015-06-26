@@ -7,5 +7,5 @@ export function floor(date) {
 };
 
 export default interval(floor, function(date, offset) {
-  date.setUTCFullYear(date.getUTCFullYear() + Math.floor(offset));
+  date.setUTCFullYear(date.getUTCFullYear() + offset);
 });

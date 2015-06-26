@@ -10,26 +10,40 @@ import utcHour from "./src/utcHour";
 import utcMinute from "./src/utcMinute";
 import utcMonth from "./src/utcMonth";
 import utcSecond from "./src/utcSecond";
-import utcWeek from "./src/utcWeek";
+import {default as utcWeek, utcSunday, utcMonday, utcTuesday, utcWednesday, utcThursday, utcFriday, utcSaturday} from "./src/utcWeek";
 import utcYear from "./src/utcYear";
-import week from "./src/week";
+import {default as week, sunday, monday, tuesday, wednesday, thursday, friday, saturday} from "./src/week";
 import year from "./src/year";
 
 export {
   day,
   dayOfYear,
+  friday,
   hour,
   minute,
+  monday,
   month,
+  saturday,
   second,
+  sunday,
+  thursday,
+  tuesday,
   utcDay,
   utcDayOfYear,
+  utcFriday,
   utcHour,
   utcMinute,
+  utcMonday,
   utcMonth,
+  utcSaturday,
   utcSecond,
+  utcSunday,
+  utcThursday,
+  utcTuesday,
+  utcWednesday,
   utcWeek,
   utcYear,
+  wednesday,
   week,
   year
 };

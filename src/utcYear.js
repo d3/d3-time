@@ -1,11 +1,9 @@
-import {floor as utcDay} from "./utcDay";
+import {floor} from "./utcDay";
 import interval from "./interval";
 
-export function floor(date) {
-  utcDay(date);
+export default interval(function(date) {
+  floor(date);
   date.setUTCMonth(0, 1);
-};
-
-export default interval(floor, function(date, offset) {
+}, function(date, offset) {
   date.setUTCFullYear(date.getUTCFullYear() + offset);
 });

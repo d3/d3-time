@@ -1,9 +1,9 @@
-import {floor as utcDay} from "./utcDay";
+import {floor} from "./utcDay";
 import interval from "./interval";
 
 function utcWeekday(i) {
   return interval(function(date) {
-    utcDay(date);
+    floor(date);
     date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 7 - i) % 7);
   }, function(date, offset) {
     date.setUTCDate(date.getUTCDate() + offset * 7);

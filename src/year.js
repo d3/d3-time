@@ -1,11 +1,9 @@
-import {floor as day} from "./day";
+import {floor} from "./day";
 import interval from "./interval";
 
-export function floor(date) {
-  day(date);
+export default interval(function(date) {
+  floor(date);
   date.setMonth(0, 1);
-};
-
-export default interval(floor, function(date, offset) {
+}, function(date, offset) {
   date.setFullYear(date.getFullYear() + offset);
 });

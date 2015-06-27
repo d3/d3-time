@@ -1,9 +1,9 @@
-import {floor as day} from "./day";
+import {floor} from "./day";
 import interval from "./interval";
 
 function weekday(i) {
   return interval(function(date) {
-    day(date);
+    floor(date);
     date.setDate(date.getDate() - (date.getDay() + 7 - i) % 7);
   }, function(date, offset) {
     date.setDate(date.getDate() + offset * 7);

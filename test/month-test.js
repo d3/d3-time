@@ -4,6 +4,11 @@ var tape = require("tape"),
 
 require("./dateEqual");
 
+tape("months in an alias for month.range", function(test) {
+  test.equal(time.months, time.month.range);
+  test.end();
+});
+
 tape("month.floor(date) returns months", function(test) {
   test.dateEqual(time.month.floor(date.local(2010, 11, 31, 23)), date.local(2010, 11, 01));
   test.dateEqual(time.month.floor(date.local(2011, 00, 01, 00)), date.local(2011, 00, 01));

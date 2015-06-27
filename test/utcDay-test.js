@@ -4,6 +4,11 @@ var tape = require("tape"),
 
 require("./dateEqual");
 
+tape("utcDays in an alias for utcDay.range", function(test) {
+  test.equal(time.utcDays, time.utcDay.range);
+  test.end();
+});
+
 tape("utcDay.floor(date) returns days", function(test) {
   test.dateEqual(time.utcDay.floor(date.utc(2010, 11, 31, 23)), date.utc(2010, 11, 31));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 00, 01, 00)), date.utc(2011, 00, 01));

@@ -4,6 +4,11 @@ var tape = require("tape"),
 
 require("./dateEqual");
 
+tape("tuesdays in an alias for tuesday.range", function(test) {
+  test.equal(time.tuesdays, time.tuesday.range);
+  test.end();
+});
+
 tape("tuesday.floor(date) returns tuesdays", function(test) {
   test.dateEqual(time.tuesday.floor(date.local(2011, 00, 02, 23, 59, 59)), date.local(2010, 11, 28));
   test.dateEqual(time.tuesday.floor(date.local(2011, 00, 03, 00, 00, 00)), date.local(2010, 11, 28));

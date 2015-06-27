@@ -4,6 +4,11 @@ var tape = require("tape"),
 
 require("./dateEqual");
 
+tape("utcSundays in an alias for utcSunday.range", function(test) {
+  test.equal(time.utcSundays, time.utcSunday.range);
+  test.end();
+});
+
 tape("utcSunday.floor(date) returns sundays", function(test) {
   test.dateEqual(time.utcSunday.floor(date.utc(2010, 11, 31, 23, 59, 59)), date.utc(2010, 11, 26));
   test.dateEqual(time.utcSunday.floor(date.utc(2011, 00, 01, 00, 00, 00)), date.utc(2010, 11, 26));

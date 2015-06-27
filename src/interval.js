@@ -1,37 +1,45 @@
-export default function interval(floor, offset) {
-  return {
-    floor: function(date) {
-      return floor(date = new Date(+date)), date;
-    },
-    round: function(date) {
-      var d0 = new Date(+date),
-          d1 = new Date(date - 1);
-      floor(d0), floor(d1), offset(d1, 1);
-      return date - d0 < d1 - date ? d0 : d1;
-    },
-    ceil: function(date) {
-      return floor(date = new Date(date - 1)), offset(date, 1), date;
-    },
-    offset: function(date, step) {
-      return offset(date = new Date(+date), step == null ? 1 : Math.floor(step)), date;
-    },
-    range: function(start, stop, step) {
-      var range = [];
-      start = new Date(start - 1);
-      stop = new Date(+stop);
-      step = step == null ? 1 : Math.floor(step);
-      if (!(start < stop)) return range; // also handles Invalid Date
-      floor(start), offset(start, 1);
-      if (start < stop) range.push(new Date(+start));
-      while (offset(start, step), start < stop) range.push(new Date(+start));
-      return range;
-    },
-    filter: function(test) {
-      return interval(function(date) {
-        while (floor(date), !test(date)) date.setTime(date - 1);
-      }, function(date, step) {
-        while (--step >= 0) while (offset(date, 1), !test(date));
-      });
-    }
+export default function newInterval(floori, offseti) {
+
+  function interval(date) {
+    return floori(date = new Date(+date)), date;
+  }
+
+  interval.floor = interval;
+
+  interval.round = function(date) {
+    var d0 = new Date(+date),
+        d1 = new Date(date - 1);
+    floori(d0), floori(d1), offseti(d1, 1);
+    return date - d0 < d1 - date ? d0 : d1;
   };
+
+  interval.ceil = function(date) {
+    return floori(date = new Date(date - 1)), offseti(date, 1), date;
+  };
+
+  interval.offset = function(date, step) {
+    return offseti(date = new Date(+date), step == null ? 1 : Math.floor(step)), date;
+  };
+
+  interval.range = function(start, stop, step) {
+    var range = [];
+    start = new Date(start - 1);
+    stop = new Date(+stop);
+    step = step == null ? 1 : Math.floor(step);
+    if (!(start < stop)) return range; // also handles Invalid Date
+    floori(start), offseti(start, 1);
+    if (start < stop) range.push(new Date(+start));
+    while (offseti(start, step), start < stop) range.push(new Date(+start));
+    return range;
+  };
+
+  interval.filter = function(test) {
+    return newInterval(function(date) {
+      while (floori(date), !test(date)) date.setTime(date - 1);
+    }, function(date, step) {
+      while (--step >= 0) while (offseti(date, 1), !test(date));
+    });
+  };
+
+  return interval;
 };

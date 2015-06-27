@@ -1,4 +1,4 @@
-export default function(floor, offset) {
+export default function interval(floor, offset) {
   return {
     floor: function(date) {
       return floor(date = new Date(+date)), date;
@@ -24,6 +24,13 @@ export default function(floor, offset) {
       floor(start);
       while (offset(start, step), start < stop) range.push(new Date(+start));
       return range;
+    },
+    filter: function(test) {
+      return interval(function(date) {
+        while (floor(date), !test(date)) date.setTime(date - 1);
+      }, function(date, step) {
+        while (--step >= 0) while (offset(date, 1), !test(date));
+      });
     }
   };
 };

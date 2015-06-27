@@ -121,7 +121,7 @@ Years (e.g., January 1, 2012 at 12:00 AM); ranges from 365 to 366 days.
 For convenience, aliases for [*interval*.range](#interval_range) are also provided as plural forms of the corresponding time interval.
 
 <a name="seconds" href="#seconds">#</a> <b>seconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#seconds">#</as> <b>utcSecond</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#seconds">#</a> <b>utcSeconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [second](#second).[range](#interval_range) and [utcSecond](#second).[range](#interval_range).
 

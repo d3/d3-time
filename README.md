@@ -33,7 +33,7 @@ Days (e.g., February 7, 2012 at 12:00 AM); typically 24 hours. Days in local tim
 <a name="week" href="#week">#</a> <b>week</b>
 <br><a href="#week">#</a> <b>utcWeek</b>
 
-Alias for [sunday](#sunday); 7 days. Weeks in local time may range from 167 to 169 hours due on Daylight Savings.
+Alias for [sunday](#sunday); 7 days and typically 168 hours. Weeks in local time may range from 167 to 169 hours due on Daylight Savings.
 
 <a name="sunday" href="#sunday">#</a> <b>sunday</b>
 <br><a href="#sunday">#</a> <b>utcSunday</b>

@@ -44,6 +44,8 @@ There are also UTC-equivalents:
 * [utcMonth](#utcMonth)
 * [utcYear](#utcYear)
 
+Each interval supports the following methods:
+
 <a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>)
 
 Rounds down the specified *date*, returning the latest time interval before or equal to *date*. For example, `day.floor(new Date())` returns midnight (12:00 AM) on the current day, in local time.

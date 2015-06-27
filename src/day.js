@@ -1,9 +1,7 @@
 import interval from "./interval";
 
-export function floor(date) {
+export default interval(function(date) {
   date.setHours(0, 0, 0, 0);
-};
-
-export default interval(floor, function(date, offset) {
+}, function(date, offset) {
   date.setDate(date.getDate() + offset);
 });

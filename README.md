@@ -8,7 +8,43 @@ If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](
 
 ## API Reference
 
-The following time intervals are supported:
+[Need description of time interval here.]
+
+<a name="_interval" href="#_interval">#</a> <i>interval</i>(<i>date</i>)
+
+An alias for [*interval*.floor](#interval_floor).
+
+<a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>)
+
+Returns a new date representing the latest time interval before or equal to *date*. For example, `day.floor(new Date)` typically returns 12:00 AM local time on the current day.
+
+<a name="interval_round" href="#interval_round">#</a> <i>interval</i>.<b>round</b>(<i>date</i>)
+
+Returns a new date representing the closest time interval to *date*. For example, `day.round(new Date)` typically returns 12:00 AM local time on the current day if it is on or before noon, and 12:00 AM of the following day if it is after noon.
+
+<a name="interval_ceil" href="#interval_ceil">#</a> <i>interval</i>.<b>ceil</b>(<i>date</i>)
+
+Returns a new date representing the earliest time interval after or equal to *date*. For example, `day.ceil(new Date)` typically returns 12:00 AM local time on the following day.
+
+<a name="interval_offset" href="#interval_offset">#</a> <i>interval</i>.<b>offset</b>(<i>date</i>[, <i>step</i>])
+
+Returns a new date equal to *date* plus *step* intervals. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned. This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if Daylight Savings changes!). If *step* is not specified it defaults to 1.
+
+<a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Returns every an array of dates representing every time interval after or equal to *start* and before *stop*. If *step* is specified, then every *step*'th interval will be returned; for example, for the [day](#day) interval a *step* of 2 will return every other day.
+
+<a name="interval_filter" href="#interval_filter">#</a> <i>interval</i>.<b>filter</b>(<i>test</i>)
+
+Returns a new time interval that is a filtered subset of this time interval using the specified *test* function. The *test* function is passed a date and should return true if and only if the specified date should be considered part of the time interval. For example, to create an interval that returns the 1st, 11th, 21th and 31th (if it exists) of each month:
+
+```js
+var i = day.filter(function(d) { return (d.getDate() - 1) % 10 === 0; });
+```
+
+### Intervals
+
+The following time intervals are provided:
 
 <a name="second" href="#second">#</a> <b>second</b>
 <br><a href="#second">#</a> <b>utcSecond</b>
@@ -80,35 +116,80 @@ Months (e.g., February 1, 2012 at 12:00 AM); ranges from 28 to 31 days.
 
 Years (e.g., January 1, 2012 at 12:00 AM); ranges from 365 to 366 days.
 
-Each interval supports the following methods:
+### Ranges
 
-<a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>)
+For convenience, aliases for [*interval*.range](#interval_range) are provided as plural forms of the corresponding time interval.
 
-Returns a new date representing the latest time interval before or equal to *date*. For example, `day.floor(new Date)` typically returns 12:00 AM local time on the current day.
+<a name="seconds" href="#seconds">#</a> <b>seconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#seconds">#</a> <b>utcSecond</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-<a name="interval_round" href="#interval_round">#</a> <i>interval</i>.<b>round</b>(<i>date</i>)
+Aliases for [second](#second).[range](#interval_range) and [utcSecond](#utcSecond).[range](#interval_range).
 
-Returns a new date representing the closest time interval to *date*. For example, `day.round(new Date)` typically returns 12:00 AM local time on the current day if it is on or before noon, and 12:00 AM of the following day if it is after noon.
+<a name="minutes" href="#minutes">#</a> <b>minutes</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#minutes">#</a> <b>utcMinute</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-<a name="interval_ceil" href="#interval_ceil">#</a> <i>interval</i>.<b>ceil</b>(<i>date</i>)
+Aliases for [minute](#minute).[range](#interval_range) and [utcMinute](#utcMinute).[range](#interval_range).
 
-Returns a new date representing the earliest time interval after or equal to *date*. For example, `day.ceil(new Date)` typically returns 12:00 AM local time on the following day.
+<a name="hours" href="#hours">#</a> <b>hours</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#hours">#</a> <b>utcHour</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-<a name="interval_offset" href="#interval_offset">#</a> <i>interval</i>.<b>offset</b>(<i>date</i>[, <i>step</i>])
+Aliases for [hour](#hour).[range](#interval_range) and [utcHour](#utcHour).[range](#interval_range).
 
-Returns a new date equal to *date* plus *step* intervals. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned. This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if Daylight Savings changes!). If *step* is not specified it defaults to 1.
+<a name="days" href="#days">#</a> <b>days</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#days">#</a> <b>utcDay</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-<a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+Aliases for [day](#day).[range](#interval_range) and [utcDay](#utcDay).[range](#interval_range).
 
-Returns every an array of dates representing every time interval after or equal to *start* and before *stop*. If *step* is specified, then every *step*'th interval will be returned; for example, for the [day](#day) interval a *step* of 2 will return every other day.
+<a name="weeks" href="#weeks">#</a> <b>weeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#weeks">#</a> <b>utcWeek</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-<a name="interval_filter" href="#interval_filter">#</a> <i>interval</i>.<b>filter</b>(<i>test</i>)
+Aliases for [week](#week).[range](#interval_range) and [utcWeek](#utcWeek).[range](#interval_range).
 
-Returns a new time interval that is a filtered subset of this time interval using the specified *test* function. The *test* function is passed a date and should return true if and only if the specified date should be considered part of the time interval. For example, to create an interval that returns the 1st, 11th, 21th and 31th (if it exists) of each month:
+<a name="sundays" href="#sundays">#</a> <b>sundays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#sundays">#</a> <b>utcSunday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-```js
-var i = day.filter(function(d) { return (d.getDate() - 1) % 10 === 0; });
-```
+Aliases for [sunday](#sunday).[range](#interval_range) and [utcSunday](#utcSunday).[range](#interval_range).
+
+<a name="mondays" href="#mondays">#</a> <b>mondays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#mondays">#</a> <b>utcMonday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Aliases for [monday](#monday).[range](#interval_range) and [utcMonday](#utcMonday).[range](#interval_range).
+
+<a name="tuesdays" href="#tuesdays">#</a> <b>tuesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#tuesdays">#</a> <b>utcTuesday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Aliases for [tuesday](#tuesday).[range](#interval_range) and [utcTuesday](#utcTuesday).[range](#interval_range).
+
+<a name="wednesdays" href="#wednesdays">#</a> <b>wednesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#wednesdays">#</a> <b>utcWednesday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Aliases for [wednesday](#wednesday).[range](#interval_range) and [utcWednesday](#utcWednesday).[range](#interval_range).
+
+<a name="thursdays" href="#thursdays">#</a> <b>thursdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#thursdays">#</a> <b>utcThursday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Aliases for [thursday](#thursday).[range](#interval_range) and [utcThursday](#utcThursday).[range](#interval_range).
+
+<a name="fridays" href="#fridays">#</a> <b>fridays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#fridays">#</a> <b>utcFriday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Aliases for [friday](#friday).[range](#interval_range) and [utcFriday](#utcFriday).[range](#interval_range).
+
+<a name="saturdays" href="#saturdays">#</a> <b>saturdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#saturdays">#</a> <b>utcSaturday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Aliases for [saturday](#saturday).[range](#interval_range) and [utcSaturday](#utcSaturday).[range](#interval_range).
+
+<a name="months" href="#months">#</a> <b>months</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#months">#</a> <b>utcMonth</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Aliases for [month](#month).[range](#interval_range) and [utcMonth](#utcMonth).[range](#interval_range).
+
+<a name="years" href="#years">#</a> <b>years</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#years">#</a> <b>utcYear</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Aliases for [year](#year).[range](#interval_range) and [utcYear](#utcYear).[range](#interval_range).
+
 
 ### Counting
 

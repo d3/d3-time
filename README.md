@@ -12,37 +12,20 @@ If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](
 
 The following intervals are supported:
 
-* [second](#second)
-* [minute](#minute)
-* [hour](#hour)
-* [day](#day)
-* [week](#week) (alias for [sunday](#sunday))
-* [sunday](#sunday)
-* [monday](#monday)
-* [tuesday](#tuesday)
-* [wednesday](#wednesday)
-* [thursday](#thursday)
-* [friday](#friday)
-* [saturday](#saturday)
-* [month](#month)
-* [year](#year)
-
-There are also equivalent intervals for UTC:
-
-* [utcSecond](#utcSecond)
-* [utcMinute](#utcMinute)
-* [utcHour](#utcHour)
-* [utcDay](#utcDay)
-* [utcWeek](#utcWeek) (alias for [utcSunday](#utcSunday))
-* [utcSunday](#utcSunday)
-* [utcMonday](#utcMonday)
-* [utcTuesday](#utcTuesday)
-* [utcWednesday](#utcWednesday)
-* [utcThursday](#utcThursday)
-* [utcFriday](#utcFriday)
-* [utcSaturday](#utcSaturday)
-* [utcMonth](#utcMonth)
-* [utcYear](#utcYear)
+* [second](#second) / [utcSecond](#utcSecond)
+* [minute](#minute) / [utcMinute](#utcMinute)
+* [hour](#hour) / [utcHour](#utcHour)
+* [day](#day) / [utcDay](#utcDay)
+* [week](#week) / [utcWeek](#utcWeek) (alias for [sunday](#sunday) / [utcSunday](#utcSunday))
+* [sunday](#sunday) / [utcSunday](#utcSunday)
+* [monday](#monday) / [utcMonday](#utcMonday)
+* [tuesday](#tuesday) / [utcTuesday](#utcTuesday)
+* [wednesday](#wednesday) / [utcWednesday](#utcWednesday)
+* [thursday](#thursday) / [utcThursday](#utcThursday)
+* [friday](#friday) / [utcFriday](#utcFriday)
+* [saturday](#saturday) / [utcSaturday](#utcSaturday)
+* [month](#month) / [utcMonth](#utcMonth)
+* [year](#year) / [utcYear](#utcYear)
 
 Each interval supports the following methods:
 

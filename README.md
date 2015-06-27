@@ -35,7 +35,7 @@ Rounds down the specified *date*, returning the latest time interval before or e
 
 <a name="interval_round" href="#interval_round">#</a> <i>interval</i>.<b>round</b>(<i>date</i>)
 
-Rounds up or down the specified *date*, returning the closest time interval to *date*. For example, `day.round(new Date)` typically returns 12:00 AM local time on the current day if it is on or before noon, and midnight of the following day if it is after noon.
+Rounds up or down the specified *date*, returning the closest time interval to *date*. For example, `day.round(new Date)` typically returns 12:00 AM local time on the current day if it is on or before noon, and 12:00 AM of the following day if it is after noon.
 
 <a name="interval_ceil" href="#interval_ceil">#</a> <i>interval</i>.<b>ceil</b>(<i>date</i>)
 

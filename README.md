@@ -16,7 +16,6 @@ The following intervals are supported:
 * [minute](#minute) / [utcMinute](#utcMinute)
 * [hour](#hour) / [utcHour](#utcHour)
 * [day](#day) / [utcDay](#utcDay)
-* [week](#week) / [utcWeek](#utcWeek) (alias for [sunday](#sunday) / [utcSunday](#utcSunday))
 * [sunday](#sunday) / [utcSunday](#utcSunday)
 * [monday](#monday) / [utcMonday](#utcMonday)
 * [tuesday](#tuesday) / [utcTuesday](#utcTuesday)
@@ -24,6 +23,7 @@ The following intervals are supported:
 * [thursday](#thursday) / [utcThursday](#utcThursday)
 * [friday](#friday) / [utcFriday](#utcFriday)
 * [saturday](#saturday) / [utcSaturday](#utcSaturday)
+* [week](#week) / [utcWeek](#utcWeek) (alias for [sunday](#sunday) / [utcSunday](#utcSunday))
 * [month](#month) / [utcMonth](#utcMonth)
 * [year](#year) / [utcYear](#utcYear)
 

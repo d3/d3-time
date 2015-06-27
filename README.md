@@ -27,7 +27,7 @@ The following intervals are supported:
 * [month](#month)
 * [year](#year)
 
-There are also UTC-equivalents:
+There are also equivalent intervals for UTC:
 
 * [utcSecond](#utcSecond)
 * [utcMinute](#utcMinute)

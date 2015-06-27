@@ -127,7 +127,7 @@ tape("sunday.range(start, stop) returns the empty array if start >= stop", funct
 });
 
 tape("sunday.range(start, stop, step) returns every step sunday", function(test) {
-  var days = time.sunday.range(+date.local(2011, 11, 01), +date.local(2012, 00, 15), 2);
+  var days = time.sunday.range(date.local(2011, 11, 01), date.local(2012, 00, 15), 2);
   test.equal(days.length, 3);
   test.dateEqual(days[0], date.local(2011, 11, 04));
   test.dateEqual(days[1], date.local(2011, 11, 18));

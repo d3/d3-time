@@ -78,3 +78,59 @@ tape("utcSunday.offset(date, count) allows count to be zero", function(test) {
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 31, 23, 59, 58, 000), 0), date.utc(2010, 11, 31, 23, 59, 58, 000));
   test.end();
 });
+
+tape("utcSunday.range(start, stop) returns sundays between start (inclusive) and stop (exclusive)", function(test) {
+  var days = time.utcSunday.range(date.utc(2011, 11, 01), date.utc(2012, 00, 15));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.utc(2011, 11, 04));
+  test.dateEqual(days[1], date.utc(2011, 11, 11));
+  test.dateEqual(days[2], date.utc(2011, 11, 18));
+  test.dateEqual(days[3], date.utc(2011, 11, 25));
+  test.dateEqual(days[4], date.utc(2012, 00, 01));
+  test.dateEqual(days[5], date.utc(2012, 00, 08));
+  test.end();
+});
+
+tape("utcSunday.range(start, stop) returns sundays", function(test) {
+  var days = time.utcSunday.range(date.utc(2011, 11, 01, 12, 23), date.utc(2012, 00, 14, 12, 23));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.utc(2011, 11, 04));
+  test.dateEqual(days[1], date.utc(2011, 11, 11));
+  test.dateEqual(days[2], date.utc(2011, 11, 18));
+  test.dateEqual(days[3], date.utc(2011, 11, 25));
+  test.dateEqual(days[4], date.utc(2012, 00, 01));
+  test.dateEqual(days[5], date.utc(2012, 00, 08));
+  test.end();
+});
+
+tape("utcSunday.range(start, stop) coerces start and stop to dates", function(test) {
+  var days = time.utcSunday.range(+date.utc(2011, 11, 01), +date.utc(2012, 00, 15));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.utc(2011, 11, 04));
+  test.dateEqual(days[1], date.utc(2011, 11, 11));
+  test.dateEqual(days[2], date.utc(2011, 11, 18));
+  test.dateEqual(days[3], date.utc(2011, 11, 25));
+  test.dateEqual(days[4], date.utc(2012, 00, 01));
+  test.dateEqual(days[5], date.utc(2012, 00, 08));
+  test.end();
+});
+
+tape("utcSunday.range(start, stop) returns the empty array for invalid dates", function(test) {
+  test.deepEqual(time.utcSunday.range(new Date(NaN), Infinity), []);
+  test.end();
+});
+
+tape("utcSunday.range(start, stop) returns the empty array if start >= stop", function(test) {
+  test.deepEqual(time.utcSunday.range(date.utc(2011, 11, 10), date.utc(2011, 10, 04)), []);
+  test.deepEqual(time.utcSunday.range(date.utc(2011, 10, 01), date.utc(2011, 10, 01)), []);
+  test.end();
+});
+
+tape("utcSunday.range(start, stop, step) returns every step sunday", function(test) {
+  var days = time.utcSunday.range(date.utc(2011, 11, 01), date.utc(2012, 00, 15), 2);
+  test.equal(days.length, 3);
+  test.dateEqual(days[0], date.utc(2011, 11, 04));
+  test.dateEqual(days[1], date.utc(2011, 11, 18));
+  test.dateEqual(days[2], date.utc(2012, 00, 01));
+  test.end();
+});

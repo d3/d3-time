@@ -198,24 +198,45 @@ Aliases for [year](#year).[range](#interval_range) and [utcYear](#utcYear).[rang
 
 Returns the day number for the given date. The first day of the year (January 1) is always the 0th day.
 
-<a name="weekOfYear" href="#weekOfYear">#</a> <b>weekOfYear</b>(<i>date</i>)
-<br><a href="#weekOfYear">#</a> <b>utcWeekOfYear</b>(<i>date</i>)
-<br><a name="sundayOfYear" href="#sundayOfYear">#</a> <b>sundayOfYear</b>(<i>date</i>)
+<a name="sundayOfYear" href="#sundayOfYear">#</a> <b>sundayOfYear</b>(<i>date</i>)
 <br><a href="#sundayOfYear">#</a> <b>utcSundayOfYear</b>(<i>date</i>)
-<br><a name="mondayOfYear" href="#mondayOfYear">#</a> <b>mondayOfYear</b>(<i>date</i>)
+
+Returns the week number for the given date, where weeks start on Sunday. The first day of the year (January 1) is always the 0th week.
+
+<a name="mondayOfYear" href="#mondayOfYear">#</a> <b>mondayOfYear</b>(<i>date</i>)
 <br><a href="#mondayOfYear">#</a> <b>utcMondayOfYear</b>(<i>date</i>)
-<br><a name="tuesdayOfYear" href="#tuesdayOfYear">#</a> <b>tuesdayOfYear</b>(<i>date</i>)
+
+Returns the week number for the given date, where weeks start on Monday. The first day of the year (January 1) is always the 0th week.
+
+<a name="tuesdayOfYear" href="#tuesdayOfYear">#</a> <b>tuesdayOfYear</b>(<i>date</i>)
 <br><a href="#tuesdayOfYear">#</a> <b>utcTuesdayOfYear</b>(<i>date</i>)
-<br><a name="wednesdayOfYear" href="#wednesdayOfYear">#</a> <b>wednesdayOfYear</b>(<i>date</i>)
+
+Returns the week number for the given date, where weeks start on Tuesday. The first day of the year (January 1) is always the 0th week.
+
+<a name="wednesdayOfYear" href="#wednesdayOfYear">#</a> <b>wednesdayOfYear</b>(<i>date</i>)
 <br><a href="#wednesdayOfYear">#</a> <b>utcWednesdayOfYear</b>(<i>date</i>)
-<br><a name="thursdayOfYear" href="#thursdayOfYear">#</a> <b>thursdayOfYear</b>(<i>date</i>)
+
+Returns the week number for the given date, where weeks start on Wednesday. The first day of the year (January 1) is always the 0th week.
+
+<a name="thursdayOfYear" href="#thursdayOfYear">#</a> <b>thursdayOfYear</b>(<i>date</i>)
 <br><a href="#thursdayOfYear">#</a> <b>utcThursdayOfYear</b>(<i>date</i>)
-<br><a name="fridayOfYear" href="#fridayOfYear">#</a> <b>fridayOfYear</b>(<i>date</i>)
+
+Returns the week number for the given date, where weeks start on Thursday. The first day of the year (January 1) is always the 0th week.
+
+<a name="fridayOfYear" href="#fridayOfYear">#</a> <b>fridayOfYear</b>(<i>date</i>)
 <br><a href="#fridayOfYear">#</a> <b>utcFridayOfYear</b>(<i>date</i>)
-<br><a name="saturdayOfYear" href="#saturdayOfYear">#</a> <b>saturdayOfYear</b>(<i>date</i>)
+
+Returns the week number for the given date, where weeks start on Friday. The first day of the year (January 1) is always the 0th week.
+
+<a name="saturdayOfYear" href="#saturdayOfYear">#</a> <b>saturdayOfYear</b>(<i>date</i>)
 <br><a href="#saturdayOfYear">#</a> <b>utcSaturdayOfYear</b>(<i>date</i>)
 
-Returns the week number for the given date, where weeks start with the given <i>day</i>. The first day of the year (January 1) is always the 0th week. weekOfYear is an alias for sundayOfYear.
+Returns the week number for the given date, where weeks start on Saturday. The first day of the year (January 1) is always the 0th week.
+
+<a name="weekOfYear" href="#weekOfYear">#</a> <b>weekOfYear</b>(<i>date</i>)
+<br><a href="#weekOfYear">#</a> <b>utcWeekOfYear</b>(<i>date</i>)
+
+Aliases for [sundayOfYear](#sundayOfYear) and [utcSundayOfYear](#utcSundayOfYear).
 
 ## Changes from D3 3.x:
 

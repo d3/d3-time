@@ -78,3 +78,50 @@ tape("sunday.offset(date, count) allows count to be zero", function(test) {
   test.dateEqual(time.sunday.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
   test.end();
 });
+
+tape("sunday.range(start, stop) returns sundays between start (inclusive) and stop (exclusive)", function(test) {
+  var days = time.sunday.range(date.local(2011, 11, 01), date.local(2012, 00, 15));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.local(2011, 11, 04));
+  test.dateEqual(days[1], date.local(2011, 11, 11));
+  test.dateEqual(days[2], date.local(2011, 11, 18));
+  test.dateEqual(days[3], date.local(2011, 11, 25));
+  test.dateEqual(days[4], date.local(2012, 00, 01));
+  test.dateEqual(days[5], date.local(2012, 00, 08));
+  test.end();
+});
+
+tape("sunday.range(start, stop) returns sundays", function(test) {
+  var days = time.sunday.range(date.local(2011, 11, 01, 12, 23), date.local(2012, 00, 14, 12, 23));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.local(2011, 11, 04));
+  test.dateEqual(days[1], date.local(2011, 11, 11));
+  test.dateEqual(days[2], date.local(2011, 11, 18));
+  test.dateEqual(days[3], date.local(2011, 11, 25));
+  test.dateEqual(days[4], date.local(2012, 00, 01));
+  test.dateEqual(days[5], date.local(2012, 00, 08));
+  test.end();
+});
+
+tape("sunday.range(start, stop) coerces start and stop to dates", function(test) {
+  var days = time.sunday.range(+date.local(2011, 11, 01), +date.local(2012, 00, 15));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.local(2011, 11, 04));
+  test.dateEqual(days[1], date.local(2011, 11, 11));
+  test.dateEqual(days[2], date.local(2011, 11, 18));
+  test.dateEqual(days[3], date.local(2011, 11, 25));
+  test.dateEqual(days[4], date.local(2012, 00, 01));
+  test.dateEqual(days[5], date.local(2012, 00, 08));
+  test.end();
+});
+
+tape("sunday.range(start, stop) returns the empty array for invalid dates", function(test) {
+  test.deepEqual(time.sunday.range(new Date(NaN), Infinity), []);
+  test.end();
+});
+
+tape("sunday.range(start, stop) returns the empty array if start >= stop", function(test) {
+  test.deepEqual(time.sunday.range(date.local(2011, 11, 10), date.local(2011, 10, 04)), []);
+  test.deepEqual(time.sunday.range(date.local(2011, 10, 01), date.local(2011, 10, 01)), []);
+  test.end();
+});

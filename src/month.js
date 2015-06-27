@@ -7,5 +7,5 @@ export function floor(date) {
 };
 
 export default interval(floor, function(date, offset) {
-  date.setDate(date.getDate() + offset);
+  date.setMonth(date.getMonth() + offset);
 });

@@ -7,5 +7,5 @@ export function floor(date) {
 };
 
 export default interval(floor, function(date, offset) {
-  date.setUTCDate(date.getUTCDate() + offset);
+  date.setUTCMonth(date.getUTCMonth() + offset);
 });

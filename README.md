@@ -23,17 +23,17 @@ Minutes (e.g., 01:02:00 AM). ECMAScript [ignores leap seconds](http://www.ecma-i
 <a name="hour" href="#hour">#</a> <b>hour</b>
 <br><a href="#hour">#</a> <b>utcHour</b>
 
-Hours (e.g., 01:00 AM). Always 60 minutes long (36e5 milliseconds). Note that advancing time by one hour in local time can return the same hour number, or skip an hour number, due to Daylight Savings Time.
+Hours (e.g., 01:00 AM). Always 60 minutes long (36e5 milliseconds). Note that advancing time by one hour in local time can return the same hour or skip an hour due to Daylight Savings.
 
 <a name="day" href="#day">#</a> <b>day</b>
 <br><a href="#day">#</a> <b>utcDay</b>
 
-Days (e.g., February 7, 2012 at 12:00 AM). In UTC, days are always 24 hours long (864e5 milliseconds); however, with Daylight Savings Time, a day in local time may be 23 or 25 hours long.
+Days (e.g., February 7, 2012 at 12:00 AM). In UTC, days are always 24 hours long (864e5 milliseconds); however a day in local time may be 23 or 25 hours long due to Daylight Savings.
 
 <a name="week" href="#week">#</a> <b>week</b>
 <br><a href="#week">#</a> <b>utcWeek</b>
 
-Alias for [sunday](#sunday). A week is always 7 days, but ranges between 167 and 169 hours in local time depending on Daylight Savings Time.
+Alias for [sunday](#sunday). A week is always 7 days, but ranges between 167 and 169 hours in local time depending on Daylight Savings.
 
 <a name="sunday" href="#sunday">#</a> <b>sunday</b>
 <br><a href="#sunday">#</a> <b>utcSunday</b>
@@ -96,7 +96,7 @@ Returns a new date representing the earliest time interval after or equal to *da
 
 <a name="interval_offset" href="#interval_offset">#</a> <i>interval</i>.<b>offset</b>(<i>date</i>[, <i>step</i>])
 
-Returns a new date equal to *date* plus *step* intervals. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned. This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if Daylight Savings Time changes!). If *step* is not specified it defaults to 1.
+Returns a new date equal to *date* plus *step* intervals. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned. This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if Daylight Savings changes!). If *step* is not specified it defaults to 1.
 
 <a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 

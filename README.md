@@ -123,72 +123,72 @@ For convenience, aliases for [*interval*.range](#interval_range) are also provid
 <a name="seconds" href="#seconds">#</a> <b>seconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#seconds">#</a> <b>utcSecond</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [second](#second).[range](#interval_range) and [utcSecond](#utcSecond).[range](#interval_range).
+Aliases for [second](#second).[range](#interval_range) and [utcSecond](#second).[range](#interval_range).
 
 <a name="minutes" href="#minutes">#</a> <b>minutes</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#minutes">#</a> <b>utcMinute</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [minute](#minute).[range](#interval_range) and [utcMinute](#utcMinute).[range](#interval_range).
+Aliases for [minute](#minute).[range](#interval_range) and [utcMinute](#minute).[range](#interval_range).
 
 <a name="hours" href="#hours">#</a> <b>hours</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#hours">#</a> <b>utcHour</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [hour](#hour).[range](#interval_range) and [utcHour](#utcHour).[range](#interval_range).
+Aliases for [hour](#hour).[range](#interval_range) and [utcHour](#hour).[range](#interval_range).
 
 <a name="days" href="#days">#</a> <b>days</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#days">#</a> <b>utcDay</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [day](#day).[range](#interval_range) and [utcDay](#utcDay).[range](#interval_range).
+Aliases for [day](#day).[range](#interval_range) and [utcDay](#day).[range](#interval_range).
 
 <a name="weeks" href="#weeks">#</a> <b>weeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#weeks">#</a> <b>utcWeek</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [week](#week).[range](#interval_range) and [utcWeek](#utcWeek).[range](#interval_range).
+Aliases for [week](#week).[range](#interval_range) and [utcWeek](#week).[range](#interval_range).
 
 <a name="sundays" href="#sundays">#</a> <b>sundays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#sundays">#</a> <b>utcSunday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [sunday](#sunday).[range](#interval_range) and [utcSunday](#utcSunday).[range](#interval_range).
+Aliases for [sunday](#sunday).[range](#interval_range) and [utcSunday](#sunday).[range](#interval_range).
 
 <a name="mondays" href="#mondays">#</a> <b>mondays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#mondays">#</a> <b>utcMonday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [monday](#monday).[range](#interval_range) and [utcMonday](#utcMonday).[range](#interval_range).
+Aliases for [monday](#monday).[range](#interval_range) and [utcMonday](#monday).[range](#interval_range).
 
 <a name="tuesdays" href="#tuesdays">#</a> <b>tuesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#tuesdays">#</a> <b>utcTuesday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [tuesday](#tuesday).[range](#interval_range) and [utcTuesday](#utcTuesday).[range](#interval_range).
+Aliases for [tuesday](#tuesday).[range](#interval_range) and [utcTuesday](#tuesday).[range](#interval_range).
 
 <a name="wednesdays" href="#wednesdays">#</a> <b>wednesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#wednesdays">#</a> <b>utcWednesday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [wednesday](#wednesday).[range](#interval_range) and [utcWednesday](#utcWednesday).[range](#interval_range).
+Aliases for [wednesday](#wednesday).[range](#interval_range) and [utcWednesday](#wednesday).[range](#interval_range).
 
 <a name="thursdays" href="#thursdays">#</a> <b>thursdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#thursdays">#</a> <b>utcThursday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [thursday](#thursday).[range](#interval_range) and [utcThursday](#utcThursday).[range](#interval_range).
+Aliases for [thursday](#thursday).[range](#interval_range) and [utcThursday](#thursday).[range](#interval_range).
 
 <a name="fridays" href="#fridays">#</a> <b>fridays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#fridays">#</a> <b>utcFriday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [friday](#friday).[range](#interval_range) and [utcFriday](#utcFriday).[range](#interval_range).
+Aliases for [friday](#friday).[range](#interval_range) and [utcFriday](#friday).[range](#interval_range).
 
 <a name="saturdays" href="#saturdays">#</a> <b>saturdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#saturdays">#</a> <b>utcSaturday</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [saturday](#saturday).[range](#interval_range) and [utcSaturday](#utcSaturday).[range](#interval_range).
+Aliases for [saturday](#saturday).[range](#interval_range) and [utcSaturday](#saturday).[range](#interval_range).
 
 <a name="months" href="#months">#</a> <b>months</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#months">#</a> <b>utcMonth</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [month](#month).[range](#interval_range) and [utcMonth](#utcMonth).[range](#interval_range).
+Aliases for [month](#month).[range](#interval_range) and [utcMonth](#month).[range](#interval_range).
 
 <a name="years" href="#years">#</a> <b>years</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#years">#</a> <b>utcYear</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [year](#year).[range](#interval_range) and [utcYear](#utcYear).[range](#interval_range).
+Aliases for [year](#year).[range](#interval_range) and [utcYear](#year).[range](#interval_range).
 
 
 ### Counting
@@ -236,7 +236,7 @@ Returns the week number for the given date, where weeks start on Saturday. The f
 <a name="weekOfYear" href="#weekOfYear">#</a> <b>weekOfYear</b>(<i>date</i>)
 <br><a href="#weekOfYear">#</a> <b>utcWeekOfYear</b>(<i>date</i>)
 
-Aliases for [sundayOfYear](#sundayOfYear) and [utcSundayOfYear](#utcSundayOfYear).
+Aliases for [sundayOfYear](#sundayOfYear) and [utcSundayOfYear](#sundayOfYear).
 
 ## Changes from D3 3.x:
 

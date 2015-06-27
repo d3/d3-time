@@ -13,27 +13,27 @@ The following time intervals are supported:
 <a name="second" href="#second">#</a> <b>second</b>
 <br><a href="#second">#</a> <b>utcSecond</b>
 
-Seconds (e.g., 01:23:45.0000 AM). Always 1,000 milliseconds long.
+Seconds (e.g., 01:23:45.0000 AM); 1,000 milliseconds.
 
 <a name="minute" href="#minute">#</a> <b>minute</b>
 <br><a href="#minute">#</a> <b>utcMinute</b>
 
-Minutes (e.g., 01:02:00 AM). ECMAScript [ignores leap seconds](http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.1), so minutes are always 60 seconds (6e4 milliseconds) long.
+Minutes (e.g., 01:02:00 AM); 60 seconds. Note that ECMAScript [ignores leap seconds](http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.1).
 
 <a name="hour" href="#hour">#</a> <b>hour</b>
 <br><a href="#hour">#</a> <b>utcHour</b>
 
-Hours (e.g., 01:00 AM). Always 60 minutes long (36e5 milliseconds). Note that advancing time by one hour in local time can return the same hour or skip an hour due to Daylight Savings.
+Hours (e.g., 01:00 AM); 60 minutes. Note that advancing time by one hour in local time can return the same hour or skip an hour due to Daylight Savings.
 
 <a name="day" href="#day">#</a> <b>day</b>
 <br><a href="#day">#</a> <b>utcDay</b>
 
-Days (e.g., February 7, 2012 at 12:00 AM). In UTC, days are always 24 hours long (864e5 milliseconds); however a day in local time may be 23 or 25 hours long due to Daylight Savings.
+Days (e.g., February 7, 2012 at 12:00 AM); typically 24 hours. Days in local time may range from 23 to 25 hours due to Daylight Savings.
 
 <a name="week" href="#week">#</a> <b>week</b>
 <br><a href="#week">#</a> <b>utcWeek</b>
 
-Alias for [sunday](#sunday). A week is always 7 days, but ranges between 167 and 169 hours in local time depending on Daylight Savings.
+Alias for [sunday](#sunday); 7 days. Weeks in local time may range from 167 to 169 hours due on Daylight Savings.
 
 <a name="sunday" href="#sunday">#</a> <b>sunday</b>
 <br><a href="#sunday">#</a> <b>utcSunday</b>
@@ -73,12 +73,12 @@ Saturday-based weeks (e.g., February 11, 2012 at 12:00 AM).
 <a name="month" href="#month">#</a> <b>month</b>
 <br><a href="#month">#</a> <b>utcMonth</b>
 
-Months (e.g., February 1, 2012 at 12:00 AM). Ranges between 28 and 31 days.
+Months (e.g., February 1, 2012 at 12:00 AM); ranges from 28 to 31 days.
 
 <a name="year" href="#year">#</a> <b>year</b>
 <br><a href="#year">#</a> <b>utcYear</b>
 
-Years (e.g., January 1, 2012 at 12:00 AM). Normal years are 365 days long; leap years are 366.
+Years (e.g., January 1, 2012 at 12:00 AM); ranges from 365 to 366 days.
 
 Each interval supports the following methods:
 

@@ -14,12 +14,8 @@ tape("sunday.floor(date) returns sundays", function(test) {
   test.end();
 });
 
-tape("sunday.floor(date) observes the start of daylight savings time", function(test) {
+tape("sunday.floor(date) observes daylight savings time", function(test) {
   test.dateEqual(time.sunday.floor(date.local(2011, 02, 13, 01)), date.local(2011, 02, 13));
-  test.end();
-});
-
-tape("sunday.floor(date) observes the end of the daylight savings time", function(test) {
   test.dateEqual(time.sunday.floor(date.local(2011, 10, 06, 01)), date.local(2011, 10, 06));
   test.end();
 });
@@ -39,12 +35,8 @@ tape("sunday.ceil(date) returns sundays", function(test) {
   test.end();
 });
 
-tape("sunday.ceil(date) observes the start of daylight savings time", function(test) {
+tape("sunday.ceil(date) observes daylight savings time", function(test) {
   test.dateEqual(time.sunday.ceil(date.local(2011, 02, 13, 01)), date.local(2011, 02, 20));
-  test.end();
-});
-
-tape("sunday.ceil(date) observes the end of the daylight savings time", function(test) {
   test.dateEqual(time.sunday.ceil(date.local(2011, 10, 06, 01)), date.local(2011, 10, 13));
   test.end();
 });

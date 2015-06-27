@@ -11,15 +11,11 @@ tape("utcDay.floor(date) returns the latest preceding midnight", function(test) 
   test.end();
 });
 
-tape("utcDay.floor(date) does not observe the start of daylight savings time", function(test) {
+tape("utcDay.floor(date) does not observe daylight savings time", function(test) {
   test.dateEqual(time.utcDay.floor(date.utc(2011, 02, 13, 07)), date.utc(2011, 02, 13));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 02, 13, 08)), date.utc(2011, 02, 13));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 02, 13, 09)), date.utc(2011, 02, 13));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 02, 13, 10)), date.utc(2011, 02, 13));
-  test.end();
-});
-
-tape("utcDay.floor(date) does not observe the end of daylight savings time", function(test) {
   test.dateEqual(time.utcDay.floor(date.utc(2011, 10, 06, 05)), date.utc(2011, 10, 06));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 10, 06, 06)), date.utc(2011, 10, 06));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 10, 06, 07)), date.utc(2011, 10, 06));
@@ -40,15 +36,11 @@ tape("utcDay.ceil(date) returns the earliest following midnights", function(test
   test.end();
 });
 
-tape("utcDay.ceil(date) does not observe the start of daylight savings time", function(test) {
+tape("utcDay.ceil(date) does not observe daylight savings time", function(test) {
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 02, 13, 07)), date.utc(2011, 02, 14));
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 02, 13, 08)), date.utc(2011, 02, 14));
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 02, 13, 09)), date.utc(2011, 02, 14));
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 02, 13, 10)), date.utc(2011, 02, 14));
-  test.end();
-});
-
-tape("utcDay.ceil(date) does not observe the end of daylight savings time", function(test) {
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 10, 06, 05)), date.utc(2011, 10, 07));
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 10, 06, 06)), date.utc(2011, 10, 07));
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 10, 06, 07)), date.utc(2011, 10, 07));

@@ -4,22 +4,18 @@ var tape = require("tape"),
 
 require("./dateEqual");
 
-tape("day.floor(date) returns the latest day boundary", function(test) {
+tape("day.floor(date) returns days", function(test) {
   test.dateEqual(time.day.floor(date.local(2010, 11, 31, 23)), date.local(2010, 11, 31));
   test.dateEqual(time.day.floor(date.local(2011, 00, 01, 00)), date.local(2011, 00, 01));
   test.dateEqual(time.day.floor(date.local(2011, 00, 01, 01)), date.local(2011, 00, 01));
   test.end();
 });
 
-tape("day.floor(date) observes start of daylight savings time", function(test) {
+tape("day.floor(date) observes daylight savings time", function(test) {
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 12));
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 10)), date.local(2011, 02, 13));
-  test.end();
-});
-
-tape("day.floor(date) observes end of daylight savings time", function(test) {
   test.dateEqual(time.day.floor(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
   test.dateEqual(time.day.floor(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 06));
   test.dateEqual(time.day.floor(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 06));
@@ -38,15 +34,11 @@ tape("day.round(date) returns the nearest day boundary", function(test) {
   test.end();
 });
 
-tape("day.round(date) observes start of daylight savings time", function(test) {
+tape("day.round(date) observes daylight savings time", function(test) {
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 13));
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 20)), date.local(2011, 02, 14));
-  test.end();
-});
-
-tape("day.round(date) observes end of daylight savings time", function(test) {
   test.dateEqual(time.day.round(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
   test.dateEqual(time.day.round(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 06));
   test.dateEqual(time.day.round(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 06));

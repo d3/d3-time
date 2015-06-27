@@ -23,17 +23,17 @@ Minutes (e.g., 01:02:00 AM). ECMAScript [ignores leap seconds](http://www.ecma-i
 <a name="hour" href="#hour">#</a> <b>hour</b>
 <br><a href="#hour">#</a> <b>utcHour</b>
 
-Hours (e.g., 01:00 AM). 60 minutes long (36e5 milliseconds). Note that advancing time by one hour can return the same hour number, or skip an hour number, due to Daylight Savings Time.
+Hours (e.g., 01:00 AM). Always 60 minutes long (36e5 milliseconds). Note that advancing time by one hour in local time can return the same hour number, or skip an hour number, due to Daylight Savings Time.
 
 <a name="day" href="#day">#</a> <b>day</b>
 <br><a href="#day">#</a> <b>utcDay</b>
 
-Days (e.g., February 7, 2012 at 12:00 AM). Most days are 24 hours long (864e5 milliseconds); however, with Daylight Savings Time, a day may be 23 or 25 hours long.
+Days (e.g., February 7, 2012 at 12:00 AM). In UTC, days are always 24 hours long (864e5 milliseconds); however, with Daylight Savings Time, a day in local time may be 23 or 25 hours long.
 
 <a name="week" href="#week">#</a> <b>week</b>
 <br><a href="#week">#</a> <b>utcWeek</b>
 
-Alias for [sunday](#sunday). A week is always 7 days, but ranges between 167 and 169 hours depending on Daylight Savings Time.
+Alias for [sunday](#sunday). A week is always 7 days, but ranges between 167 and 169 hours in local time depending on Daylight Savings Time.
 
 <a name="sunday" href="#sunday">#</a> <b>sunday</b>
 <br><a href="#sunday">#</a> <b>utcSunday</b>

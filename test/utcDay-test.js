@@ -4,7 +4,7 @@ var tape = require("tape"),
 
 require("./dateEqual");
 
-tape("utcDay.floor(date) returns the latest preceding midnight", function(test) {
+tape("utcDay.floor(date) returns days", function(test) {
   test.dateEqual(time.utcDay.floor(date.utc(2010, 11, 31, 23)), date.utc(2010, 11, 31));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 00, 01, 00)), date.utc(2011, 00, 01));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 00, 01, 01)), date.utc(2011, 00, 01));
@@ -23,13 +23,13 @@ tape("utcDay.floor(date) does not observe daylight savings time", function(test)
   test.end();
 });
 
-tape("utcDay.round(date) returns the nearest day boundary", function(test) {
+tape("utcDay.round(date) returns days", function(test) {
   test.dateEqual(time.utcDay.round(date.utc(2010, 11, 30, 13)), date.utc(2010, 11, 31));
   test.dateEqual(time.utcDay.round(date.utc(2010, 11, 30, 11)), date.utc(2010, 11, 30));
   test.end();
 });
 
-tape("utcDay.ceil(date) returns the earliest following midnights", function(test) {
+tape("utcDay.ceil(date) returns days", function(test) {
   test.dateEqual(time.utcDay.ceil(date.utc(2010, 11, 30, 23)), date.utc(2010, 11, 31));
   test.dateEqual(time.utcDay.ceil(date.utc(2010, 11, 31, 00)), date.utc(2010, 11, 31));
   test.dateEqual(time.utcDay.ceil(date.utc(2010, 11, 31, 01)), date.utc(2011, 00, 01));
@@ -66,21 +66,21 @@ tape("utcDay.offset(date, count) does not round the passed-in date", function(te
   test.end();
 });
 
-tape("utcDay.offset(date, count) allows negative offsets", function(test) {
+tape("utcDay.offset(date, count) allows count to be negative", function(test) {
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31), -1), date.utc(2010, 11, 30));
   test.dateEqual(time.utcDay.offset(date.utc(2011, 00, 01), -2), date.utc(2010, 11, 30));
   test.dateEqual(time.utcDay.offset(date.utc(2011, 00, 01), -1), date.utc(2010, 11, 31));
   test.end();
 });
 
-tape("utcDay.offset(date, count) allows positive offsets", function(test) {
+tape("utcDay.offset(date, count) allows count to be positive", function(test) {
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31), +1), date.utc(2011, 00, 01));
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 30), +2), date.utc(2011, 00, 01));
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 30), +1), date.utc(2010, 11, 31));
   test.end();
 });
 
-tape("utcDay.offset(date, count) allows zero offset", function(test) {
+tape("utcDay.offset(date, count) allows count to be zero", function(test) {
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31, 23, 59, 59, 999), 0), date.utc(2010, 11, 31, 23, 59, 59, 999));
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31, 23, 59, 58, 000), 0), date.utc(2010, 11, 31, 23, 59, 58, 000));
   test.end();

@@ -20,7 +20,7 @@ tape("utcSunday.floor(date) observes daylight savings time", function(test) {
   test.end();
 });
 
-tape("utcSunday.floor(date) correctly handles years in the first century", function(test) {
+tape("utcSunday.floor(date) handles years in the first century", function(test) {
   test.dateEqual(time.utcSunday.floor(date.utc(0011, 10, 06, 07)), date.utc(0011, 10, 01));
   test.end();
 });
@@ -59,21 +59,21 @@ tape("utcSunday.offset(date, count) does not round the passed-in date", function
   test.end();
 });
 
-tape("utcSunday.offset(date, count) allows negative offsets", function(test) {
+tape("utcSunday.offset(date, count) allows count to be negative", function(test) {
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 01), -1), date.utc(2010, 10, 24));
   test.dateEqual(time.utcSunday.offset(date.utc(2011, 00, 01), -2), date.utc(2010, 11, 18));
   test.dateEqual(time.utcSunday.offset(date.utc(2011, 00, 01), -1), date.utc(2010, 11, 25));
   test.end();
 });
 
-tape("utcSunday.offset(date, count) allows positive offsets", function(test) {
+tape("utcSunday.offset(date, count) allows count to be positive", function(test) {
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 10, 24), +1), date.utc(2010, 11, 01));
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 18), +2), date.utc(2011, 00, 01));
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 25), +1), date.utc(2011, 00, 01));
   test.end();
 });
 
-tape("utcSunday.offset(date, count) allows zero offset", function(test) {
+tape("utcSunday.offset(date, count) allows count to be zero", function(test) {
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 31, 23, 59, 59, 999), 0), date.utc(2010, 11, 31, 23, 59, 59, 999));
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 31, 23, 59, 58, 000), 0), date.utc(2010, 11, 31, 23, 59, 58, 000));
   test.end();

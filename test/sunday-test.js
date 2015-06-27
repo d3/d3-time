@@ -20,7 +20,7 @@ tape("sunday.floor(date) observes daylight savings time", function(test) {
   test.end();
 });
 
-tape("sunday.floor(date) correctly handles years in the first century", function(test) {
+tape("sunday.floor(date) handles years in the first century", function(test) {
   test.dateEqual(time.sunday.floor(date.local(0011, 10, 06, 07)), date.local(0011, 10, 01));
   test.end();
 });
@@ -59,21 +59,21 @@ tape("sunday.offset(date, count) does not round the passed-in date", function(te
   test.end();
 });
 
-tape("sunday.offset(date, count) allows negative offsets", function(test) {
+tape("sunday.offset(date, count) allows count to be negative", function(test) {
   test.dateEqual(time.sunday.offset(date.local(2010, 11, 01), -1), date.local(2010, 10, 24));
   test.dateEqual(time.sunday.offset(date.local(2011, 00, 01), -2), date.local(2010, 11, 18));
   test.dateEqual(time.sunday.offset(date.local(2011, 00, 01), -1), date.local(2010, 11, 25));
   test.end();
 });
 
-tape("sunday.offset(date, count) allows positive offsets", function(test) {
+tape("sunday.offset(date, count) allows count to be positive", function(test) {
   test.dateEqual(time.sunday.offset(date.local(2010, 10, 24), +1), date.local(2010, 11, 01));
   test.dateEqual(time.sunday.offset(date.local(2010, 11, 18), +2), date.local(2011, 00, 01));
   test.dateEqual(time.sunday.offset(date.local(2010, 11, 25), +1), date.local(2011, 00, 01));
   test.end();
 });
 
-tape("sunday.offset(date, count) allows zero offset", function(test) {
+tape("sunday.offset(date, count) allows count to be zero", function(test) {
   test.dateEqual(time.sunday.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
   test.dateEqual(time.sunday.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
   test.end();

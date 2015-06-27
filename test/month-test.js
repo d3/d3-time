@@ -1,0 +1,159 @@
+var tape = require("tape"),
+    time = require("../"),
+    date = require("./date");
+
+require("./dateEqual");
+
+tape("month.floor(date) returns months", function(test) {
+  test.dateEqual(time.month.floor(date.local(2010, 11, 31, 23)), date.local(2010, 11, 01));
+  test.dateEqual(time.month.floor(date.local(2011, 00, 01, 00)), date.local(2011, 00, 01));
+  test.dateEqual(time.month.floor(date.local(2011, 00, 01, 01)), date.local(2011, 00, 01));
+  test.end();
+});
+
+tape("month.floor(date) observes daylight savings time", function(test) {
+  test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 01));
+  test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 01));
+  test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 01));
+  test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 10)), date.local(2011, 02, 01));
+  test.dateEqual(time.month.floor(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 01));
+  test.dateEqual(time.month.floor(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 01));
+  test.dateEqual(time.month.floor(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 01));
+  test.dateEqual(time.month.floor(date.utc(2011, 10, 06, 10)), date.local(2011, 10, 01));
+  test.end();
+});
+
+tape("month.floor(date) handles years in the first century", function(test) {
+  test.dateEqual(time.month.floor(date.local(0011, 10, 06, 07)), date.local(0011, 10, 01));
+  test.end();
+});
+
+tape("month.round(date) returns months", function(test) {
+  test.dateEqual(time.month.round(date.local(2010, 11, 16, 12)), date.local(2011, 00, 01));
+  test.dateEqual(time.month.round(date.local(2010, 11, 16, 11)), date.local(2010, 11, 01));
+  test.end();
+});
+
+tape("month.round(date) observes daylight savings time", function(test) {
+  test.dateEqual(time.month.round(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 01));
+  test.dateEqual(time.month.round(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 01));
+  test.dateEqual(time.month.round(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 01));
+  test.dateEqual(time.month.round(date.utc(2011, 02, 13, 20)), date.local(2011, 02, 01));
+  test.dateEqual(time.month.round(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 01));
+  test.dateEqual(time.month.round(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 01));
+  test.dateEqual(time.month.round(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 01));
+  test.dateEqual(time.month.round(date.utc(2011, 10, 06, 20)), date.local(2011, 10, 01));
+  test.end();
+});
+
+tape("month.round(date) handles midnight for leap years", function(test) {
+  test.dateEqual(time.month.round(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
+  test.dateEqual(time.month.round(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
+  test.end();
+});
+
+tape("month.ceil(date) returns months", function(test) {
+  test.dateEqual(time.month.ceil(date.local(2010, 10, 30, 23)), date.local(2010, 11, 01));
+  test.dateEqual(time.month.ceil(date.local(2010, 11, 01, 01)), date.local(2011, 00, 01));
+  test.end();
+});
+
+tape("month.ceil(date) observes daylight savings time", function(test) {
+  test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 07)), date.local(2011, 03, 01));
+  test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 08)), date.local(2011, 03, 01));
+  test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 09)), date.local(2011, 03, 01));
+  test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 10)), date.local(2011, 03, 01));
+  test.dateEqual(time.month.ceil(date.utc(2011, 10, 06, 07)), date.local(2011, 11, 01));
+  test.dateEqual(time.month.ceil(date.utc(2011, 10, 06, 08)), date.local(2011, 11, 01));
+  test.dateEqual(time.month.ceil(date.utc(2011, 10, 06, 09)), date.local(2011, 11, 01));
+  test.dateEqual(time.month.ceil(date.utc(2011, 10, 06, 10)), date.local(2011, 11, 01));
+  test.end();
+});
+
+tape("month.ceil(date) handles midnight for leap years", function(test) {
+  test.dateEqual(time.month.ceil(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
+  test.dateEqual(time.month.ceil(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
+  test.end();
+});
+
+tape("month.offset(date) is an alias for month.offset(date, 1)", function(test) {
+  test.dateEqual(time.month.offset(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2011, 00, 31, 23, 59, 59, 999));
+  test.end();
+});
+
+tape("month.offset(date, count) does not modify the passed-in date", function(test) {
+  var d = date.local(2010, 11, 31, 23, 59, 59, 999);
+  time.month.offset(date, +1);
+  test.dateEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
+  test.end();
+});
+
+tape("month.offset(date, count) does not round the passed-in date", function(test) {
+  test.dateEqual(time.month.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011, 00, 31, 23, 59, 59, 999));
+  test.dateEqual(time.month.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 09, 31, 23, 59, 59, 456));
+  test.end();
+});
+
+tape("month.offset(date, count) allows count to be negative", function(test) {
+  test.dateEqual(time.month.offset(date.local(2010, 11, 31), -1), date.local(2010, 10, 31));
+  test.dateEqual(time.month.offset(date.local(2011, 00, 01), -2), date.local(2010, 10, 01));
+  test.dateEqual(time.month.offset(date.local(2011, 00, 01), -1), date.local(2010, 11, 01));
+  test.end();
+});
+
+tape("month.offset(date, count) allows count to be positive", function(test) {
+  test.dateEqual(time.month.offset(date.local(2010, 11, 31), +1), date.local(2011, 00, 31));
+  test.dateEqual(time.month.offset(date.local(2010, 11, 30), +2), date.local(2011, 01, 30));
+  test.dateEqual(time.month.offset(date.local(2010, 11, 30), +1), date.local(2011, 00, 30));
+  test.end();
+});
+
+tape("month.offset(date, count) allows count to be zero", function(test) {
+  test.dateEqual(time.month.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
+  test.dateEqual(time.month.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
+  test.end();
+});
+
+tape("month.range(start, stop) returns months between start (inclusive) and stop (exclusive)", function(test) {
+  var days = time.month.range(date.local(2011, 11, 01), date.local(2012, 05, 01));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.local(2011, 11, 01));
+  test.dateEqual(days[1], date.local(2012, 00, 01));
+  test.dateEqual(days[2], date.local(2012, 01, 01));
+  test.dateEqual(days[3], date.local(2012, 02, 01));
+  test.dateEqual(days[4], date.local(2012, 03, 01));
+  test.dateEqual(days[5], date.local(2012, 04, 01));
+  test.end();
+});
+
+tape("month.range(start, stop) returns months", function(test) {
+  var days = time.month.range(date.local(2011, 10, 04, 02), date.local(2012, 04, 10, 13));
+  test.equal(days.length, 6);
+  test.dateEqual(days[0], date.local(2011, 11, 01));
+  test.dateEqual(days[1], date.local(2012, 00, 01));
+  test.dateEqual(days[2], date.local(2012, 01, 01));
+  test.dateEqual(days[3], date.local(2012, 02, 01));
+  test.dateEqual(days[4], date.local(2012, 03, 01));
+  test.dateEqual(days[5], date.local(2012, 04, 01));
+  test.end();
+});
+
+tape("month.range(start, stop) coerces start and stop to dates", function(test) {
+  var days = time.month.range(+date.local(2011, 10, 04), +date.local(2012, 01, 07));
+  test.equal(days.length, 3);
+  test.dateEqual(days[0], date.local(2011, 11, 01));
+  test.dateEqual(days[1], date.local(2012, 00, 01));
+  test.dateEqual(days[2], date.local(2012, 01, 01));
+  test.end();
+});
+
+tape("month.range(start, stop) returns the empty array for invalid dates", function(test) {
+  test.deepEqual(time.month.range(new Date(NaN), Infinity), []);
+  test.end();
+});
+
+tape("month.range(start, stop) returns the empty array if start >= stop", function(test) {
+  test.deepEqual(time.month.range(date.local(2011, 11, 10), date.local(2011, 10, 04)), []);
+  test.deepEqual(time.month.range(date.local(2011, 10, 01), date.local(2011, 10, 01)), []);
+  test.end();
+});

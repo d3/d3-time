@@ -104,10 +104,10 @@ Returns every an array of dates representing every time interval after or equal 
 
 <a name="interval_filter" href="#interval_filter">#</a> <i>interval</i>.<b>filter</b>(<i>test</i>)
 
-Returns a new time interval that is a filtered subset of this time interval using the specified *test* function. The *test* function is passed a date and should return true if and only if the specified date should be considered part of the time interval. For example, to create an interval that returns the 1st, 10th, 20th and 30th (if it exists) of each month:
+Returns a new time interval that is a filtered subset of this time interval using the specified *test* function. The *test* function is passed a date and should return true if and only if the specified date should be considered part of the time interval. For example, to create an interval that returns the 1st, 11th, 21th and 31th (if it exists) of each month:
 
 ```js
-var i = day.filter(function(d) { return d.getDate() % 10 === 0; });
+var i = day.filter(function(d) { return (d.getDate() - 1) % 10 === 0; });
 ```
 
 ### Counting

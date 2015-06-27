@@ -31,19 +31,19 @@ Each interval supports the following methods:
 
 <a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>)
 
-Rounds down the specified *date*, returning the latest time interval before or equal to *date*. For example, `day.floor(new Date())` returns midnight (12:00 AM) on the current day, in local time.
+Rounds down the specified *date*, returning the latest time interval before or equal to *date*. For example, `day.floor(new Date)` returns midnight (12:00 AM) on the current day, in local time (assuming that such a time is expressible in the current timezone).
 
 <a name="interval_round" href="#interval_round">#</a> <i>interval</i>.<b>round</b>(<i>date</i>)
 
-Rounds up or down the specified *date*, returning the closest time interval to *date*. For example, `day.round(new Date())` returns midnight (12:00 AM) on the current day if it is on or before noon, and midnight of the following day if it is after noon.
+Rounds up or down the specified *date*, returning the closest time interval to *date*. For example, `day.round(new Date)` returns midnight (12:00 AM) on the current day if it is on or before noon, and midnight of the following day if it is after noon.
 
 <a name="interval_ceil" href="#interval_ceil">#</a> <i>interval</i>.<b>ceil</b>(<i>date</i>)
 
-Rounds up the specified *date*, returning the earliest time interval after or equal to *date*. For example, `day.ceil(new Date())` returns midnight (12:00 AM) on the following day, in local time (unless you happen to run this code at exactly midnight, in which case it returns the current time).
+Rounds up the specified *date*, returning the earliest time interval after or equal to *date*. For example, `day.ceil(new Date)` returns midnight (12:00 AM) on the following day, in local time (unless you happen to run this code at exactly midnight, in which case it returns the current time).
 
 <a name="interval_offset" href="#interval_offset">#</a> <i>interval</i>.<b>offset</b>(<i>date</i>[, <i>step</i>])
 
-Returns a new date equal to *date* plus *step* intervals. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned. This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `day.offset(new Date(), 1)` returns 5:34 PM tomorrow (even if Daylight Savings Time changes!). If *step* is not specified it defaults to 1.
+Returns a new date equal to *date* plus *step* intervals. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned. This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if Daylight Savings Time changes!). If *step* is not specified it defaults to 1.
 
 <a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 

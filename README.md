@@ -54,7 +54,7 @@ Note that the `==` and `===` operators do not compare by value with [Date](https
 ```js
 // Returns true if the specified date is a day boundary.
 function isDay(date) {
-  return +day(date) === +date;
+  return +day.floor(date) === +date;
 }
 ```
 

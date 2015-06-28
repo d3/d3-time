@@ -1,17 +1,18 @@
-import day from "./src/day";
-import hour from "./src/hour";
-import minute from "./src/minute";
-import month from "./src/month";
 import second from "./src/second";
-import utcDay from "./src/utcDay";
-import utcHour from "./src/utcHour";
-import utcMinute from "./src/utcMinute";
-import utcMonth from "./src/utcMonth";
-import utcSecond from "./src/utcSecond";
-import utcYear from "./src/utcYear";
-import year from "./src/year";
-import {default as utcWeek, utcSunday, utcMonday, utcTuesday, utcWednesday, utcThursday, utcFriday, utcSaturday} from "./src/utcWeek";
+import minute from "./src/minute";
+import hour from "./src/hour";
+import day from "./src/day";
 import {default as week, sunday, monday, tuesday, wednesday, thursday, friday, saturday} from "./src/week";
+import month from "./src/month";
+import year from "./src/year";
+
+import utcSecond from "./src/utcSecond";
+import utcMinute from "./src/utcMinute";
+import utcHour from "./src/utcHour";
+import utcDay from "./src/utcDay";
+import {default as utcWeek, utcSunday, utcMonday, utcTuesday, utcWednesday, utcThursday, utcFriday, utcSaturday} from "./src/utcWeek";
+import utcMonth from "./src/utcMonth";
+import utcYear from "./src/utcYear";
 
 export var seconds = second.range;
 export var minutes = minute.range;
@@ -44,32 +45,32 @@ export var utcMonths = utcMonth.range;
 export var utcYears = utcYear.range;
 
 export {
-  day,
-  friday,
-  hour,
-  minute,
-  monday,
-  month,
-  saturday,
   second,
+  minute,
+  hour,
+  day,
   sunday,
-  thursday,
+  monday,
   tuesday,
-  utcDay,
-  utcFriday,
-  utcHour,
-  utcMinute,
-  utcMonday,
-  utcMonth,
-  utcSaturday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  week,
+  month,
+  year,
   utcSecond,
+  utcMinute,
+  utcHour,
+  utcDay,
   utcSunday,
-  utcThursday,
+  utcMonday,
   utcTuesday,
   utcWednesday,
+  utcThursday,
+  utcFriday,
+  utcSaturday,
   utcWeek,
-  utcYear,
-  wednesday,
-  week,
-  year
+  utcMonth,
+  utcYear
 };

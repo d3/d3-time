@@ -41,7 +41,7 @@ export default function newInterval(floori, offseti, count) {
     });
   };
 
-  interval.count = function(start, end) {
+  if (count) interval.count = function(start, end) {
     start = new Date(+start);
     end = new Date(+end);
     floori(start), floori(end);

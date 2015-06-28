@@ -10,11 +10,13 @@ var start = new Date(2015, 02, 01), // Sun Mar 01 2015 00:00:00 GMT-0800 (PST)
 (end - start) / 864e5; // 30.958333333333332, oops!
 ```
 
-Instead, use [day](#day).[count](#interval_count):
+You can, however, use [day](#day).[count](#interval_count):
 
 ```js
 day.count(start, end); // 31
 ```
+
+[Day](#day) is one of several [time intervals](#api-reference) provided by d3-time. Each interval represents a conventional unit of time—[hours](#hour), [days](#day), [weeks](#weeks), *etc.*—and has methods to calculate boundary dates between adjacent units. For example, the [day](#day) interval computes midnight (12:00 AM local time) of the corresponding day. If such a time is not representable in the local time zone, as sometimes happens due to daylight saving, the closest equivalent is returned.
 
 As another example, to compute each Sunday in the current month:
 
@@ -27,7 +29,6 @@ week.range(month.floor(now), month.ceil(now));
 //  Sun Jun 28 2015 00:00:00 GMT-0700 (PDT)]
 ```
 
-This module provides a variety of [time intervals](#api-reference) that represent conventional units of time: [hours](#hour), [days](#day), [weeks](#weeks), *etc.* Each interval has methods to calculate boundary dates between adjacent time units. For example, the [day](#day) interval computes midnight (12:00 AM local time) of the corresponding day. If such a time is not representable in the local time zone, as sometimes happens due to daylight saving, the closest equivalent is returned.
 
 This module does not implement its own calendaring system; it merely implements a convenient API for calendar math. The provided time intervals thus reflect the behavior of ECMAScript [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date). This means, for example, that this module ignores leap seconds and can only work with the local time zone and [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC).
 

@@ -27,7 +27,9 @@ week.range(month.floor(now), month.ceil(now));
 //  Sun Jun 28 2015 00:00:00 GMT-0700 (PDT)]
 ```
 
-This module provides a variety of [time intervals](#api-reference) that represent conventional units of time: [hours](#hour), [days](#day), [weeks](#weeks), *etc.* Each interval has methods to calculate boundary [dates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) between adjacent time units. For example, the [day](#day) interval computes the midnight (12:00 AM local time) of the corresponding day. If such a time is not representable in the local timezone, as sometimes happens due to daylight saving, then the closest equivalent is returned.
+This module provides a variety of [time intervals](#api-reference) that represent conventional units of time: [hours](#hour), [days](#day), [weeks](#weeks), *etc.* Each interval has methods to calculate boundary dates between adjacent time units. For example, the [day](#day) interval computes the midnight (12:00 AM local time) of the corresponding day. If such a time is not representable in the local time zone, as sometimes happens due to daylight saving, then the closest equivalent is returned.
+
+This module does not implement its own calendaring system, and thus reflects the behavior of the underlying ECMAScript [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object. This means, for example, that it ignores leap seconds and can only work within the local time zone and [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC).
 
 This module is used by D3’s time scales to generate sensible ticks, by D3’s time format, and can also be used directly to do things like [calendar layouts](http://bl.ocks.org/mbostock/4063318).
 

@@ -51,34 +51,34 @@ tape("utcSunday.offset(date) is an alias for utcSunday.offset(date, 1)", functio
   test.end();
 });
 
-tape("utcSunday.offset(date, count) does not modify the passed-in date", function(test) {
+tape("utcSunday.offset(date, step) does not modify the passed-in date", function(test) {
   var d = date.utc(2010, 11, 31, 23, 59, 59, 999);
   time.utcSunday.offset(d, +1);
   test.dateEqual(d, date.utc(2010, 11, 31, 23, 59, 59, 999));
   test.end();
 });
 
-tape("utcSunday.offset(date, count) does not round the passed-in date", function(test) {
+tape("utcSunday.offset(date, step) does not round the passed-in date", function(test) {
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 31, 23, 59, 59, 999), +1), date.utc(2011, 00, 07, 23, 59, 59, 999));
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 31, 23, 59, 59, 456), -2), date.utc(2010, 11, 17, 23, 59, 59, 456));
   test.end();
 });
 
-tape("utcSunday.offset(date, count) allows count to be negative", function(test) {
+tape("utcSunday.offset(date, step) allows step to be negative", function(test) {
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 01), -1), date.utc(2010, 10, 24));
   test.dateEqual(time.utcSunday.offset(date.utc(2011, 00, 01), -2), date.utc(2010, 11, 18));
   test.dateEqual(time.utcSunday.offset(date.utc(2011, 00, 01), -1), date.utc(2010, 11, 25));
   test.end();
 });
 
-tape("utcSunday.offset(date, count) allows count to be positive", function(test) {
+tape("utcSunday.offset(date, step) allows step to be positive", function(test) {
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 10, 24), +1), date.utc(2010, 11, 01));
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 18), +2), date.utc(2011, 00, 01));
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 25), +1), date.utc(2011, 00, 01));
   test.end();
 });
 
-tape("utcSunday.offset(date, count) allows count to be zero", function(test) {
+tape("utcSunday.offset(date, step) allows step to be zero", function(test) {
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 31, 23, 59, 59, 999), 0), date.utc(2010, 11, 31, 23, 59, 59, 999));
   test.dateEqual(time.utcSunday.offset(date.utc(2010, 11, 31, 23, 59, 58, 000), 0), date.utc(2010, 11, 31, 23, 59, 58, 000));
   test.end();

@@ -58,34 +58,34 @@ tape("utcDay.offset(date) is an alias for utcDay.offset(date, 1)", function(test
   test.end();
 });
 
-tape("utcDay.offset(date, count) does not modify the passed-in date", function(test) {
+tape("utcDay.offset(date, step) does not modify the passed-in date", function(test) {
   var d = date.utc(2010, 11, 31, 23, 59, 59, 999);
   time.utcDay.offset(d, +1);
   test.dateEqual(d, date.utc(2010, 11, 31, 23, 59, 59, 999));
   test.end();
 });
 
-tape("utcDay.offset(date, count) does not round the passed-in date", function(test) {
+tape("utcDay.offset(date, step) does not round the passed-in date", function(test) {
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31, 23, 59, 59, 999), +1), date.utc(2011, 00, 01, 23, 59, 59, 999));
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31, 23, 59, 59, 456), -2), date.utc(2010, 11, 29, 23, 59, 59, 456));
   test.end();
 });
 
-tape("utcDay.offset(date, count) allows count to be negative", function(test) {
+tape("utcDay.offset(date, step) allows step to be negative", function(test) {
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31), -1), date.utc(2010, 11, 30));
   test.dateEqual(time.utcDay.offset(date.utc(2011, 00, 01), -2), date.utc(2010, 11, 30));
   test.dateEqual(time.utcDay.offset(date.utc(2011, 00, 01), -1), date.utc(2010, 11, 31));
   test.end();
 });
 
-tape("utcDay.offset(date, count) allows count to be positive", function(test) {
+tape("utcDay.offset(date, step) allows step to be positive", function(test) {
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31), +1), date.utc(2011, 00, 01));
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 30), +2), date.utc(2011, 00, 01));
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 30), +1), date.utc(2010, 11, 31));
   test.end();
 });
 
-tape("utcDay.offset(date, count) allows count to be zero", function(test) {
+tape("utcDay.offset(date, step) allows step to be zero", function(test) {
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31, 23, 59, 59, 999), 0), date.utc(2010, 11, 31, 23, 59, 59, 999));
   test.dateEqual(time.utcDay.offset(date.utc(2010, 11, 31, 23, 59, 58, 000), 0), date.utc(2010, 11, 31, 23, 59, 58, 000));
   test.end();

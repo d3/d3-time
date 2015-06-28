@@ -86,34 +86,34 @@ tape("month.offset(date) is an alias for month.offset(date, 1)", function(test) 
   test.end();
 });
 
-tape("month.offset(date, count) does not modify the passed-in date", function(test) {
+tape("month.offset(date, step) does not modify the passed-in date", function(test) {
   var d = date.local(2010, 11, 31, 23, 59, 59, 999);
   time.month.offset(date, +1);
   test.dateEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
   test.end();
 });
 
-tape("month.offset(date, count) does not round the passed-in date", function(test) {
+tape("month.offset(date, step) does not round the passed-in date", function(test) {
   test.dateEqual(time.month.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011, 00, 31, 23, 59, 59, 999));
   test.dateEqual(time.month.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 09, 31, 23, 59, 59, 456));
   test.end();
 });
 
-tape("month.offset(date, count) allows count to be negative", function(test) {
+tape("month.offset(date, step) allows step to be negative", function(test) {
   test.dateEqual(time.month.offset(date.local(2010, 11, 31), -1), date.local(2010, 10, 31));
   test.dateEqual(time.month.offset(date.local(2011, 00, 01), -2), date.local(2010, 10, 01));
   test.dateEqual(time.month.offset(date.local(2011, 00, 01), -1), date.local(2010, 11, 01));
   test.end();
 });
 
-tape("month.offset(date, count) allows count to be positive", function(test) {
+tape("month.offset(date, step) allows step to be positive", function(test) {
   test.dateEqual(time.month.offset(date.local(2010, 11, 31), +1), date.local(2011, 00, 31));
   test.dateEqual(time.month.offset(date.local(2010, 11, 30), +2), date.local(2011, 01, 30));
   test.dateEqual(time.month.offset(date.local(2010, 11, 30), +1), date.local(2011, 00, 30));
   test.end();
 });
 
-tape("month.offset(date, count) allows count to be zero", function(test) {
+tape("month.offset(date, step) allows step to be zero", function(test) {
   test.dateEqual(time.month.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
   test.dateEqual(time.month.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
   test.end();

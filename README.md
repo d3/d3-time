@@ -7,16 +7,16 @@ As a result of these temporal peculiarities, it can be difficult to do seemingly
 ```js
 var start = new Date(2015, 02, 01), // Sun Mar 01 2015 00:00:00 GMT-0800 (PST)
     end = new Date(2015, 03, 01); // Wed Apr 01 2015 00:00:00 GMT-0700 (PDT)
-(end - start) / 864e5; // 30.958333333333332
+(end - start) / 864e5; // 30.958333333333332, oops!
 ```
 
-With d3-time’s [day](#day) interval, you can easily [count](#interval_count) the exact number of days:
+Instead, use [day](#day).[count](#interval_count):
 
 ```js
 day.count(start, end); // 31
 ```
 
-You can easily generate an array of dates representing each Sunday in the current month:
+As another example, to generate an array of dates representing each Sunday in the current month:
 
 ```js
 var now = new Date;
@@ -27,7 +27,7 @@ week.range(month.floor(now), month.ceil(now));
 //  Sun Jun 28 2015 00:00:00 GMT-0700 (PDT)]
 ```
 
-The d3-time module provides a variety of [time intervals](#api-reference) that represent conventional units of time: [hours](#hour), [days](#day), [weeks](#weeks), *etc.* Each interval has methods to calculate dates that represent the boundary between adjacent units. For example, the [day](#day) interval computes a [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) that is the midnight (12:00 AM local time) of the corresponding day. (If such a time is not representable in the local timezone, as sometimes happens due to daylight saving, then the closest equivalent is returned.)
+This module provides a variety of [time intervals](#api-reference) that represent conventional units of time: [hours](#hour), [days](#day), [weeks](#weeks), *etc.* Each interval has methods to calculate boundary [dates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) between adjacent time units. For example, the [day](#day) interval computes the midnight (12:00 AM local time) of the corresponding day. (If such a time is not representable in the local timezone, as sometimes happens due to daylight saving, then the closest equivalent is returned.)
 
 This module is used by D3’s time scales to generate sensible ticks, by D3’s time format, and can also be used directly to do things like [calendar layouts](http://bl.ocks.org/mbostock/4063318).
 

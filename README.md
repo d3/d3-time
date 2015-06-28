@@ -16,7 +16,7 @@ You can, however, use [day](#day).[count](#interval_count):
 day.count(start, end); // 31
 ```
 
-[Day](#day) is one of several [time intervals](#api-reference) provided by d3-time. Each interval represents a conventional unit of time—[hours](#hour), [weeks](#weeks), [months](#month) *etc.*—and has methods to calculate boundary dates. For example, the [day](#day) interval computes midnight (typically 12:00 AM local time) of the corresponding day. In addition to [rounding](#interval_round) and [counting](#interval_count), intervals can also be used to generate arrays of boundary dates. For example, to compute each Sunday in the current month:
+[Day](#day) is one of several [time intervals](#api-reference) provided by d3-time. Each interval represents a conventional unit of time—[hours](#hour), [weeks](#weeks), [months](#month), *etc.*—and has methods to calculate boundary dates. For example, the [day](#day) interval computes midnight (typically 12:00 AM local time) of the corresponding day. In addition to [rounding](#interval_round) and [counting](#interval_count), intervals can also be used to generate arrays of boundary dates. For example, to compute each Sunday in the current month:
 
 ```js
 var now = new Date;

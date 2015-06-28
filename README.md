@@ -29,7 +29,7 @@ week.range(month.floor(now), month.ceil(now));
 
 This module provides a variety of [time intervals](#api-reference) that represent conventional units of time: [hours](#hour), [days](#day), [weeks](#weeks), *etc.* Each interval has methods to calculate boundary dates between adjacent time units. For example, the [day](#day) interval computes the midnight (12:00 AM local time) of the corresponding day. If such a time is not representable in the local time zone, as sometimes happens due to daylight saving, then the closest equivalent is returned.
 
-This module does not implement its own calendaring system, and thus reflects the behavior of the underlying ECMAScript [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object. This means, for example, that it ignores leap seconds and can only work within the local time zone and [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC).
+This module does not implement its own calendaring system; it merely implements a convenient API for calendar math. The provided time intervals thus reflect the behavior of ECMAScript [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date). This means, for example, that this module ignores leap seconds and can only work with the local time zone and [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC).
 
 This module is used by D3’s time scales to generate sensible ticks, by D3’s time format, and can also be used directly to do things like [calendar layouts](http://bl.ocks.org/mbostock/4063318).
 
@@ -48,6 +48,17 @@ Alias for [*interval*.floor](#interval_floor). For example, `year(date)` and `ye
 Returns a new date representing the latest interval boundary date before or equal to *date*. For example, `day.floor(new Date)` typically returns 12:00 AM local time on the current day.
 
 This method is idempotent: if the specified *date* is already floored to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the minimum expressible value of the associated interval, such that `floor(+floor(date) - 1)` returns the preceeding interval boundary date.
+
+Note that the `==` and `===` operators do not compare by value with [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) objects, and thus you cannot use them to tell whether the specified *date* has already been floored. Instead, coerce to a number and then compare:
+
+```js
+// Returns true if the specified date is a day boundary.
+function isDay(date) {
+  return +day(date) === +date;
+}
+```
+
+This is more reliable than testing whether the time is 12:00 AM, as in some time zones midnight may not exist due to daylight saving.
 
 <a name="interval_round" href="#interval_round">#</a> <i>interval</i>.<b>round</b>(<i>date</i>)
 

@@ -16,7 +16,7 @@ tape("month.floor(date) returns months", function(test) {
   test.end();
 });
 
-tape("month.floor(date) observes daylight savings time", function(test) {
+tape("month.floor(date) observes Daylight Savings Time", function(test) {
   test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 01));
   test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 01));
   test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 01));
@@ -39,7 +39,7 @@ tape("month.round(date) returns months", function(test) {
   test.end();
 });
 
-tape("month.round(date) observes daylight savings time", function(test) {
+tape("month.round(date) observes Daylight Savings Time", function(test) {
   test.dateEqual(time.month.round(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 01));
   test.dateEqual(time.month.round(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 01));
   test.dateEqual(time.month.round(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 01));
@@ -63,7 +63,7 @@ tape("month.ceil(date) returns months", function(test) {
   test.end();
 });
 
-tape("month.ceil(date) observes daylight savings time", function(test) {
+tape("month.ceil(date) observes Daylight Savings Time", function(test) {
   test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 07)), date.local(2011, 03, 01));
   test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 08)), date.local(2011, 03, 01));
   test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 09)), date.local(2011, 03, 01));
@@ -160,5 +160,15 @@ tape("month.range(start, stop) returns the empty array for invalid dates", funct
 tape("month.range(start, stop) returns the empty array if start >= stop", function(test) {
   test.deepEqual(time.month.range(date.local(2011, 11, 10), date.local(2011, 10, 04)), []);
   test.deepEqual(time.month.range(date.local(2011, 10, 01), date.local(2011, 10, 01)), []);
+  test.end();
+});
+
+tape("month.count(start, end) counts months after start (exclusive) and before end (inclusive)", function(test) {
+  test.equal(time.month.count(date.local(2011, 00, 01), date.local(2011, 04, 01)), 4);
+  test.equal(time.month.count(date.local(2011, 00, 01), date.local(2011, 03, 30)), 3);
+  test.equal(time.month.count(date.local(2010, 11, 31), date.local(2011, 03, 30)), 4);
+  test.equal(time.month.count(date.local(2010, 11, 31), date.local(2011, 04, 01)), 5);
+  test.equal(time.month.count(date.local(2009, 11, 31), date.local(2012, 04, 01)), 29);
+  test.equal(time.month.count(date.local(2012, 04, 01), date.local(2009, 11, 31)), -29);
   test.end();
 });

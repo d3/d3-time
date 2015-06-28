@@ -5,4 +5,6 @@ export default interval(function(date) {
   date.setDate(1);
 }, function(date, offset) {
   date.setMonth(date.getMonth() + offset);
+}, function(start, end) {
+  return end.getMonth() - start.getMonth() + (end.getFullYear() - start.getFullYear()) * 12;
 });

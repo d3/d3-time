@@ -8,7 +8,7 @@ If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](
 
 ## API Reference
 
-[Need description of time interval here.]
+[Need description of interval here.]
 
 <a name="_interval" href="#_interval">#</a> <i>interval</i>(<i>date</i>)
 
@@ -16,15 +16,15 @@ Alias for [*interval*.floor](#interval_floor).
 
 <a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>)
 
-Returns a new date representing the latest time interval before or equal to *date*. For example, `day.floor(new Date)` typically returns 12:00 AM local time on the current day.
+Returns a new date representing the latest interval boundary before or equal to *date*. For example, `day.floor(new Date)` typically returns 12:00 AM local time on the current day.
 
 <a name="interval_round" href="#interval_round">#</a> <i>interval</i>.<b>round</b>(<i>date</i>)
 
-Returns a new date representing the closest time interval to *date*. For example, `day.round(new Date)` typically returns 12:00 AM local time on the current day if it is on or before noon, and 12:00 AM of the following day if it is after noon.
+Returns a new date representing the closest interval boundary to *date*. For example, `day.round(new Date)` typically returns 12:00 AM local time on the current day if it is on or before noon, and 12:00 AM of the following day if it is after noon.
 
 <a name="interval_ceil" href="#interval_ceil">#</a> <i>interval</i>.<b>ceil</b>(<i>date</i>)
 
-Returns a new date representing the earliest time interval after or equal to *date*. For example, `day.ceil(new Date)` typically returns 12:00 AM local time on the following day.
+Returns a new date representing the earliest interval boundary after or equal to *date*. For example, `day.ceil(new Date)` typically returns 12:00 AM local time on the following day.
 
 <a name="interval_offset" href="#interval_offset">#</a> <i>interval</i>.<b>offset</b>(<i>date</i>[, <i>step</i>])
 
@@ -32,19 +32,34 @@ Returns a new date equal to *date* plus *step* intervals. If *step* is negative,
 
 <a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Returns every an array of dates representing every time interval after or equal to *start* and before *stop*. If *step* is specified, then every *step*'th interval will be returned; for example, for the [day](#day) interval a *step* of 2 will return every other day.
+Returns every an array of dates representing every interval boundary after or equal to *start* (inclusive) and before *stop* (exclusive). If *step* is specified, then every *step*'th interval will be returned; for example, for the [day](#day) interval a *step* of 2 will return every other day.
 
 <a name="interval_filter" href="#interval_filter">#</a> <i>interval</i>.<b>filter</b>(<i>test</i>)
 
-Returns a new time interval that is a filtered subset of this time interval using the specified *test* function. The *test* function is passed a date and should return true if and only if the specified date should be considered part of the time interval. For example, to create an interval that returns the 1st, 11th, 21th and 31th (if it exists) of each month:
+Returns a new interval that is a filtered subset of this interval using the specified *test* function. The *test* function is passed a date and should return true if and only if the specified date should be considered part of the interval. For example, to create an interval that returns the 1st, 11th, 21th and 31th (if it exists) of each month:
 
 ```js
 var i = day.filter(function(d) { return (d.getDate() - 1) % 10 === 0; });
 ```
 
+<a name="interval_count" href="#interval_count">#</a> <i>interval</i>.<b>count</b>(<i>start</i>, <i>end</i>)
+
+Returns the number of interval boundaries after *start* (exclusive) and before or equal to *end* (inclusive). (Note that this behavior is slightly different than [*interval*.range](#interval_range).) For example, to compute the current zero-based day-of-year number:
+
+```js
+var now = new Date;
+day.count(year(now), now); // 177
+```
+
+Likewise, to compute the current zero-based week-of-year number for weeks that start on Sunday:
+
+```js
+sunday.count(year(now), now); // 25
+```
+
 ### Intervals
 
-The following time intervals are provided:
+The following intervals are provided:
 
 <a name="second" href="#second">#</a> <b>second</b>
 <br><a href="#second">#</a> <b>utcSecond</b>
@@ -118,7 +133,7 @@ Years (e.g., January 1, 2012 at 12:00 AM); ranges from 365 to 366 days.
 
 ### Ranges
 
-For convenience, aliases for [*interval*.range](#interval_range) are also provided as plural forms of the corresponding time interval.
+For convenience, aliases for [*interval*.range](#interval_range) are also provided as plural forms of the corresponding interval.
 
 <a name="seconds" href="#seconds">#</a> <b>seconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#seconds">#</a> <b>utcSeconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
@@ -189,54 +204,6 @@ Aliases for [month](#month).[range](#interval_range) and [utcMonth](#month).[ran
 <br><a href="#years">#</a> <b>utcYears</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [year](#year).[range](#interval_range) and [utcYear](#year).[range](#interval_range).
-
-
-### Counting
-
-<a name="dayOfYear" href="#dayOfYear">#</a> <b>dayOfYear</b>(<i>date</i>)
-<br><a href="#dayOfYear">#</a> <b>utcDayOfYear</b>(<i>date</i>)
-
-Returns the day number for the given date. The first day of the year (January 1) is always the 0th day.
-
-<a name="sundayOfYear" href="#sundayOfYear">#</a> <b>sundayOfYear</b>(<i>date</i>)
-<br><a href="#sundayOfYear">#</a> <b>utcSundayOfYear</b>(<i>date</i>)
-
-Returns the week number for the given date, where weeks start on Sunday. The first day of the year (January 1) is always the 0th week.
-
-<a name="mondayOfYear" href="#mondayOfYear">#</a> <b>mondayOfYear</b>(<i>date</i>)
-<br><a href="#mondayOfYear">#</a> <b>utcMondayOfYear</b>(<i>date</i>)
-
-Returns the week number for the given date, where weeks start on Monday. The first day of the year (January 1) is always the 0th week.
-
-<a name="tuesdayOfYear" href="#tuesdayOfYear">#</a> <b>tuesdayOfYear</b>(<i>date</i>)
-<br><a href="#tuesdayOfYear">#</a> <b>utcTuesdayOfYear</b>(<i>date</i>)
-
-Returns the week number for the given date, where weeks start on Tuesday. The first day of the year (January 1) is always the 0th week.
-
-<a name="wednesdayOfYear" href="#wednesdayOfYear">#</a> <b>wednesdayOfYear</b>(<i>date</i>)
-<br><a href="#wednesdayOfYear">#</a> <b>utcWednesdayOfYear</b>(<i>date</i>)
-
-Returns the week number for the given date, where weeks start on Wednesday. The first day of the year (January 1) is always the 0th week.
-
-<a name="thursdayOfYear" href="#thursdayOfYear">#</a> <b>thursdayOfYear</b>(<i>date</i>)
-<br><a href="#thursdayOfYear">#</a> <b>utcThursdayOfYear</b>(<i>date</i>)
-
-Returns the week number for the given date, where weeks start on Thursday. The first day of the year (January 1) is always the 0th week.
-
-<a name="fridayOfYear" href="#fridayOfYear">#</a> <b>fridayOfYear</b>(<i>date</i>)
-<br><a href="#fridayOfYear">#</a> <b>utcFridayOfYear</b>(<i>date</i>)
-
-Returns the week number for the given date, where weeks start on Friday. The first day of the year (January 1) is always the 0th week.
-
-<a name="saturdayOfYear" href="#saturdayOfYear">#</a> <b>saturdayOfYear</b>(<i>date</i>)
-<br><a href="#saturdayOfYear">#</a> <b>utcSaturdayOfYear</b>(<i>date</i>)
-
-Returns the week number for the given date, where weeks start on Saturday. The first day of the year (January 1) is always the 0th week.
-
-<a name="weekOfYear" href="#weekOfYear">#</a> <b>weekOfYear</b>(<i>date</i>)
-<br><a href="#weekOfYear">#</a> <b>utcWeekOfYear</b>(<i>date</i>)
-
-Aliases for [sundayOfYear](#sundayOfYear) and [utcSundayOfYear](#sundayOfYear).
 
 ## Changes from D3 3.x:
 

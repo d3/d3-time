@@ -1,4 +1,4 @@
-export default function newInterval(floori, offseti) {
+export default function newInterval(floori, offseti, count) {
 
   function interval(date) {
     return floori(date = new Date(+date)), date;
@@ -39,6 +39,13 @@ export default function newInterval(floori, offseti) {
     }, function(date, step) {
       while (--step >= 0) while (offseti(date, 1), !test(date));
     });
+  };
+
+  interval.count = function(start, end) {
+    start = new Date(+start);
+    end = new Date(+end);
+    floori(start), floori(end);
+    return count(start, end);
   };
 
   return interval;

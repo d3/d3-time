@@ -6,6 +6,8 @@ function utcWeekday(i) {
     date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 7 - i) % 7);
   }, function(date, offset) {
     date.setUTCDate(date.getUTCDate() + offset * 7);
+  }, function(start, end) {
+    return (end - start) / 6048e5;
   });
 }
 

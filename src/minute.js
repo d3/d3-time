@@ -4,4 +4,6 @@ export default interval(function(date) {
   date.setSeconds(0, 0);
 }, function(date, offset) {
   date.setTime(+date + offset * 6e4);
+}, function(start, end) {
+  return (end - start) / 6e4;
 });

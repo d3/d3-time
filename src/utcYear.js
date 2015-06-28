@@ -5,4 +5,6 @@ export default interval(function(date) {
   date.setUTCMonth(0, 1);
 }, function(date, offset) {
   date.setUTCFullYear(date.getUTCFullYear() + offset);
+}, function(start, end) {
+  return end.getUTCFullYear() - start.getUTCFullYear();
 });

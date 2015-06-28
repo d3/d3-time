@@ -21,7 +21,7 @@ tape("day.floor(date) returns days", function(test) {
   test.end();
 });
 
-tape("day.floor(date) observes daylight savings time", function(test) {
+tape("day.floor(date) observes Daylight Savings Time", function(test) {
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 12));
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
@@ -44,7 +44,7 @@ tape("day.round(date) returns days", function(test) {
   test.end();
 });
 
-tape("day.round(date) observes daylight savings time", function(test) {
+tape("day.round(date) observes Daylight Savings Time", function(test) {
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 13));
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
@@ -69,7 +69,7 @@ tape("day.ceil(date) returns days", function(test) {
   test.end();
 });
 
-tape("day.ceil(date) observes start of daylight savings time", function(test) {
+tape("day.ceil(date) observes start of Daylight Savings Time", function(test) {
   test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 13));
   test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
   test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 14));
@@ -77,7 +77,7 @@ tape("day.ceil(date) observes start of daylight savings time", function(test) {
   test.end();
 });
 
-tape("day.ceil(date) observes end of daylight savings time", function(test) {
+tape("day.ceil(date) observes end of Daylight Savings Time", function(test) {
   test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
   test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 07));
   test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 07));
@@ -180,5 +180,41 @@ tape("day.range(start, stop, step) returns every step day", function(test) {
   test.dateEqual(days[1], date.local(2011, 10, 08));
   test.dateEqual(days[2], date.local(2011, 10, 11));
   test.dateEqual(days[3], date.local(2011, 10, 14));
+  test.end();
+});
+
+tape("day.count(start, end) counts days after start (exclusive) and before end (inclusive)", function(test) {
+  test.equal(time.day.count(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00)), 128);
+  test.equal(time.day.count(date.local(2011, 00, 01, 01), date.local(2011, 04, 09, 00)), 128);
+  test.equal(time.day.count(date.local(2010, 11, 31, 23), date.local(2011, 04, 09, 00)), 129);
+  test.equal(time.day.count(date.local(2011, 00, 01, 00), date.local(2011, 04, 08, 23)), 127);
+  test.equal(time.day.count(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 01)), 128);
+  test.end();
+});
+
+tape("day.count(start, end) observes Daylight Savings Time", function(test) {
+  test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 01)), 71);
+  test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 03)), 71);
+  test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 04)), 71);
+  test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 00)), 309);
+  test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 01)), 309);
+  test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 02)), 309);
+  test.end();
+});
+
+tape("day.count(start, end) returns 364 or 365 for a full year", function(test) {
+  test.equal(time.day.count(date.local(1999, 00, 01), date.local(1999, 11, 31)), 364);
+  test.equal(time.day.count(date.local(2000, 00, 01), date.local(2000, 11, 31)), 365); // leap year
+  test.equal(time.day.count(date.local(2001, 00, 01), date.local(2001, 11, 31)), 364);
+  test.equal(time.day.count(date.local(2002, 00, 01), date.local(2002, 11, 31)), 364);
+  test.equal(time.day.count(date.local(2003, 00, 01), date.local(2003, 11, 31)), 364);
+  test.equal(time.day.count(date.local(2004, 00, 01), date.local(2004, 11, 31)), 365); // leap year
+  test.equal(time.day.count(date.local(2005, 00, 01), date.local(2005, 11, 31)), 364);
+  test.equal(time.day.count(date.local(2006, 00, 01), date.local(2006, 11, 31)), 364);
+  test.equal(time.day.count(date.local(2007, 00, 01), date.local(2007, 11, 31)), 364);
+  test.equal(time.day.count(date.local(2008, 00, 01), date.local(2008, 11, 31)), 365); // leap year
+  test.equal(time.day.count(date.local(2009, 00, 01), date.local(2009, 11, 31)), 364);
+  test.equal(time.day.count(date.local(2010, 00, 01), date.local(2010, 11, 31)), 364);
+  test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 11, 31)), 364);
   test.end();
 });

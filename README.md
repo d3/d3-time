@@ -12,7 +12,7 @@ If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](
 
 <a name="_interval" href="#_interval">#</a> <i>interval</i>(<i>date</i>)
 
-Alias for [*interval*.floor](#interval_floor).
+Alias for [*interval*.floor](#interval_floor). For example, `year(date)` and `year.floor(date)` are equivalent.
 
 <a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>)
 

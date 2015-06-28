@@ -16,9 +16,9 @@ You can, however, use [day](#day).[count](#interval_count):
 day.count(start, end); // 31
 ```
 
-[Day](#day) is one of several [time intervals](#api-reference) provided by d3-time. Each interval represents a conventional unit of time—[hours](#hour), [days](#day), [weeks](#weeks), *etc.*—and has methods to calculate boundary dates between adjacent units. For example, the [day](#day) interval computes midnight (12:00 AM local time) of the corresponding day. If such a time is not representable in the local time zone, as sometimes happens due to daylight saving, the closest equivalent is returned.
+[Day](#day) is one of several [time intervals](#api-reference) provided by d3-time. Each interval represents a conventional unit of time—[hours](#hour), [weeks](#weeks), [months](#month) *etc.*—and has methods to calculate boundary dates. For example, the [day](#day) interval computes midnight (12:00 AM local time) of the corresponding day.
 
-As another example, to compute each Sunday in the current month:
+In addition to [rounding](#interval_round) and [counting](#interval_count), intervals can also be used to generate arrays of boundary dates. For example, to compute each Sunday in the current month:
 
 ```js
 var now = new Date;
@@ -28,7 +28,6 @@ week.range(month.floor(now), month.ceil(now));
 //  Sun Jun 21 2015 00:00:00 GMT-0700 (PDT),
 //  Sun Jun 28 2015 00:00:00 GMT-0700 (PDT)]
 ```
-
 
 This module does not implement its own calendaring system; it merely implements a convenient API for calendar math. The provided time intervals thus reflect the behavior of ECMAScript [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date). This means, for example, that this module ignores leap seconds and can only work with the local time zone and [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC).
 

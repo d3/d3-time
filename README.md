@@ -1,14 +1,41 @@
 # d3-time
 
-…
+When visualizing time series data, analyzing temporal patterns, or working with time in general, the irregularities of conventional time units quickly become apparent. In the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar), for example, most years have 365 days but leap years have 366; most months have 31 days but some have 28, 29 or 30; and with [daylight saving](https://en.wikipedia.org/wiki/Daylight_saving_time), most days have 24 hours but some have 23 or 25. Adding to complexity, daylight saving conventions vary around the world.
+
+As a result of these temporal peculiarities, it can be difficult to do seemingly-trivial tasks. For example, if you want to compute the number of days that have passed between two dates, you can’t simply subtract and divide by 24 hours (86,400,000 ms):
+
+```js
+var start = new Date(2015, 02, 01), // Sun Mar 01 2015 00:00:00 GMT-0800 (PST)
+    end = new Date(2015, 03, 01); // Wed Apr 01 2015 00:00:00 GMT-0700 (PDT)
+(end - start) / 864e5; // 30.958333333333332
+```
+
+With d3-time’s [day](#day) interval, you can easily [count](#interval_count) the exact number of days:
+
+```js
+day.count(start, end); // 31
+```
+
+You can easily generate an array of dates representing each Sunday in the current month:
+
+```js
+var now = new Date;
+week.range(month.floor(now), month.ceil(now));
+// [Sun Jun 07 2015 00:00:00 GMT-0700 (PDT),
+//  Sun Jun 14 2015 00:00:00 GMT-0700 (PDT),
+//  Sun Jun 21 2015 00:00:00 GMT-0700 (PDT),
+//  Sun Jun 28 2015 00:00:00 GMT-0700 (PDT)]
+```
+
+The d3-time module provides a variety of [time intervals](#api-reference) that represent conventional units of time: [hours](#hour), [days](#day), [weeks](#weeks), *etc.* Each interval has methods to calculate dates that represent the boundary between adjacent units. For example, the [day](#day) interval computes a [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) that is the midnight (12:00 AM local time) of the corresponding day. (If such a time is not representable in the local timezone, as sometimes happens due to daylight saving, then the closest equivalent is returned.)
+
+This module is used by D3’s time scales to generate sensible ticks, by D3’s time format, and can also be used directly to do things like [calendar layouts](http://bl.ocks.org/mbostock/4063318).
 
 ## Installing
 
 If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](https://github.com/d3/d3-time/releases/latest).
 
 ## API Reference
-
-[Need description of interval here.]
 
 <a name="_interval" href="#_interval">#</a> <i>interval</i>(<i>date</i>)
 
@@ -28,7 +55,7 @@ Returns a new date representing the earliest interval boundary after or equal to
 
 <a name="interval_offset" href="#interval_offset">#</a> <i>interval</i>.<b>offset</b>(<i>date</i>[, <i>step</i>])
 
-Returns a new date equal to *date* plus *step* intervals. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned. This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if Daylight Savings changes!). If *step* is not specified it defaults to 1.
+Returns a new date equal to *date* plus *step* intervals. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned. This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if daylight saving changes!). If *step* is not specified it defaults to 1.
 
 <a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
@@ -76,17 +103,17 @@ Minutes (e.g., 01:02:00 AM); 60 seconds. Note that ECMAScript [ignores leap seco
 <a name="hour" href="#hour">#</a> <b>hour</b>
 <br><a href="#hour">#</a> <b>utcHour</b>
 
-Hours (e.g., 01:00 AM); 60 minutes. Note that advancing time by one hour in local time can return the same hour or skip an hour due to Daylight Savings.
+Hours (e.g., 01:00 AM); 60 minutes. Note that advancing time by one hour in local time can return the same hour or skip an hour due to daylight saving.
 
 <a name="day" href="#day">#</a> <b>day</b>
 <br><a href="#day">#</a> <b>utcDay</b>
 
-Days (e.g., February 7, 2012 at 12:00 AM); typically 24 hours. Days in local time may range from 23 to 25 hours due to Daylight Savings.
+Days (e.g., February 7, 2012 at 12:00 AM); typically 24 hours. Days in local time may range from 23 to 25 hours due to daylight saving.
 
 <a name="week" href="#week">#</a> <b>week</b>
 <br><a href="#week">#</a> <b>utcWeek</b>
 
-Alias for [sunday](#sunday); 7 days and typically 168 hours. Weeks in local time may range from 167 to 169 hours due on Daylight Savings.
+Alias for [sunday](#sunday); 7 days and typically 168 hours. Weeks in local time may range from 167 to 169 hours due on daylight saving.
 
 <a name="sunday" href="#sunday">#</a> <b>sunday</b>
 <br><a href="#sunday">#</a> <b>utcSunday</b>

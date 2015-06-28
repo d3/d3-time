@@ -16,7 +16,7 @@ tape("month.floor(date) returns months", function(test) {
   test.end();
 });
 
-tape("month.floor(date) observes Daylight Savings Time", function(test) {
+tape("month.floor(date) observes daylight saving", function(test) {
   test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 01));
   test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 01));
   test.dateEqual(time.month.floor(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 01));
@@ -39,7 +39,7 @@ tape("month.round(date) returns months", function(test) {
   test.end();
 });
 
-tape("month.round(date) observes Daylight Savings Time", function(test) {
+tape("month.round(date) observes daylight saving", function(test) {
   test.dateEqual(time.month.round(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 01));
   test.dateEqual(time.month.round(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 01));
   test.dateEqual(time.month.round(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 01));
@@ -63,7 +63,7 @@ tape("month.ceil(date) returns months", function(test) {
   test.end();
 });
 
-tape("month.ceil(date) observes Daylight Savings Time", function(test) {
+tape("month.ceil(date) observes daylight saving", function(test) {
   test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 07)), date.local(2011, 03, 01));
   test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 08)), date.local(2011, 03, 01));
   test.dateEqual(time.month.ceil(date.utc(2011, 02, 13, 09)), date.local(2011, 03, 01));

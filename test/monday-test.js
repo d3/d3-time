@@ -54,7 +54,7 @@ tape("monday.count(start, end) counts Mondays after start (exclusive) and before
   test.end();
 });
 
-tape("monday.count(start, end) observes Daylight Savings Time", function(test) {
+tape("monday.count(start, end) observes daylight saving", function(test) {
   test.equal(time.monday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 01)), 10);
   test.equal(time.monday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 03)), 10);
   test.equal(time.monday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 04)), 10);

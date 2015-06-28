@@ -19,7 +19,7 @@ tape("utcSunday.floor(date) returns Sundays", function(test) {
   test.end();
 });
 
-tape("utcSunday.floor(date) observes Daylight Savings Time", function(test) {
+tape("utcSunday.floor(date) observes daylight saving", function(test) {
   test.dateEqual(time.utcSunday.floor(date.utc(2011, 02, 13, 01)), date.utc(2011, 02, 13));
   test.dateEqual(time.utcSunday.floor(date.utc(2011, 10, 06, 01)), date.utc(2011, 10, 06));
   test.end();
@@ -40,7 +40,7 @@ tape("utcSunday.ceil(date) returns Sundays", function(test) {
   test.end();
 });
 
-tape("utcSunday.ceil(date) observes Daylight Savings Time", function(test) {
+tape("utcSunday.ceil(date) observes daylight saving", function(test) {
   test.dateEqual(time.utcSunday.ceil(date.utc(2011, 02, 13, 01)), date.utc(2011, 02, 20));
   test.dateEqual(time.utcSunday.ceil(date.utc(2011, 10, 06, 01)), date.utc(2011, 10, 13));
   test.end();
@@ -166,7 +166,7 @@ tape("utcSunday.count(start, end) counts Sundays after start (exclusive) and bef
   test.end();
 });
 
-tape("utcSunday.count(start, end) does not observe Daylight Savings Time", function(test) {
+tape("utcSunday.count(start, end) does not observe daylight saving", function(test) {
   test.equal(time.utcSunday.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 01)), 11);
   test.equal(time.utcSunday.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 03)), 11);
   test.equal(time.utcSunday.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 04)), 11);

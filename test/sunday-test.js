@@ -19,7 +19,7 @@ tape("sunday.floor(date) returns Sundays", function(test) {
   test.end();
 });
 
-tape("sunday.floor(date) observes Daylight Savings Time", function(test) {
+tape("sunday.floor(date) observes daylight saving", function(test) {
   test.dateEqual(time.sunday.floor(date.local(2011, 02, 13, 01)), date.local(2011, 02, 13));
   test.dateEqual(time.sunday.floor(date.local(2011, 10, 06, 01)), date.local(2011, 10, 06));
   test.end();
@@ -40,7 +40,7 @@ tape("sunday.ceil(date) returns Sundays", function(test) {
   test.end();
 });
 
-tape("sunday.ceil(date) observes Daylight Savings Time", function(test) {
+tape("sunday.ceil(date) observes daylight saving", function(test) {
   test.dateEqual(time.sunday.ceil(date.local(2011, 02, 13, 01)), date.local(2011, 02, 20));
   test.dateEqual(time.sunday.ceil(date.local(2011, 10, 06, 01)), date.local(2011, 10, 13));
   test.end();
@@ -166,7 +166,7 @@ tape("sunday.count(start, end) counts Sundays after start (exclusive) and before
   test.end();
 });
 
-tape("sunday.count(start, end) observes Daylight Savings Time", function(test) {
+tape("sunday.count(start, end) observes daylight saving", function(test) {
   test.equal(time.sunday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 01)), 11);
   test.equal(time.sunday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 03)), 11);
   test.equal(time.sunday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 04)), 11);

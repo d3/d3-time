@@ -45,7 +45,7 @@ tape("tuesday.count(start, end) counts Tuesdays after start (exclusive) and befo
   test.end();
 });
 
-tape("tuesday.count(start, end) observes Daylight Savings Time", function(test) {
+tape("tuesday.count(start, end) observes daylight saving", function(test) {
   test.equal(time.tuesday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 01)), 10);
   test.equal(time.tuesday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 03)), 10);
   test.equal(time.tuesday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 04)), 10);

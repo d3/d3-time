@@ -16,7 +16,7 @@ tape("utcDay.floor(date) returns days", function(test) {
   test.end();
 });
 
-tape("utcDay.floor(date) does not observe Daylight Savings Time", function(test) {
+tape("utcDay.floor(date) does not observe daylight saving", function(test) {
   test.dateEqual(time.utcDay.floor(date.utc(2011, 02, 13, 07)), date.utc(2011, 02, 13));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 02, 13, 08)), date.utc(2011, 02, 13));
   test.dateEqual(time.utcDay.floor(date.utc(2011, 02, 13, 09)), date.utc(2011, 02, 13));
@@ -41,7 +41,7 @@ tape("utcDay.ceil(date) returns days", function(test) {
   test.end();
 });
 
-tape("utcDay.ceil(date) does not observe Daylight Savings Time", function(test) {
+tape("utcDay.ceil(date) does not observe daylight saving", function(test) {
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 02, 13, 07)), date.utc(2011, 02, 14));
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 02, 13, 08)), date.utc(2011, 02, 14));
   test.dateEqual(time.utcDay.ceil(date.utc(2011, 02, 13, 09)), date.utc(2011, 02, 14));
@@ -100,7 +100,7 @@ tape("utcDay.count(start, end) counts days after start (exclusive) and before en
   test.end();
 });
 
-tape("utcDay.count(start, end) does not observe Daylight Savings Time", function(test) {
+tape("utcDay.count(start, end) does not observe daylight saving", function(test) {
   test.equal(time.utcDay.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 01)), 71);
   test.equal(time.utcDay.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 03)), 71);
   test.equal(time.utcDay.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 04)), 71);

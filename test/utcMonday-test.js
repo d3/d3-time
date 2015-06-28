@@ -54,7 +54,7 @@ tape("utcMonday.count(start, end) counts Mondays after start (exclusive) and bef
   test.end();
 });
 
-tape("utcMonday.count(start, end) does not observe Daylight Savings Time", function(test) {
+tape("utcMonday.count(start, end) does not observe daylight saving", function(test) {
   test.equal(time.utcMonday.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 01)), 10);
   test.equal(time.utcMonday.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 03)), 10);
   test.equal(time.utcMonday.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 04)), 10);

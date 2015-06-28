@@ -21,7 +21,7 @@ tape("day.floor(date) returns days", function(test) {
   test.end();
 });
 
-tape("day.floor(date) observes Daylight Savings Time", function(test) {
+tape("day.floor(date) observes daylight saving", function(test) {
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 12));
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
   test.dateEqual(time.day.floor(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
@@ -44,7 +44,7 @@ tape("day.round(date) returns days", function(test) {
   test.end();
 });
 
-tape("day.round(date) observes Daylight Savings Time", function(test) {
+tape("day.round(date) observes daylight saving", function(test) {
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 13));
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
   test.dateEqual(time.day.round(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
@@ -69,7 +69,7 @@ tape("day.ceil(date) returns days", function(test) {
   test.end();
 });
 
-tape("day.ceil(date) observes start of Daylight Savings Time", function(test) {
+tape("day.ceil(date) observes start of daylight saving", function(test) {
   test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 13));
   test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
   test.dateEqual(time.day.ceil(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 14));
@@ -77,7 +77,7 @@ tape("day.ceil(date) observes start of Daylight Savings Time", function(test) {
   test.end();
 });
 
-tape("day.ceil(date) observes end of Daylight Savings Time", function(test) {
+tape("day.ceil(date) observes end of daylight saving", function(test) {
   test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
   test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 07));
   test.dateEqual(time.day.ceil(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 07));
@@ -192,7 +192,7 @@ tape("day.count(start, end) counts days after start (exclusive) and before end (
   test.end();
 });
 
-tape("day.count(start, end) observes Daylight Savings Time", function(test) {
+tape("day.count(start, end) observes daylight saving", function(test) {
   test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 01)), 71);
   test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 03)), 71);
   test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 04)), 71);

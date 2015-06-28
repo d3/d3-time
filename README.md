@@ -42,6 +42,8 @@ Returns a new interval that is a filtered subset of this interval using the spec
 var i = day.filter(function(d) { return (d.getDate() - 1) % 10 === 0; });
 ```
 
+The returned filtered interval does not support [count](#interval_count).
+
 <a name="interval_count" href="#interval_count">#</a> <i>interval</i>.<b>count</b>(<i>start</i>, <i>end</i>)
 
 Returns the number of interval boundaries after *start* (exclusive) and before or equal to *end* (inclusive). Note that this behavior is slightly different than [*interval*.range](#interval_range) because its purpose is to return the zero-based number of the specified *end* date relative to the specified *start* date. For example, to compute the current zero-based day-of-year number:

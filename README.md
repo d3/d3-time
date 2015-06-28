@@ -43,21 +43,21 @@ Alias for [*interval*.floor](#interval_floor). For example, `year(date)` and `ye
 
 <a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>)
 
-Returns a new date representing the latest interval boundary before or equal to *date*. For example, `day.floor(new Date)` typically returns 12:00 AM local time on the current day.
+Returns a new date representing the latest interval boundary date before or equal to *date*. For example, `day.floor(new Date)` typically returns 12:00 AM local time on the current day.
 
-This method is idempotent: if the specified *date* is already floored to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the minimum expressible value of the associated time interval, such that `floor(+floor(date) - 1)` returns the preceeding time interval boundary.
+This method is idempotent: if the specified *date* is already floored to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the minimum expressible value of the associated interval, such that `floor(+floor(date) - 1)` returns the preceeding interval boundary date.
 
 <a name="interval_round" href="#interval_round">#</a> <i>interval</i>.<b>round</b>(<i>date</i>)
 
-Returns a new date representing the closest interval boundary to *date*. For example, `day.round(new Date)` typically returns 12:00 AM local time on the current day if it is on or before noon, and 12:00 AM of the following day if it is after noon.
+Returns a new date representing the closest interval boundary date to *date*. For example, `day.round(new Date)` typically returns 12:00 AM local time on the current day if it is on or before noon, and 12:00 AM of the following day if it is after noon.
 
 This method is idempotent: if the specified *date* is already rounded to the current interval, a new date with an identical time is returned.
 
 <a name="interval_ceil" href="#interval_ceil">#</a> <i>interval</i>.<b>ceil</b>(<i>date</i>)
 
-Returns a new date representing the earliest interval boundary after or equal to *date*. For example, `day.ceil(new Date)` typically returns 12:00 AM local time on the following day.
+Returns a new date representing the earliest interval boundary date after or equal to *date*. For example, `day.ceil(new Date)` typically returns 12:00 AM local time on the following day.
 
-This method is idempotent: if the specified *date* is already ceilinged to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the maximum expressible value of the associated time interval, such that `ceil(+ceil(date) + 1)` returns the follwing time interval boundary.
+This method is idempotent: if the specified *date* is already ceilinged to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the maximum expressible value of the associated interval, such that `ceil(+ceil(date) + 1)` returns the following interval boundary date.
 
 <a name="interval_offset" href="#interval_offset">#</a> <i>interval</i>.<b>offset</b>(<i>date</i>[, <i>step</i>])
 
@@ -242,7 +242,7 @@ Aliases for [year](#year).[range](#interval_range) and [utcYear](#year).[range](
 
 ## Changes from D3 3.x:
 
-* Instead of exposing UTC time intervals as *interval*.utc, separate UTC time intervals are provided. For example, use utcDay instead of day.utc.
+* Instead of exposing UTC intervals as *interval*.utc, separate UTC intervals are provided. For example, use utcDay instead of day.utc.
 
 * The dayOfYear, weekOfYear and related methods have been removed in favor of the more general [*interval*.count](#interval_count).
 

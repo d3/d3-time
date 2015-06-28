@@ -257,7 +257,7 @@ Aliases for [year](#year).[range](#interval_range) and [utcYear](#year).[range](
 
 * Instead of exposing UTC intervals as *interval*.utc, separate UTC intervals are provided. For example, use utcDay instead of day.utc.
 
-* The dayOfYear, weekOfYear and related methods have been removed in favor of the more general [*interval*.count](#interval_count). Thus, you can easily count the number of days you have lived, or the number of hours in the current week, and you can count in either local time or UTC.
+* The dayOfYear, weekOfYear and related methods have been removed in favor of the more general [*interval*.count](#interval_count). You can now easily count the number of days you have lived, or the number of hours in the current week, and you can count in either local time or UTC.
 
 * The unusual behavior of [day](#day).[range](#interval_range) when passed a *step* greater than one has been replaced with more sensible behavior of simply skipping every *step* days. If you want to filter by day-of-month, use [*interval*.filter](#interval_filter) instead.
 

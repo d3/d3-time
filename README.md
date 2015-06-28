@@ -16,7 +16,7 @@ Instead, use [day](#day).[count](#interval_count):
 day.count(start, end); // 31
 ```
 
-As another example, to generate an array of dates representing each Sunday in the current month:
+As another example, to compute each Sunday in the current month:
 
 ```js
 var now = new Date;
@@ -27,7 +27,7 @@ week.range(month.floor(now), month.ceil(now));
 //  Sun Jun 28 2015 00:00:00 GMT-0700 (PDT)]
 ```
 
-This module provides a variety of [time intervals](#api-reference) that represent conventional units of time: [hours](#hour), [days](#day), [weeks](#weeks), *etc.* Each interval has methods to calculate boundary dates between adjacent time units. For example, the [day](#day) interval computes the midnight (12:00 AM local time) of the corresponding day. If such a time is not representable in the local time zone, as sometimes happens due to daylight saving, then the closest equivalent is returned.
+This module provides a variety of [time intervals](#api-reference) that represent conventional units of time: [hours](#hour), [days](#day), [weeks](#weeks), *etc.* Each interval has methods to calculate boundary dates between adjacent time units. For example, the [day](#day) interval computes midnight (12:00 AM local time) of the corresponding day. If such a time is not representable in the local time zone, as sometimes happens due to daylight saving, the closest equivalent is returned.
 
 This module does not implement its own calendaring system; it merely implements a convenient API for calendar math. The provided time intervals thus reflect the behavior of ECMAScript [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date). This means, for example, that this module ignores leap seconds and can only work with the local time zone and [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC).
 

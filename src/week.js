@@ -7,7 +7,7 @@ function weekday(i) {
   }, function(date, offset) {
     date.setDate(date.getDate() + offset * 7);
   }, function(start, end) {
-    return Math.floor((end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * 6e4) / 6048e5);
+    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * 6e4) / 6048e5;
   });
 }
 

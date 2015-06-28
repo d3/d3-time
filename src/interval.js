@@ -45,7 +45,7 @@ export default function newInterval(floori, offseti, count) {
     start = new Date(+start);
     end = new Date(+end);
     floori(start), floori(end);
-    return count(start, end);
+    return Math.floor(count(start, end));
   };
 
   return interval;

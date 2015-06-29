@@ -3,7 +3,7 @@ import interval from "./interval";
 export default interval(function(date) {
   var value0 = date.getDate(), offset0 = date.getTimezoneOffset();
   date.setHours(0, 0, 0, 0);
-  if (date.getDate() !== value0) date.setTime(date - (offset0 - date.getTimezoneOffset()) * 6e4);
+  if (date.getDate() < value0) date.setTime(date - (offset0 - date.getTimezoneOffset()) * 6e4);
 }, function(date) {
   date.setTime(date - 1);
   var value0 = date.getDate(), offset0 = date.getTimezoneOffset();

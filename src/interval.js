@@ -8,13 +8,13 @@ export default function newInterval(floori, ceili, offseti, count) {
 
   interval.round = function(date) {
     var d0 = new Date(+date),
-        d1 = new Date(date - 1);
+        d1 = new Date(+date);
     floori(d0), ceili(d1);
     return date - d0 < d1 - date ? d0 : d1;
   };
 
   interval.ceil = function(date) {
-    return ceili(date = new Date(date - 1)), date;
+    return ceili(date = new Date(+date)), date;
   };
 
   interval.offset = function(date, step) {

@@ -183,6 +183,14 @@ tape("day.range(start, stop, step) returns every step day", function(test) {
   test.end();
 });
 
+tape("day.range(start, stop, step) returns the empty array if step is zero, negative or NaN", function(test) {
+  test.deepEqual(time.day.range(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00), 0), []);
+  test.deepEqual(time.day.range(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00), -1), []);
+  test.deepEqual(time.day.range(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00), 0.5), []);
+  test.deepEqual(time.day.range(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00), NaN), []);
+  test.end();
+});
+
 tape("day.count(start, end) counts days after start (exclusive) and before end (inclusive)", function(test) {
   test.equal(time.day.count(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00)), 128);
   test.equal(time.day.count(date.local(2011, 00, 01, 01), date.local(2011, 04, 09, 00)), 128);

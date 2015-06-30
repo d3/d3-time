@@ -26,7 +26,7 @@ export default function newInterval(floori, offseti, count) {
     start = new Date(start - 1);
     stop = new Date(+stop);
     step = step == null ? 1 : Math.floor(step);
-    if (!(start < stop)) return range; // also handles Invalid Date
+    if (!(start < stop) || !(step > 0)) return range; // also handles Invalid Date
     offseti(start, 1), floori(start);
     if (start < stop) range.push(new Date(+start));
     while (offseti(start, step), floori(start), start < stop) range.push(new Date(+start));

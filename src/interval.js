@@ -1,3 +1,6 @@
+var t0 = new Date,
+    t1 = new Date;
+
 export default function newInterval(floori, offseti, count) {
 
   function interval(date) {
@@ -42,10 +45,9 @@ export default function newInterval(floori, offseti, count) {
   };
 
   if (count) interval.count = function(start, end) {
-    start = new Date(+start);
-    end = new Date(+end);
-    floori(start), floori(end);
-    return Math.floor(count(start, end));
+    t0.setTime(+start), t1.setTime(+end);
+    floori(t0), floori(t1);
+    return Math.floor(count(t0, t1));
   };
 
   return interval;

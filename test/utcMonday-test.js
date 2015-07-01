@@ -18,11 +18,11 @@ tape("utcMonday.floor(date) returns Mondays", function(test) {
 });
 
 tape("utcMonday.range(start, stop, step) returns every step Monday", function(test) {
-  var days = time.utcMonday.range(date.utc(2011, 11, 01), date.utc(2012, 00, 15), 2);
-  test.equal(days.length, 3);
-  test.deepEqual(days[0], date.utc(2011, 11, 05));
-  test.deepEqual(days[1], date.utc(2011, 11, 19));
-  test.deepEqual(days[2], date.utc(2012, 00, 02));
+  test.deepEqual(time.utcMonday.range(date.utc(2011, 11, 01), date.utc(2012, 00, 15), 2), [
+    date.utc(2011, 11, 05),
+    date.utc(2011, 11, 19),
+    date.utc(2012, 00, 02)
+  ]);
   test.end();
 });
 

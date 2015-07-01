@@ -83,38 +83,38 @@ tape("utcSunday.offset(date, step) allows step to be zero", function(test) {
 });
 
 tape("utcSunday.range(start, stop) returns Sundays between start (inclusive) and stop (exclusive)", function(test) {
-  var days = time.utcSunday.range(date.utc(2011, 11, 01), date.utc(2012, 00, 15));
-  test.equal(days.length, 6);
-  test.deepEqual(days[0], date.utc(2011, 11, 04));
-  test.deepEqual(days[1], date.utc(2011, 11, 11));
-  test.deepEqual(days[2], date.utc(2011, 11, 18));
-  test.deepEqual(days[3], date.utc(2011, 11, 25));
-  test.deepEqual(days[4], date.utc(2012, 00, 01));
-  test.deepEqual(days[5], date.utc(2012, 00, 08));
+  test.deepEqual(time.utcSunday.range(date.utc(2011, 11, 01), date.utc(2012, 00, 15)), [
+    date.utc(2011, 11, 04),
+    date.utc(2011, 11, 11),
+    date.utc(2011, 11, 18),
+    date.utc(2011, 11, 25),
+    date.utc(2012, 00, 01),
+    date.utc(2012, 00, 08)
+  ]);
   test.end();
 });
 
 tape("utcSunday.range(start, stop) returns Sundays", function(test) {
-  var days = time.utcSunday.range(date.utc(2011, 11, 01, 12, 23), date.utc(2012, 00, 14, 12, 23));
-  test.equal(days.length, 6);
-  test.deepEqual(days[0], date.utc(2011, 11, 04));
-  test.deepEqual(days[1], date.utc(2011, 11, 11));
-  test.deepEqual(days[2], date.utc(2011, 11, 18));
-  test.deepEqual(days[3], date.utc(2011, 11, 25));
-  test.deepEqual(days[4], date.utc(2012, 00, 01));
-  test.deepEqual(days[5], date.utc(2012, 00, 08));
+  test.deepEqual(time.utcSunday.range(date.utc(2011, 11, 01, 12, 23), date.utc(2012, 00, 14, 12, 23)), [
+    date.utc(2011, 11, 04),
+    date.utc(2011, 11, 11),
+    date.utc(2011, 11, 18),
+    date.utc(2011, 11, 25),
+    date.utc(2012, 00, 01),
+    date.utc(2012, 00, 08)
+  ]);
   test.end();
 });
 
 tape("utcSunday.range(start, stop) coerces start and stop to dates", function(test) {
-  var days = time.utcSunday.range(+date.utc(2011, 11, 01), +date.utc(2012, 00, 15));
-  test.equal(days.length, 6);
-  test.deepEqual(days[0], date.utc(2011, 11, 04));
-  test.deepEqual(days[1], date.utc(2011, 11, 11));
-  test.deepEqual(days[2], date.utc(2011, 11, 18));
-  test.deepEqual(days[3], date.utc(2011, 11, 25));
-  test.deepEqual(days[4], date.utc(2012, 00, 01));
-  test.deepEqual(days[5], date.utc(2012, 00, 08));
+  test.deepEqual(time.utcSunday.range(+date.utc(2011, 11, 01), +date.utc(2012, 00, 15)), [
+    date.utc(2011, 11, 04),
+    date.utc(2011, 11, 11),
+    date.utc(2011, 11, 18),
+    date.utc(2011, 11, 25),
+    date.utc(2012, 00, 01),
+    date.utc(2012, 00, 08)
+  ]);
   test.end();
 });
 
@@ -130,11 +130,11 @@ tape("utcSunday.range(start, stop) returns the empty array if start >= stop", fu
 });
 
 tape("utcSunday.range(start, stop, step) returns every step Sunday", function(test) {
-  var days = time.utcSunday.range(date.utc(2011, 11, 01), date.utc(2012, 00, 15), 2);
-  test.equal(days.length, 3);
-  test.deepEqual(days[0], date.utc(2011, 11, 04));
-  test.deepEqual(days[1], date.utc(2011, 11, 18));
-  test.deepEqual(days[2], date.utc(2012, 00, 01));
+  test.deepEqual(time.utcSunday.range(date.utc(2011, 11, 01), date.utc(2012, 00, 15), 2), [
+    date.utc(2011, 11, 04),
+    date.utc(2011, 11, 18),
+    date.utc(2012, 00, 01)
+  ]);
   test.end();
 });
 

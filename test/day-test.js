@@ -128,35 +128,35 @@ tape("day.offset(date, step) allows step to be zero", function(test) {
 });
 
 tape("day.range(start, stop) returns days between start (inclusive) and stop (exclusive)", function(test) {
-  var days = time.day.range(date.local(2011, 10, 04), date.local(2011, 10, 10));
-  test.equal(days.length, 6);
-  test.deepEqual(days[0], date.local(2011, 10, 04));
-  test.deepEqual(days[1], date.local(2011, 10, 05));
-  test.deepEqual(days[2], date.local(2011, 10, 06));
-  test.deepEqual(days[3], date.local(2011, 10, 07));
-  test.deepEqual(days[4], date.local(2011, 10, 08));
-  test.deepEqual(days[5], date.local(2011, 10, 09));
+  test.deepEqual(time.day.range(date.local(2011, 10, 04), date.local(2011, 10, 10)), [
+    date.local(2011, 10, 04),
+    date.local(2011, 10, 05),
+    date.local(2011, 10, 06),
+    date.local(2011, 10, 07),
+    date.local(2011, 10, 08),
+    date.local(2011, 10, 09)
+  ]);
   test.end();
 });
 
 tape("day.range(start, stop) returns days", function(test) {
-  var days = time.day.range(date.local(2011, 10, 04, 02), date.local(2011, 10, 10, 13));
-  test.equal(days.length, 6);
-  test.deepEqual(days[0], date.local(2011, 10, 05));
-  test.deepEqual(days[1], date.local(2011, 10, 06));
-  test.deepEqual(days[2], date.local(2011, 10, 07));
-  test.deepEqual(days[3], date.local(2011, 10, 08));
-  test.deepEqual(days[4], date.local(2011, 10, 09));
-  test.deepEqual(days[5], date.local(2011, 10, 10));
+  test.deepEqual(time.day.range(date.local(2011, 10, 04, 02), date.local(2011, 10, 10, 13)), [
+    date.local(2011, 10, 05),
+    date.local(2011, 10, 06),
+    date.local(2011, 10, 07),
+    date.local(2011, 10, 08),
+    date.local(2011, 10, 09),
+    date.local(2011, 10, 10)
+  ]);
   test.end();
 });
 
 tape("day.range(start, stop) coerces start and stop to dates", function(test) {
-  var days = time.day.range(+date.local(2011, 10, 04), +date.local(2011, 10, 07));
-  test.equal(days.length, 3);
-  test.deepEqual(days[0], date.local(2011, 10, 04));
-  test.deepEqual(days[1], date.local(2011, 10, 05));
-  test.deepEqual(days[2], date.local(2011, 10, 06));
+  test.deepEqual(time.day.range(+date.local(2011, 10, 04), +date.local(2011, 10, 07)), [
+    date.local(2011, 10, 04),
+    date.local(2011, 10, 05),
+    date.local(2011, 10, 06)
+  ]);
   test.end();
 });
 
@@ -172,12 +172,12 @@ tape("day.range(start, stop) returns the empty array if start >= stop", function
 });
 
 tape("day.range(start, stop, step) returns every step day", function(test) {
-  var days = time.day.range(date.local(2011, 10, 04, 02), date.local(2011, 10, 14, 13), 3);
-  test.equal(days.length, 4);
-  test.deepEqual(days[0], date.local(2011, 10, 05));
-  test.deepEqual(days[1], date.local(2011, 10, 08));
-  test.deepEqual(days[2], date.local(2011, 10, 11));
-  test.deepEqual(days[3], date.local(2011, 10, 14));
+  test.deepEqual(time.day.range(date.local(2011, 10, 04, 02), date.local(2011, 10, 14, 13), 3), [
+    date.local(2011, 10, 05),
+    date.local(2011, 10, 08),
+    date.local(2011, 10, 11),
+    date.local(2011, 10, 14)
+  ]);
   test.end();
 });
 

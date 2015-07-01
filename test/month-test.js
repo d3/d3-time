@@ -118,35 +118,35 @@ tape("month.offset(date, step) allows step to be zero", function(test) {
 });
 
 tape("month.range(start, stop) returns months between start (inclusive) and stop (exclusive)", function(test) {
-  var days = time.month.range(date.local(2011, 11, 01), date.local(2012, 05, 01));
-  test.equal(days.length, 6);
-  test.deepEqual(days[0], date.local(2011, 11, 01));
-  test.deepEqual(days[1], date.local(2012, 00, 01));
-  test.deepEqual(days[2], date.local(2012, 01, 01));
-  test.deepEqual(days[3], date.local(2012, 02, 01));
-  test.deepEqual(days[4], date.local(2012, 03, 01));
-  test.deepEqual(days[5], date.local(2012, 04, 01));
+  test.deepEqual(time.month.range(date.local(2011, 11, 01), date.local(2012, 05, 01)), [
+    date.local(2011, 11, 01),
+    date.local(2012, 00, 01),
+    date.local(2012, 01, 01),
+    date.local(2012, 02, 01),
+    date.local(2012, 03, 01),
+    date.local(2012, 04, 01)
+  ]);
   test.end();
 });
 
 tape("month.range(start, stop) returns months", function(test) {
-  var days = time.month.range(date.local(2011, 10, 04, 02), date.local(2012, 04, 10, 13));
-  test.equal(days.length, 6);
-  test.deepEqual(days[0], date.local(2011, 11, 01));
-  test.deepEqual(days[1], date.local(2012, 00, 01));
-  test.deepEqual(days[2], date.local(2012, 01, 01));
-  test.deepEqual(days[3], date.local(2012, 02, 01));
-  test.deepEqual(days[4], date.local(2012, 03, 01));
-  test.deepEqual(days[5], date.local(2012, 04, 01));
+  test.deepEqual(time.month.range(date.local(2011, 10, 04, 02), date.local(2012, 04, 10, 13)), [
+    date.local(2011, 11, 01),
+    date.local(2012, 00, 01),
+    date.local(2012, 01, 01),
+    date.local(2012, 02, 01),
+    date.local(2012, 03, 01),
+    date.local(2012, 04, 01)
+  ]);
   test.end();
 });
 
 tape("month.range(start, stop) coerces start and stop to dates", function(test) {
-  var days = time.month.range(+date.local(2011, 10, 04), +date.local(2012, 01, 07));
-  test.equal(days.length, 3);
-  test.deepEqual(days[0], date.local(2011, 11, 01));
-  test.deepEqual(days[1], date.local(2012, 00, 01));
-  test.deepEqual(days[2], date.local(2012, 01, 01));
+  test.deepEqual(time.month.range(+date.local(2011, 10, 04), +date.local(2012, 01, 07)), [
+    date.local(2011, 11, 01),
+    date.local(2012, 00, 01),
+    date.local(2012, 01, 01)
+  ]);
   test.end();
 });
 

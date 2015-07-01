@@ -1,7 +1,7 @@
 {
   "name": "d3-time",
   "version": "0.0.3",
-  "description": "",
+  "description": "A calculator for humanity’s peculiar conventions of time.",
   "keywords": [
     "d3",
     "time",

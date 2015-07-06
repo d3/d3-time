@@ -4,8 +4,8 @@ function utcWeekday(i) {
   return interval(function(date) {
     date.setUTCHours(0, 0, 0, 0);
     date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 7 - i) % 7);
-  }, function(date, offset) {
-    date.setUTCDate(date.getUTCDate() + offset * 7);
+  }, function(date, step) {
+    date.setUTCDate(date.getUTCDate() + step * 7);
   }, function(start, end) {
     return (end - start) / 6048e5;
   });

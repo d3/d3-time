@@ -103,6 +103,16 @@ Likewise, to compute the current zero-based week-of-year number for weeks that s
 sunday.count(year(now), now); // 25
 ```
 
+<a name="interval" href="#interval">#</a> <b>interval</b>(<i>floor</i>, <i>offset</i>[, <i>count</i>])
+
+Constructs a new custom interval given the specified *floor* and *offset* functions and an optional *count* function.
+
+The *floor* function takes a single date as an argument and rounds it down to the nearest interval boundary.
+
+The *offset* function takes a date and an integer step as arguments and advances the specified date by the specified number of boundaries; the step may be positive, negative or zero.
+
+The optional *count* function takes a start date and an end date, already floored to the current interval, and returns the number of boundaries between the start (exclusive) and end (inclusive). If a *count* function is not specified, the returned interval does not expose a [count](#interval_count) method. Note: due to an internal optimization, the specified *count* function must not invoke *interval*.count on other time intervals.
+
 ### Intervals
 
 The following intervals are provided:

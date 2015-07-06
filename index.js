@@ -1,3 +1,4 @@
+import interval from "./src/interval";
 import second from "./src/second";
 import minute from "./src/minute";
 import hour from "./src/hour";
@@ -45,6 +46,7 @@ export var utcMonths = utcMonth.range;
 export var utcYears = utcYear.range;
 
 export {
+  interval,
   second,
   minute,
   hour,

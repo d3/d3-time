@@ -4,8 +4,8 @@ function weekday(i) {
   return interval(function(date) {
     date.setHours(0, 0, 0, 0);
     date.setDate(date.getDate() - (date.getDay() + 7 - i) % 7);
-  }, function(date, offset) {
-    date.setDate(date.getDate() + offset * 7);
+  }, function(date, step) {
+    date.setDate(date.getDate() + step * 7);
   }, function(start, end) {
     return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * 6e4) / 6048e5;
   });

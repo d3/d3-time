@@ -1,4 +1,5 @@
 import interval from "./src/interval";
+import millisecond from "./src/millisecond";
 import second from "./src/second";
 import minute from "./src/minute";
 import hour from "./src/hour";
@@ -15,6 +16,7 @@ import {default as utcWeek, utcSunday, utcMonday, utcTuesday, utcWednesday, utcT
 import utcMonth from "./src/utcMonth";
 import utcYear from "./src/utcYear";
 
+export var milliseconds = millisecond.range;
 export var seconds = second.range;
 export var minutes = minute.range;
 export var hours = hour.range;
@@ -30,6 +32,8 @@ export var weeks = week.range;
 export var months = month.range;
 export var years = year.range;
 
+export var utcMillisecond = millisecond;
+export var utcMilliseconds = milliseconds;
 export var utcSeconds = utcSecond.range;
 export var utcMinutes = utcMinute.range;
 export var utcHours = utcHour.range;
@@ -47,6 +51,7 @@ export var utcYears = utcYear.range;
 
 export {
   interval,
+  millisecond,
   second,
   minute,
   hour,

@@ -117,6 +117,11 @@ The optional *count* function takes a start date and an end date, already floore
 
 The following intervals are provided:
 
+<a name="millisecond" href="#millisecond">#</a> <b>millisecond</b>
+<br><a href="#millisecond">#</a> <b>utcMillisecond</b>
+
+Milliseconds; the shortest available time unit.
+
 <a name="second" href="#second">#</a> <b>second</b>
 <br><a href="#second">#</a> <b>utcSecond</b>
 
@@ -190,6 +195,11 @@ Years (e.g., January 1, 2012 at 12:00 AM); ranges from 365 to 366 days.
 ### Ranges
 
 For convenience, aliases for [*interval*.range](#interval_range) are also provided as plural forms of the corresponding interval.
+
+<a name="milliseconds" href="#milliseconds">#</a> <b>milliseconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#milliseconds">#</a> <b>utcMilliseconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+
+Aliases for [millisecond](#millisecond).[range](#interval_range) and [utcMillisecond](#millisecond).[range](#interval_range).
 
 <a name="seconds" href="#seconds">#</a> <b>seconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#seconds">#</a> <b>utcSeconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])

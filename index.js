@@ -1,4 +1,5 @@
-import interval from "./src/interval";
+export {default as interval} from "./src/interval";
+
 import millisecond from "./src/millisecond";
 import second from "./src/second";
 import minute from "./src/minute";
@@ -50,7 +51,6 @@ export var utcMonths = utcMonth.range;
 export var utcYears = utcYear.range;
 
 export {
-  interval,
   millisecond,
   second,
   minute,

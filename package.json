@@ -1,6 +1,6 @@
 {
   "name": "d3-time",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A calculator for humanity’s peculiar conventions of time.",
   "keywords": [
     "d3",
@@ -14,19 +14,19 @@
     "name": "Mike Bostock",
     "url": "http://bost.ocks.org/mike"
   },
-  "main": "build/time",
+  "main": "build/time.cjs",
   "jsnext:main": "index",
   "repository": {
     "type": "git",
     "url": "https://github.com/d3/d3-time.git"
   },
   "scripts": {
-    "pretest": "mkdir -p build && d3-bundler --format=umd --name=time -- index.js > build/time.js",
-    "test": "TZ=America/Los_Angeles faucet `find test -name '*-test.js'`",
-    "prepublish": "npm run test && uglifyjs build/time.js -c -m -o build/time.min.js && rm -f build/time.zip && zip -j build/time.zip -- LICENSE README.md build/time.js build/time.min.js"
+    "pretest": "mkdir -p build && d3-bundler -x -f cjs -o build/time.cjs.js",
+    "test": "faucet `find test -name '*-test.js'`",
+    "prepublish": "npm run test && d3-bundler -n time -o build/time.js && uglifyjs build/time.js -c -m -o build/time.min.js && rm -f build/time.zip && zip -j build/time.zip -- LICENSE README.md build/time.js build/time.min.js"
   },
   "devDependencies": {
-    "d3-bundler": "~0.2.5",
+    "d3-bundler": "~0.4.0",
     "faucet": "0.0",
     "tape": "4",
     "uglify-js": "2"

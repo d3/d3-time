@@ -7,4 +7,6 @@ export default interval(function(date) {
   date.setFullYear(date.getFullYear() + step);
 }, function(start, end) {
   return end.getFullYear() - start.getFullYear();
+}, function(date) {
+  return date.getFullYear();
 });

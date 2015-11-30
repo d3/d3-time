@@ -6,4 +6,6 @@ export default interval(function(date) {
   date.setTime(+date + step * 6e4);
 }, function(start, end) {
   return (end - start) / 6e4;
+}, function(date) {
+  return date.getMinutes();
 });

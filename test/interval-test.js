@@ -58,3 +58,21 @@ tape("interval(floor, offset, count) floors dates before passing them to count",
   test.deepEqual(dates, [date.utc(2015, 0, 1, 12), date.utc(2015, 0, 1, 15)]);
   test.end();
 });
+
+tape("interval.every(step) returns null if step is invalid", function(test) {
+  test.equal(time.day.every(), null);
+  test.equal(time.minute.every(null), null);
+  test.equal(time.second.every(undefined), null);
+  test.equal(time.day.every(NaN), null);
+  test.equal(time.minute.every(0), null);
+  test.equal(time.second.every(0.8), null);
+  test.equal(time.hour.every(-1), null);
+  test.end();
+});
+
+tape("interval.every(step) returns interval if step is one", function(test) {
+  test.equal(time.day.every("1"), time.day);
+  test.equal(time.minute.every(1), time.minute);
+  test.equal(time.second.every(1.8), time.second);
+  test.end();
+});

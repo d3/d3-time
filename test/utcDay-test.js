@@ -124,3 +124,10 @@ tape("utcDay.count(start, end) returns 364 or 365 for a full year", function(tes
   test.equal(time.utcDay.count(date.utc(2011, 00, 01), date.utc(2011, 11, 31)), 364);
   test.end();
 });
+
+tape("utcDay.every(step) returns every stepth day, starting with the first day of the month", function(test) {
+  test.deepEqual(time.utcDay.every(3).range(date.utc(2008, 11, 30, 0, 12), date.utc(2009, 0, 5, 23, 48)), [date.utc(2008, 11, 31), date.utc(2009, 0, 1), date.utc(2009, 0, 4)]);
+  test.deepEqual(time.utcDay.every(5).range(date.utc(2008, 11, 30, 0, 12), date.utc(2009, 0, 6, 23, 48)), [date.utc(2008, 11, 31), date.utc(2009, 0, 1), date.utc(2009, 0, 6)]);
+  test.deepEqual(time.utcDay.every(7).range(date.utc(2008, 11, 30, 0, 12), date.utc(2009, 0, 8, 23, 48)), [date.utc(2009, 0, 1), date.utc(2009, 0, 8)]);
+  test.end();
+});

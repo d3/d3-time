@@ -1,7 +1,7 @@
 var t0 = new Date,
     t1 = new Date;
 
-export default function newInterval(floori, offseti, count) {
+export default function newInterval(floori, offseti, count, field) {
 
   function interval(date) {
     return floori(date = new Date(+date)), date;
@@ -44,11 +44,22 @@ export default function newInterval(floori, offseti, count) {
     });
   };
 
-  if (count) interval.count = function(start, end) {
-    t0.setTime(+start), t1.setTime(+end);
-    floori(t0), floori(t1);
-    return Math.floor(count(t0, t1));
-  };
+  if (count) {
+    interval.count = function(start, end) {
+      t0.setTime(+start), t1.setTime(+end);
+      floori(t0), floori(t1);
+      return Math.floor(count(t0, t1));
+    };
+
+    interval.every = function(step) {
+      step = Math.floor(step);
+      return !isFinite(step) || !(step > 0) ? null
+          : !(step > 1) ? interval
+          : interval.filter(field
+              ? function(d) { return field(d) % step === 0; }
+              : function(d) { return interval.count(0, d) % step === 0; });
+    };
+  }
 
   return interval;
 };

@@ -170,3 +170,8 @@ tape("month.count(start, end) counts months after start (exclusive) and before e
   test.equal(time.month.count(date.local(2012, 04, 01), date.local(2009, 11, 31)), -29);
   test.end();
 });
+
+tape("month.every(step) returns every stepth month, starting with the first month of the year", function(test) {
+  test.deepEqual(time.month.every(3).range(date.local(2008, 11, 3), date.local(2010, 6, 5)), [date.local(2009, 0, 1), date.local(2009, 3, 1), date.local(2009, 6, 1), date.local(2009, 9, 1), date.local(2010, 0, 1), date.local(2010, 3, 1), date.local(2010, 6, 1)]);
+  test.end();
+});

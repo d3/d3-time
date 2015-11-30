@@ -6,4 +6,6 @@ export default interval(function(date) {
   date.setUTCDate(date.getUTCDate() + step);
 }, function(start, end) {
   return (end - start) / 864e5;
+}, function(date) {
+  return date.getUTCDate() - 1;
 });

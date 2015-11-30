@@ -224,3 +224,10 @@ tape("day.count(start, end) returns 364 or 365 for a full year", function(test) 
   test.equal(time.day.count(date.local(2011, 00, 01), date.local(2011, 11, 31)), 364);
   test.end();
 });
+
+tape("day.every(step) returns every stepth day, starting with the first day of the month", function(test) {
+  test.deepEqual(time.day.every(3).range(date.local(2008, 11, 30, 0, 12), date.local(2009, 0, 5, 23, 48)), [date.local(2008, 11, 31), date.local(2009, 0, 1), date.local(2009, 0, 4)]);
+  test.deepEqual(time.day.every(5).range(date.local(2008, 11, 30, 0, 12), date.local(2009, 0, 6, 23, 48)), [date.local(2008, 11, 31), date.local(2009, 0, 1), date.local(2009, 0, 6)]);
+  test.deepEqual(time.day.every(7).range(date.local(2008, 11, 30, 0, 12), date.local(2009, 0, 8, 23, 48)), [date.local(2009, 0, 1), date.local(2009, 0, 8)]);
+  test.end();
+});

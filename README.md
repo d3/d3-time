@@ -76,7 +76,7 @@ Returns a new date equal to *date* plus *step* intervals. If *step* is not speci
 
 <a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Returns every an array of dates representing every interval boundary after or equal to *start* (inclusive) and before *stop* (exclusive). If *step* is specified, then every *step*'th interval will be returned; for example, for the [day](#day) interval a *step* of 2 will return every other day. If *step* is not an integer, it is [floored](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor).
+Returns every an array of dates representing every interval boundary after or equal to *start* (inclusive) and before *stop* (exclusive). If *step* is specified, then every *step*th interval will be returned; for example, for the [day](#day) interval a *step* of 2 will return every other day. If *step* is not an integer, it is [floored](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor).
 
 <a name="interval_filter" href="#interval_filter">#</a> <i>interval</i>.<b>filter</b>(<i>test</i>)
 
@@ -86,7 +86,11 @@ Returns a new interval that is a filtered subset of this interval using the spec
 var i = day.filter(function(d) { return (d.getDate() - 1) % 10 === 0; });
 ```
 
-The returned filtered interval does not support [count](#interval_count).
+The returned filtered interval does not support [count](#interval_count). See also [*interval*.every](#interval_every).
+
+<a name="interval_every" href="#interval_every">#</a> <i>interval</i>.<b>every</b>(<i>step</i>)
+
+Returns a [filtered](#interval_filter) view of this interval representing every *step*th date. The meaning of *step* is dependent on this interval’s parent interval as defined by the field function. For example, minute.every(15) returns an interval representing every fifteen minutes, starting on the hour: :00, :15, :30, :45, <i>etc.</i> Note that for some intervals, such as [day](#day), the resulting dates may be irregularly spaced. If *step* is not valid, returns null. If *step* is one, returns this interval.
 
 <a name="interval_count" href="#interval_count">#</a> <i>interval</i>.<b>count</b>(<i>start</i>, <i>end</i>)
 
@@ -103,7 +107,7 @@ Likewise, to compute the current zero-based week-of-year number for weeks that s
 sunday.count(year(now), now); // 25
 ```
 
-<a name="interval" href="#interval">#</a> <b>interval</b>(<i>floor</i>, <i>offset</i>[, <i>count</i>])
+<a name="interval" href="#interval">#</a> <b>interval</b>(<i>floor</i>, <i>offset</i>[, <i>count</i>[, <i>field</i>]])
 
 Constructs a new custom interval given the specified *floor* and *offset* functions and an optional *count* function.
 
@@ -111,7 +115,9 @@ The *floor* function takes a single date as an argument and rounds it down to th
 
 The *offset* function takes a date and an integer step as arguments and advances the specified date by the specified number of boundaries; the step may be positive, negative or zero.
 
-The optional *count* function takes a start date and an end date, already floored to the current interval, and returns the number of boundaries between the start (exclusive) and end (inclusive). If a *count* function is not specified, the returned interval does not expose a [count](#interval_count) method. Note: due to an internal optimization, the specified *count* function must not invoke *interval*.count on other time intervals.
+The optional *count* function takes a start date and an end date, already floored to the current interval, and returns the number of boundaries between the start (exclusive) and end (inclusive). If a *count* function is not specified, the returned interval does not expose [count](#interval_count) or [every](#interval_every) methods. Note: due to an internal optimization, the specified *count* function must not invoke *interval*.count on other time intervals.
+
+The optional *field* function takes a date, already floored to the current interval, and returns the field value of the specified date, corresponding to the number of boundaries between this date (exclusive) and the latest previous parent boundary. For example, for the [day](#day) interval, this returns the number of days since the start of the month. The *field* function defines the behavior of [*interval*.every](#interval_every).
 
 ### Intervals
 

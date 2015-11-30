@@ -6,4 +6,6 @@ export default interval(function(date) {
   date.setDate(date.getDate() + step);
 }, function(start, end) {
   return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * 6e4) / 864e5;
+}, function(date) {
+  return date.getDate() - 1;
 });

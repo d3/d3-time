@@ -7,4 +7,6 @@ export default interval(function(date) {
   date.setUTCFullYear(date.getUTCFullYear() + step);
 }, function(start, end) {
   return end.getUTCFullYear() - start.getUTCFullYear();
+}, function(date) {
+  return date.getUTCFullYear();
 });

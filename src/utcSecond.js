@@ -6,4 +6,6 @@ export default interval(function(date) {
   date.setTime(+date + step * 1e3);
 }, function(start, end) {
   return (end - start) / 1e3;
+}, function(date) {
+  return date.getUTCSeconds();
 });

@@ -13,14 +13,14 @@ var start = new Date(2015, 02, 01), // Sun Mar 01 2015 00:00:00 GMT-0800 (PST)
 You can, however, use [day](#day).[count](#interval_count):
 
 ```js
-day.count(start, end); // 31
+d3_time.day.count(start, end); // 31
 ```
 
 [Day](#day) is one of several [time intervals](#api-reference) provided by d3-time. Each interval represents a conventional unit of time—[hours](#hour), [weeks](#weeks), [months](#month), *etc.*—and has methods to calculate boundary dates. For example, the [day](#day) interval computes midnight (typically 12:00 AM local time) of the corresponding day. In addition to [rounding](#interval_round) and [counting](#interval_count), intervals can also be used to generate arrays of boundary dates. For example, to compute each Sunday in the current month:
 
 ```js
 var now = new Date;
-week.range(month.floor(now), month.ceil(now));
+d3_time.week.range(d3_time.month.floor(now), d3_time.month.ceil(now));
 // [Sun Jun 07 2015 00:00:00 GMT-0700 (PDT),
 //  Sun Jun 14 2015 00:00:00 GMT-0700 (PDT),
 //  Sun Jun 21 2015 00:00:00 GMT-0700 (PDT),
@@ -33,7 +33,13 @@ This module is used by D3’s time scales to generate sensible ticks, by D3’s 
 
 ## Installing
 
-If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](https://github.com/d3/d3-time/releases/latest).
+If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](https://github.com/d3/d3-time/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. Create a custom build using [Rollup](https://github.com/rollup/rollup) or your preferred bundler. You can also load directly from [d3js.org](https://d3js.org):
+
+```html
+<script src="https://d3js.org/d3-time.v0.1.min.js"></script>
+```
+
+In a vanilla environment, a `d3_time` global is exported. [Try d3-time in your browser.](https://tonicdev.com/npm/d3-time)
 
 ## API Reference
 
@@ -43,16 +49,16 @@ Alias for [*interval*.floor](#interval_floor). For example, `year(date)` and `ye
 
 <a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>)
 
-Returns a new date representing the latest interval boundary date before or equal to *date*. For example, `day.floor(new Date)` typically returns 12:00 AM local time on the current day.
+Returns a new date representing the latest interval boundary date before or equal to *date*. For example, `d3_time.day.floor(new Date)` typically returns 12:00 AM local time on the current day.
 
-This method is idempotent: if the specified *date* is already floored to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the minimum expressible value of the associated interval, such that `floor(+floor(date) - 1)` returns the preceeding interval boundary date.
+This method is idempotent: if the specified *date* is already floored to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the minimum expressible value of the associated interval, such that floor(floor(*date*) - 1) returns the preceeding interval boundary date.
 
 Note that the `==` and `===` operators do not compare by value with [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) objects, and thus you cannot use them to tell whether the specified *date* has already been floored. Instead, coerce to a number and then compare:
 
 ```js
 // Returns true if the specified date is a day boundary.
 function isDay(date) {
-  return +day.floor(date) === +date;
+  return +d3_time.day.floor(date) === +date;
 }
 ```
 
@@ -66,13 +72,13 @@ This method is idempotent: if the specified *date* is already rounded to the cur
 
 <a name="interval_ceil" href="#interval_ceil">#</a> <i>interval</i>.<b>ceil</b>(<i>date</i>)
 
-Returns a new date representing the earliest interval boundary date after or equal to *date*. For example, `day.ceil(new Date)` typically returns 12:00 AM local time on the following day.
+Returns a new date representing the earliest interval boundary date after or equal to *date*. For example, `d3_time.day.ceil(new Date)` typically returns 12:00 AM local time on the following day.
 
-This method is idempotent: if the specified *date* is already ceilinged to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the maximum expressible value of the associated interval, such that `ceil(+ceil(date) + 1)` returns the following interval boundary date.
+This method is idempotent: if the specified *date* is already ceilinged to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the maximum expressible value of the associated interval, such that eil(ceil(*date*) + 1) returns the following interval boundary date.
 
 <a name="interval_offset" href="#interval_offset">#</a> <i>interval</i>.<b>offset</b>(<i>date</i>[, <i>step</i>])
 
-Returns a new date equal to *date* plus *step* intervals. If *step* is not specified it defaults to 1. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned; if *step* is not an integer, it is [floored](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor). This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if daylight saving changes!).
+Returns a new date equal to *date* plus *step* intervals. If *step* is not specified it defaults to 1. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned; if *step* is not an integer, it is [floored](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor). This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `d3_time.day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if daylight saving changes!).
 
 <a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
@@ -83,7 +89,7 @@ Returns every an array of dates representing every interval boundary after or eq
 Returns a new interval that is a filtered subset of this interval using the specified *test* function. The *test* function is passed a date and should return true if and only if the specified date should be considered part of the interval. For example, to create an interval that returns the 1st, 11th, 21th and 31th (if it exists) of each month:
 
 ```js
-var i = day.filter(function(d) { return (d.getDate() - 1) % 10 === 0; });
+var i = d3_time.day.filter(function(d) { return (d.getDate() - 1) % 10 === 0; });
 ```
 
 The returned filtered interval does not support [count](#interval_count). See also [*interval*.every](#interval_every).
@@ -98,16 +104,16 @@ Returns the number of interval boundaries after *start* (exclusive) and before o
 
 ```js
 var now = new Date;
-day.count(year(now), now); // 177
+d3_time.day.count(d3_time.year(now), now); // 177
 ```
 
 Likewise, to compute the current zero-based week-of-year number for weeks that start on Sunday:
 
 ```js
-sunday.count(year(now), now); // 25
+d3_time.sunday.count(d3_time.year(now), now); // 25
 ```
 
-<a name="interval" href="#interval">#</a> <b>interval</b>(<i>floor</i>, <i>offset</i>[, <i>count</i>[, <i>field</i>]])
+<a name="interval" href="#interval">#</a> d3_time.<b>interval</b>(<i>floor</i>, <i>offset</i>[, <i>count</i>[, <i>field</i>]])
 
 Constructs a new custom interval given the specified *floor* and *offset* functions and an optional *count* function.
 
@@ -123,78 +129,78 @@ The optional *field* function takes a date, already floored to the current inter
 
 The following intervals are provided:
 
-<a name="millisecond" href="#millisecond">#</a> <b>millisecond</b>
-<br><a href="#millisecond">#</a> <b>utcMillisecond</b>
+<a name="millisecond" href="#millisecond">#</a> d3_time.<b>millisecond</b>
+<br><a href="#millisecond">#</a> d3_time.<b>utcMillisecond</b>
 
 Milliseconds; the shortest available time unit.
 
-<a name="second" href="#second">#</a> <b>second</b>
-<br><a href="#second">#</a> <b>utcSecond</b>
+<a name="second" href="#second">#</a> d3_time.<b>second</b>
+<br><a href="#second">#</a> d3_time.<b>utcSecond</b>
 
 Seconds (e.g., 01:23:45.0000 AM); 1,000 milliseconds.
 
-<a name="minute" href="#minute">#</a> <b>minute</b>
-<br><a href="#minute">#</a> <b>utcMinute</b>
+<a name="minute" href="#minute">#</a> d3_time.<b>minute</b>
+<br><a href="#minute">#</a> d3_time.<b>utcMinute</b>
 
 Minutes (e.g., 01:02:00 AM); 60 seconds. Note that ECMAScript [ignores leap seconds](http://www.ecma-international.org/ecma-262/5.1/#sec-15.9.1.1).
 
-<a name="hour" href="#hour">#</a> <b>hour</b>
-<br><a href="#hour">#</a> <b>utcHour</b>
+<a name="hour" href="#hour">#</a> d3_time.<b>hour</b>
+<br><a href="#hour">#</a> d3_time.<b>utcHour</b>
 
 Hours (e.g., 01:00 AM); 60 minutes. Note that advancing time by one hour in local time can return the same hour or skip an hour due to daylight saving.
 
-<a name="day" href="#day">#</a> <b>day</b>
-<br><a href="#day">#</a> <b>utcDay</b>
+<a name="day" href="#day">#</a> d3_time.<b>day</b>
+<br><a href="#day">#</a> d3_time.<b>utcDay</b>
 
 Days (e.g., February 7, 2012 at 12:00 AM); typically 24 hours. Days in local time may range from 23 to 25 hours due to daylight saving.
 
-<a name="week" href="#week">#</a> <b>week</b>
-<br><a href="#week">#</a> <b>utcWeek</b>
+<a name="week" href="#week">#</a> d3_time.<b>week</b>
+<br><a href="#week">#</a> d3_time.<b>utcWeek</b>
 
 Alias for [sunday](#sunday); 7 days and typically 168 hours. Weeks in local time may range from 167 to 169 hours due on daylight saving.
 
-<a name="sunday" href="#sunday">#</a> <b>sunday</b>
-<br><a href="#sunday">#</a> <b>utcSunday</b>
+<a name="sunday" href="#sunday">#</a> d3_time.<b>sunday</b>
+<br><a href="#sunday">#</a> d3_time.<b>utcSunday</b>
 
 Sunday-based weeks (e.g., February 5, 2012 at 12:00 AM).
 
-<a name="monday" href="#monday">#</a> <b>monday</b>
-<br><a href="#monday">#</a> <b>utcMonday</b>
+<a name="monday" href="#monday">#</a> d3_time.<b>monday</b>
+<br><a href="#monday">#</a> d3_time.<b>utcMonday</b>
 
 Monday-based weeks (e.g., February 6, 2012 at 12:00 AM).
 
-<a name="tuesday" href="#tuesday">#</a> <b>tuesday</b>
-<br><a href="#tuesday">#</a> <b>utcTuesday</b>
+<a name="tuesday" href="#tuesday">#</a> d3_time.<b>tuesday</b>
+<br><a href="#tuesday">#</a> d3_time.<b>utcTuesday</b>
 
 Tuesday-based weeks (e.g., February 7, 2012 at 12:00 AM).
 
-<a name="wednesday" href="#wednesday">#</a> <b>wednesday</b>
-<br><a href="#wednesday">#</a> <b>utcWednesday</b>
+<a name="wednesday" href="#wednesday">#</a> d3_time.<b>wednesday</b>
+<br><a href="#wednesday">#</a> d3_time.<b>utcWednesday</b>
 
 Wednesday-based weeks (e.g., February 8, 2012 at 12:00 AM).
 
-<a name="thursday" href="#thursday">#</a> <b>thursday</b>
-<br><a href="#thursday">#</a> <b>utcThursday</b>
+<a name="thursday" href="#thursday">#</a> d3_time.<b>thursday</b>
+<br><a href="#thursday">#</a> d3_time.<b>utcThursday</b>
 
 Thursday-based weeks (e.g., February 9, 2012 at 12:00 AM).
 
-<a name="friday" href="#friday">#</a> <b>friday</b>
-<br><a href="#friday">#</a> <b>utcFriday</b>
+<a name="friday" href="#friday">#</a> d3_time.<b>friday</b>
+<br><a href="#friday">#</a> d3_time.<b>utcFriday</b>
 
 Friday-based weeks (e.g., February 10, 2012 at 12:00 AM).
 
-<a name="saturday" href="#saturday">#</a> <b>saturday</b>
-<br><a href="#saturday">#</a> <b>utcSaturday</b>
+<a name="saturday" href="#saturday">#</a> d3_time.<b>saturday</b>
+<br><a href="#saturday">#</a> d3_time.<b>utcSaturday</b>
 
 Saturday-based weeks (e.g., February 11, 2012 at 12:00 AM).
 
-<a name="month" href="#month">#</a> <b>month</b>
-<br><a href="#month">#</a> <b>utcMonth</b>
+<a name="month" href="#month">#</a> d3_time.<b>month</b>
+<br><a href="#month">#</a> d3_time.<b>utcMonth</b>
 
 Months (e.g., February 1, 2012 at 12:00 AM); ranges from 28 to 31 days.
 
-<a name="year" href="#year">#</a> <b>year</b>
-<br><a href="#year">#</a> <b>utcYear</b>
+<a name="year" href="#year">#</a> d3_time.<b>year</b>
+<br><a href="#year">#</a> d3_time.<b>utcYear</b>
 
 Years (e.g., January 1, 2012 at 12:00 AM); ranges from 365 to 366 days.
 
@@ -202,89 +208,77 @@ Years (e.g., January 1, 2012 at 12:00 AM); ranges from 365 to 366 days.
 
 For convenience, aliases for [*interval*.range](#interval_range) are also provided as plural forms of the corresponding interval.
 
-<a name="milliseconds" href="#milliseconds">#</a> <b>milliseconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#milliseconds">#</a> <b>utcMilliseconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="milliseconds" href="#milliseconds">#</a> d3_time.<b>milliseconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#milliseconds">#</a> d3_time.<b>utcMilliseconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [millisecond](#millisecond).[range](#interval_range) and [utcMillisecond](#millisecond).[range](#interval_range).
 
-<a name="seconds" href="#seconds">#</a> <b>seconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#seconds">#</a> <b>utcSeconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="seconds" href="#seconds">#</a> d3_time.<b>seconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#seconds">#</a> d3_time.<b>utcSeconds</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [second](#second).[range](#interval_range) and [utcSecond](#second).[range](#interval_range).
 
-<a name="minutes" href="#minutes">#</a> <b>minutes</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#minutes">#</a> <b>utcMinutes</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="minutes" href="#minutes">#</a> d3_time.<b>minutes</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#minutes">#</a> d3_time.<b>utcMinutes</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [minute](#minute).[range](#interval_range) and [utcMinute](#minute).[range](#interval_range).
 
-<a name="hours" href="#hours">#</a> <b>hours</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#hours">#</a> <b>utcHours</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="hours" href="#hours">#</a> d3_time.<b>hours</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#hours">#</a> d3_time.<b>utcHours</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [hour](#hour).[range](#interval_range) and [utcHour](#hour).[range](#interval_range).
 
-<a name="days" href="#days">#</a> <b>days</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#days">#</a> <b>utcDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="days" href="#days">#</a> d3_time.<b>days</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#days">#</a> d3_time.<b>utcDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [day](#day).[range](#interval_range) and [utcDay](#day).[range](#interval_range).
 
-<a name="weeks" href="#weeks">#</a> <b>weeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#weeks">#</a> <b>utcWeeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="weeks" href="#weeks">#</a> d3_time.<b>weeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#weeks">#</a> d3_time.<b>utcWeeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [week](#week).[range](#interval_range) and [utcWeek](#week).[range](#interval_range).
 
-<a name="sundays" href="#sundays">#</a> <b>sundays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#sundays">#</a> <b>utcSundays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="sundays" href="#sundays">#</a> d3_time.<b>sundays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#sundays">#</a> d3_time.<b>utcSundays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [sunday](#sunday).[range](#interval_range) and [utcSunday](#sunday).[range](#interval_range).
 
-<a name="mondays" href="#mondays">#</a> <b>mondays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#mondays">#</a> <b>utcMondays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="mondays" href="#mondays">#</a> d3_time.<b>mondays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#mondays">#</a> d3_time.<b>utcMondays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [monday](#monday).[range](#interval_range) and [utcMonday](#monday).[range](#interval_range).
 
-<a name="tuesdays" href="#tuesdays">#</a> <b>tuesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#tuesdays">#</a> <b>utcTuesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="tuesdays" href="#tuesdays">#</a> d3_time.<b>tuesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#tuesdays">#</a> d3_time.<b>utcTuesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [tuesday](#tuesday).[range](#interval_range) and [utcTuesday](#tuesday).[range](#interval_range).
 
-<a name="wednesdays" href="#wednesdays">#</a> <b>wednesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#wednesdays">#</a> <b>utcWednesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="wednesdays" href="#wednesdays">#</a> d3_time.<b>wednesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#wednesdays">#</a> d3_time.<b>utcWednesdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [wednesday](#wednesday).[range](#interval_range) and [utcWednesday](#wednesday).[range](#interval_range).
 
-<a name="thursdays" href="#thursdays">#</a> <b>thursdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#thursdays">#</a> <b>utcThursdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="thursdays" href="#thursdays">#</a> d3_time.<b>thursdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#thursdays">#</a> d3_time.<b>utcThursdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [thursday](#thursday).[range](#interval_range) and [utcThursday](#thursday).[range](#interval_range).
 
-<a name="fridays" href="#fridays">#</a> <b>fridays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#fridays">#</a> <b>utcFridays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="fridays" href="#fridays">#</a> d3_time.<b>fridays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#fridays">#</a> d3_time.<b>utcFridays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [friday](#friday).[range](#interval_range) and [utcFriday](#friday).[range](#interval_range).
 
-<a name="saturdays" href="#saturdays">#</a> <b>saturdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#saturdays">#</a> <b>utcSaturdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="saturdays" href="#saturdays">#</a> d3_time.<b>saturdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#saturdays">#</a> d3_time.<b>utcSaturdays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [saturday](#saturday).[range](#interval_range) and [utcSaturday](#saturday).[range](#interval_range).
 
-<a name="months" href="#months">#</a> <b>months</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#months">#</a> <b>utcMonths</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="months" href="#months">#</a> d3_time.<b>months</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#months">#</a> d3_time.<b>utcMonths</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [month](#month).[range](#interval_range) and [utcMonth](#month).[range](#interval_range).
 
-<a name="years" href="#years">#</a> <b>years</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
-<br><a href="#years">#</a> <b>utcYears</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<a name="years" href="#years">#</a> d3_time.<b>years</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
+<br><a href="#years">#</a> d3_time.<b>utcYears</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
 Aliases for [year](#year).[range](#interval_range) and [utcYear](#year).[range](#interval_range).
-
-## Changes from D3 3.x:
-
-* Instead of exposing UTC intervals as *interval*.utc, separate UTC intervals are provided. For example, use utcDay instead of day.utc.
-
-* The dayOfYear, weekOfYear and related methods have been removed in favor of the more general [*interval*.count](#interval_count). You can now easily count the number of days you have lived or the number of hours in the current week, and you can count in either local time or UTC.
-
-* The unusual behavior of [day](#day).[range](#interval_range) when passed a *step* greater than one has been replaced with more sensible behavior of simply skipping every *step* days. If you want to filter by day-of-month (such as ticks for a time scale), use [*interval*.filter](#interval_filter) instead.
-
-* All methods coerce to Date where appropriate, thereby allowing numeric input.
-
-* Fixed [a bug](https://github.com/mbostock/d3/pull/1197) related to unusual daylight saving behavior.

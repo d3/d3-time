@@ -45,11 +45,11 @@ In a vanilla environment, a `d3_time` global is exported. [Try d3-time in your b
 
 <a name="_interval" href="#_interval">#</a> <i>interval</i>(<i>date</i>)
 
-Alias for [*interval*.floor](#interval_floor). For example, `year(date)` and `year.floor(date)` are equivalent.
+Alias for [*interval*.floor](#interval_floor). For example, [year](#year)(*date*) and year.floor(*date*) are equivalent.
 
 <a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>)
 
-Returns a new date representing the latest interval boundary date before or equal to *date*. For example, `d3_time.day.floor(new Date)` typically returns 12:00 AM local time on the current day.
+Returns a new date representing the latest interval boundary date before or equal to *date*. For example, [day](#day).floor(*date*) typically returns 12:00 AM local time on the given *date*.
 
 This method is idempotent: if the specified *date* is already floored to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the minimum expressible value of the associated interval, such that floor(floor(*date*) - 1) returns the preceeding interval boundary date.
 
@@ -66,19 +66,19 @@ This is more reliable than testing whether the time is 12:00 AM, as in some time
 
 <a name="interval_round" href="#interval_round">#</a> <i>interval</i>.<b>round</b>(<i>date</i>)
 
-Returns a new date representing the closest interval boundary date to *date*. For example, `day.round(new Date)` typically returns 12:00 AM local time on the current day if it is on or before noon, and 12:00 AM of the following day if it is after noon.
+Returns a new date representing the closest interval boundary date to *date*. For example, [day](#day).round(*date*) typically returns 12:00 AM local time on the given *date* if it is on or before noon, and 12:00 AM of the following day if it is after noon.
 
 This method is idempotent: if the specified *date* is already rounded to the current interval, a new date with an identical time is returned.
 
 <a name="interval_ceil" href="#interval_ceil">#</a> <i>interval</i>.<b>ceil</b>(<i>date</i>)
 
-Returns a new date representing the earliest interval boundary date after or equal to *date*. For example, `d3_time.day.ceil(new Date)` typically returns 12:00 AM local time on the following day.
+Returns a new date representing the earliest interval boundary date after or equal to *date*. For example, [day](#day).ceil(*date*) typically returns 12:00 AM local time on the date following the given *date*.
 
 This method is idempotent: if the specified *date* is already ceilinged to the current interval, a new date with an identical time is returned. Furthermore, the returned date is the maximum expressible value of the associated interval, such that eil(ceil(*date*) + 1) returns the following interval boundary date.
 
 <a name="interval_offset" href="#interval_offset">#</a> <i>interval</i>.<b>offset</b>(<i>date</i>[, <i>step</i>])
 
-Returns a new date equal to *date* plus *step* intervals. If *step* is not specified it defaults to 1. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned; if *step* is not an integer, it is [floored](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor). This method does not round the specified *date* to the interval. For example, if it is currently 5:34 PM, then `d3_time.day.offset(new Date, 1)` returns 5:34 PM tomorrow (even if daylight saving changes!).
+Returns a new date equal to *date* plus *step* intervals. If *step* is not specified it defaults to 1. If *step* is negative, then the returned date will be before the specified *date*; if *step* is zero, then a copy of the specified *date* is returned; if *step* is not an integer, it is [floored](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor). This method does not round the specified *date* to the interval. For example, if *date* is today at 5:34 PM, then [day](#day).offset(*date*, 1) returns 5:34 PM tomorrow (even if daylight saving changes!).
 
 <a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 

@@ -2,8 +2,8 @@ var tape = require("tape"),
     time = require("../"),
     date = require("./date");
 
-tape("interval(floor, offset) returns a custom interval", function(test) {
-  var i = time.interval(function(date) {
+tape("timeInterval(floor, offset) returns a custom time interval", function(test) {
+  var i = time.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     date.setUTCHours(date.getUTCHours() + step);
@@ -12,8 +12,8 @@ tape("interval(floor, offset) returns a custom interval", function(test) {
   test.end();
 });
 
-tape("interval(floor, offset) does not define a count method", function(test) {
-  var i = time.interval(function(date) {
+tape("timeInterval(floor, offset) does not define a count method", function(test) {
+  var i = time.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     date.setUTCHours(date.getUTCHours() + step);
@@ -22,8 +22,8 @@ tape("interval(floor, offset) does not define a count method", function(test) {
   test.end();
 });
 
-tape("interval(floor, offset) floors the step before passing it to offset", function(test) {
-  var steps = [], i = time.interval(function(date) {
+tape("timeInterval(floor, offset) floors the step before passing it to offset", function(test) {
+  var steps = [], i = time.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     steps.push(+step), date.setUTCHours(date.getUTCHours() + step);
@@ -34,8 +34,8 @@ tape("interval(floor, offset) floors the step before passing it to offset", func
   test.end();
 });
 
-tape("interval(floor, offset, count) defines a count method", function(test) {
-  var i = time.interval(function(date) {
+tape("timeInterval(floor, offset, count) defines a count method", function(test) {
+  var i = time.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     date.setUTCHours(date.getUTCHours() + step);
@@ -46,8 +46,8 @@ tape("interval(floor, offset, count) defines a count method", function(test) {
   test.end();
 });
 
-tape("interval(floor, offset, count) floors dates before passing them to count", function(test) {
-  var dates = [], i = time.interval(function(date) {
+tape("timeInterval(floor, offset, count) floors dates before passing them to count", function(test) {
+  var dates = [], i = time.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     date.setUTCHours(date.getUTCHours() + step);
@@ -59,20 +59,20 @@ tape("interval(floor, offset, count) floors dates before passing them to count",
   test.end();
 });
 
-tape("interval.every(step) returns null if step is invalid", function(test) {
-  test.equal(time.day.every(), null);
-  test.equal(time.minute.every(null), null);
-  test.equal(time.second.every(undefined), null);
-  test.equal(time.day.every(NaN), null);
-  test.equal(time.minute.every(0), null);
-  test.equal(time.second.every(0.8), null);
-  test.equal(time.hour.every(-1), null);
+tape("timeInterval.every(step) returns null if step is invalid", function(test) {
+  test.equal(time.timeDay.every(), null);
+  test.equal(time.timeMinute.every(null), null);
+  test.equal(time.timeSecond.every(undefined), null);
+  test.equal(time.timeDay.every(NaN), null);
+  test.equal(time.timeMinute.every(0), null);
+  test.equal(time.timeSecond.every(0.8), null);
+  test.equal(time.timeHour.every(-1), null);
   test.end();
 });
 
-tape("interval.every(step) returns interval if step is one", function(test) {
-  test.equal(time.day.every("1"), time.day);
-  test.equal(time.minute.every(1), time.minute);
-  test.equal(time.second.every(1.8), time.second);
+tape("timeInterval.every(step) returns interval if step is one", function(test) {
+  test.equal(time.timeDay.every("1"), time.timeDay);
+  test.equal(time.timeMinute.every(1), time.timeMinute);
+  test.equal(time.timeSecond.every(1.8), time.timeSecond);
   test.end();
 });

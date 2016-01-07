@@ -1,4 +1,4 @@
-export {default as interval} from "./src/interval";
+export {default as timeInterval} from "./src/interval";
 
 import millisecond from "./src/millisecond";
 import second from "./src/second";
@@ -17,24 +17,24 @@ import {default as utcWeek, utcSunday, utcMonday, utcTuesday, utcWednesday, utcT
 import utcMonth from "./src/utcMonth";
 import utcYear from "./src/utcYear";
 
-export var milliseconds = millisecond.range;
-export var seconds = second.range;
-export var minutes = minute.range;
-export var hours = hour.range;
-export var days = day.range;
-export var sundays = sunday.range;
-export var mondays = monday.range;
-export var tuesdays = tuesday.range;
-export var wednesdays = wednesday.range;
-export var thursdays = thursday.range;
-export var fridays = friday.range;
-export var saturdays = saturday.range;
-export var weeks = week.range;
-export var months = month.range;
-export var years = year.range;
+export var timeMilliseconds = millisecond.range;
+export var timeSeconds = second.range;
+export var timeMinutes = minute.range;
+export var timeHours = hour.range;
+export var timeDays = day.range;
+export var timeSundays = sunday.range;
+export var timeMondays = monday.range;
+export var timeTuesdays = tuesday.range;
+export var timeWednesdays = wednesday.range;
+export var timeThursdays = thursday.range;
+export var timeFridays = friday.range;
+export var timeSaturdays = saturday.range;
+export var timeWeeks = week.range;
+export var timeMonths = month.range;
+export var timeYears = year.range;
 
 export var utcMillisecond = millisecond;
-export var utcMilliseconds = milliseconds;
+export var utcMilliseconds = timeMilliseconds;
 export var utcSeconds = utcSecond.range;
 export var utcMinutes = utcMinute.range;
 export var utcHours = utcHour.range;
@@ -51,21 +51,21 @@ export var utcMonths = utcMonth.range;
 export var utcYears = utcYear.range;
 
 export {
-  millisecond,
-  second,
-  minute,
-  hour,
-  day,
-  sunday,
-  monday,
-  tuesday,
-  wednesday,
-  thursday,
-  friday,
-  saturday,
-  week,
-  month,
-  year,
+  millisecond as timeMillisecond,
+  second as timeSecond,
+  minute as timeMinute,
+  hour as timeHour,
+  day as timeDay,
+  sunday as timeSunday,
+  monday as timeMonday,
+  tuesday as timeTuesday,
+  wednesday as timeWednesday,
+  thursday as timeThursday,
+  friday as timeFriday,
+  saturday as timeSaturday,
+  week as timeWeek,
+  month as timeMonth,
+  year as timeYear,
   utcSecond,
   utcMinute,
   utcHour,

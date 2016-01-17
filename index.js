@@ -9,6 +9,8 @@ import {default as week, sunday, monday, tuesday, wednesday, thursday, friday, s
 import month from "./src/month";
 import year from "./src/year";
 
+import {default as ticks, tickInterval} from "./src/ticks";
+
 import utcSecond from "./src/utcSecond";
 import utcMinute from "./src/utcMinute";
 import utcHour from "./src/utcHour";
@@ -51,6 +53,8 @@ export var utcMonths = utcMonth.range;
 export var utcYears = utcYear.range;
 
 export {
+  ticks as timeTicks,
+  tickInterval as timeTickInterval,
   millisecond as timeMillisecond,
   second as timeSecond,
   minute as timeMinute,

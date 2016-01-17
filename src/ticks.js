@@ -19,16 +19,12 @@ var millisecondsPerSecond = 1000,
     bisectTickIntervals = bisector(function(method) { return method[2]; }).right;
 
 export default function(start, stop, count) {
-  //var interval = tickInterval(start, stop, count);
-  //return interval.range(start, stop);
-
   start = new Date(+start);
-  var i = tickInterval(start, stop, count),
+  var info = tickInterval(start, stop, count),
     step = 0,
     nextDate = start,
     range = [nextDate];
-  while (nextDate = i.interval.offset(start, step += i.step), nextDate <= +stop) range.push(nextDate);
-  //while (++step < 3) range.push(month.every(2).offset(start, step));
+  while (nextDate = info.interval.offset(start, step += info.step), nextDate <= +stop) range.push(nextDate);
   return range;
 };
 
@@ -75,5 +71,5 @@ export function tickInterval(start, stop, count) {
     step = tickStep(start, stop, count);
     interval = millisecond;
   }
-  return { interval: interval, step: step};
+  return {interval: interval, step: step};
 };

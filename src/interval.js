@@ -62,4 +62,4 @@ export default function newInterval(floori, offseti, count, field) {
   }
 
   return interval;
-};
+}

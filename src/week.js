@@ -1,4 +1,5 @@
 import interval from "./interval";
+import {minute, week} from "./duration";
 
 function weekday(i) {
   return interval(function(date) {
@@ -7,7 +8,7 @@ function weekday(i) {
   }, function(date, step) {
     date.setDate(date.getDate() + step * 7);
   }, function(start, end) {
-    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * 6e4) / 6048e5;
+    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * minute) / week;
   });
 }
 

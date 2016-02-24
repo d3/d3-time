@@ -1,11 +1,12 @@
 import interval from "./interval";
+import {second} from "./duration";
 
 export default interval(function(date) {
-  date.setMilliseconds(0);
+  date.setTime(Math.floor(date / second) * second);
 }, function(date, step) {
-  date.setTime(+date + step * 1e3);
+  date.setTime(+date + step * second);
 }, function(start, end) {
-  return (end - start) / 1e3;
+  return (end - start) / second;
 }, function(date) {
-  return date.getSeconds();
+  return date.getUTCSeconds();
 });

@@ -1,4 +1,5 @@
 import interval from "./interval";
+import {week} from "./duration";
 
 function utcWeekday(i) {
   return interval(function(date) {
@@ -7,7 +8,7 @@ function utcWeekday(i) {
   }, function(date, step) {
     date.setUTCDate(date.getUTCDate() + step * 7);
   }, function(start, end) {
-    return (end - start) / 6048e5;
+    return (end - start) / week;
   });
 }
 

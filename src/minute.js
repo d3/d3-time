@@ -1,11 +1,12 @@
 import interval from "./interval";
+import {minute} from "./duration";
 
 export default interval(function(date) {
-  date.setSeconds(0, 0);
+  date.setTime(Math.floor(date / minute) * minute);
 }, function(date, step) {
-  date.setTime(+date + step * 6e4);
+  date.setTime(+date + step * minute);
 }, function(start, end) {
-  return (end - start) / 6e4;
+  return (end - start) / minute;
 }, function(date) {
   return date.getMinutes();
 });

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function test()
+{
+   if [[ $1 -eq 0 ]]
+   then
+      echo -e "\x1B[1;32m✓ $2\x1B[0m"
+   else
+      echo -e "\x1B[1;31m✗ $2\x1B[0m"
+   fi
+}
+
+[ "$(TZ=Asia/Kolkata node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Wed Feb 24 2016 07:00:00 GMT+0530 (IST)" ]; test $? "Wed Feb 24 2016 07:00:00 GMT+0530 (IST)"
+[ "$(TZ=Asia/Kathmandu node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Wed Feb 24 2016 07:00:00 GMT+0545 (NPT)" ]; test $? "Wed Feb 24 2016 07:00:00 GMT+0545 (NPT)"
+[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 1, 20)))')" = "Sat Feb 20 2016 00:00:00 GMT-0200 (BRST)" ]; test $? "Sat Feb 20 2016 00:00:00 GMT-0200 (BRST)"
+[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 1, 21)))')" = "Sun Feb 21 2016 00:00:00 GMT-0300 (BRT)" ]; test $? "Sun Feb 21 2016 00:00:00 GMT-0300 (BRT)"
+[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 9, 15)))')" = "Sat Oct 15 2016 00:00:00 GMT-0300 (BRT)" ]; test $? "Sat Oct 15 2016 00:00:00 GMT-0300 (BRT)"
+[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 9, 16)))')" = "Sun Oct 16 2016 01:00:00 GMT-0200 (BRST)" ]; test $? "Sun Oct 16 2016 01:00:00 GMT-0200 (BRST)"

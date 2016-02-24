@@ -22,3 +22,6 @@ function test()
 [ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 1, 21)))')" = "Sun Feb 21 2016 00:00:00 GMT-0300 (BRT)" ]; test $? "daylight saving ends at midnight"
 [ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 9, 15)))')" = "Sat Oct 15 2016 00:00:00 GMT-0300 (BRT)" ]; test $? "daylight saving begins at midnight"
 [ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 9, 16)))')" = "Sun Oct 16 2016 01:00:00 GMT-0200 (BRST)" ]; test $? "daylight saving begins at midnight"
+[ "$(TZ=Asia/Amman node -e 'd3 = require("./"); console.log(d3.timeDay(+new Date(2014, 2, 28, 1)))')" = "Fri Mar 28 2014 01:00:00 GMT+0300 (EEST)" ]; test $? "daylight savings begins at midnight"
+[ "$(TZ=Asia/Amman node -e 'd3 = require("./"); console.log(d3.timeDay.ceil(+new Date(2014, 2, 27) + 1))')" = "Fri Mar 28 2014 01:00:00 GMT+0300 (EEST)" ]; test $? "daylight savings begins at midnight"
+[ "$(TZ=Asia/Amman node -e 'd3 = require("./"); console.log(d3.timeDay.range(new Date(2014, 2, 26), new Date(2014, 2, 30)).join(","))')" = "Wed Mar 26 2014 00:00:00 GMT+0200 (EET),Thu Mar 27 2014 00:00:00 GMT+0200 (EET),Fri Mar 28 2014 01:00:00 GMT+0300 (EEST),Sat Mar 29 2014 00:00:00 GMT+0300 (EEST)" ]; test $? "daylight savings begins at midnight"

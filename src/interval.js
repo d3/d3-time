@@ -32,7 +32,7 @@ export default function newInterval(floori, offseti, count, field) {
     if (!(start < stop) || !(step > 0)) return range; // also handles Invalid Date
     floori(start), offseti(start, 1);
     if (start < stop) range.push(new Date(+start));
-    while (offseti(start, step), start < stop) range.push(new Date(+start));
+    while (offseti(start, step), floori(start), start < stop) range.push(new Date(+start));
     return range;
   };
 

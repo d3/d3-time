@@ -33,13 +33,18 @@ This module is used by D3’s time scales to generate sensible ticks, by D3’s 
 
 ## Installing
 
-If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](https://github.com/d3/d3-time/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. Create a custom build using [Rollup](https://github.com/rollup/rollup) or your preferred bundler. You can also load directly from [d3js.org](https://d3js.org):
+If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](https://github.com/d3/d3-time/releases/latest). You can also load directly from [d3js.org](https://d3js.org), either as a [standalone library](https://d3js.org/d3-time.v0.2.min.js) or as part of [D3 4.0 alpha](https://github.com/mbostock/d3/tree/4). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3_time` global is exported:
 
 ```html
 <script src="https://d3js.org/d3-time.v0.2.min.js"></script>
+<script>
+
+var day = d3_time.timeDay(new Date);
+
+</script>
 ```
 
-In a vanilla environment, a `d3_time` global is exported. [Try d3-time in your browser.](https://tonicdev.com/npm/d3-time)
+[Try d3-time in your browser.](https://tonicdev.com/npm/d3-time)
 
 ## API Reference
 

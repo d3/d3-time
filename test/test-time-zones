@@ -10,9 +10,15 @@ function test()
    fi
 }
 
-[ "$(TZ=Asia/Kolkata node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Wed Feb 24 2016 07:00:00 GMT+0530 (IST)" ]; test $? "Wed Feb 24 2016 07:00:00 GMT+0530 (IST)"
-[ "$(TZ=Asia/Kathmandu node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Wed Feb 24 2016 07:00:00 GMT+0545 (NPT)" ]; test $? "Wed Feb 24 2016 07:00:00 GMT+0545 (NPT)"
-[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 1, 20)))')" = "Sat Feb 20 2016 00:00:00 GMT-0200 (BRST)" ]; test $? "Sat Feb 20 2016 00:00:00 GMT-0200 (BRST)"
-[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 1, 21)))')" = "Sun Feb 21 2016 00:00:00 GMT-0300 (BRT)" ]; test $? "Sun Feb 21 2016 00:00:00 GMT-0300 (BRT)"
-[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 9, 15)))')" = "Sat Oct 15 2016 00:00:00 GMT-0300 (BRT)" ]; test $? "Sat Oct 15 2016 00:00:00 GMT-0300 (BRT)"
-[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 9, 16)))')" = "Sun Oct 16 2016 01:00:00 GMT-0200 (BRST)" ]; test $? "Sun Oct 16 2016 01:00:00 GMT-0200 (BRST)"
+[ "$(TZ=Asia/Kolkata node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Wed Feb 24 2016 07:00:00 GMT+0530 (IST)" ]; test $? "+:30 UTC offset floor"
+[ "$(TZ=Asia/Kolkata node -e 'd3 = require("./"); console.log(d3.timeHours(new Date(2011, 10, 7, 0), new Date(2011, 10, 7, 3)).join(","))')" = "Mon Nov 07 2011 00:00:00 GMT+0530 (IST),Mon Nov 07 2011 01:00:00 GMT+0530 (IST),Mon Nov 07 2011 02:00:00 GMT+0530 (IST)" ]; test $? "+:30 UTC offset range"
+[ "$(TZ=Asia/Kathmandu node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Wed Feb 24 2016 07:00:00 GMT+0545 (NPT)" ]; test $? "+:45 UTC offset floor"
+[ "$(TZ=Asia/Kathmandu node -e 'd3 = require("./"); console.log(d3.timeHours(new Date(2011, 10, 7, 0), new Date(2011, 10, 7, 3)).join(","))')" = "Mon Nov 07 2011 00:00:00 GMT+0545 (NPT),Mon Nov 07 2011 01:00:00 GMT+0545 (NPT),Mon Nov 07 2011 02:00:00 GMT+0545 (NPT)" ]; test $? "+:45 UTC offset range"
+[ "$(TZ=UTC+03:15 node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Tue Feb 23 2016 22:00:00 GMT-0315 (UTC)" ]; test $? "-:15 UTC offset floor"
+[ "$(TZ=UTC-03:15 node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Wed Feb 24 2016 05:00:00 GMT+0315 (UTC)" ]; test $? "+:15 UTC offset floor"
+[ "$(TZ=UTC-03:30 node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Wed Feb 24 2016 05:00:00 GMT+0330 (UTC)" ]; test $? "+:30 UTC offset floor"
+[ "$(TZ=UTC-03:45 node -e 'd3 = require("./"); console.log(d3.timeHour(new Date(1456279843199)))')" = "Wed Feb 24 2016 05:00:00 GMT+0345 (UTC)" ]; test $? "+:45 UTC offset floor"
+[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 1, 20)))')" = "Sat Feb 20 2016 00:00:00 GMT-0200 (BRST)" ]; test $? "daylight saving ends at midnight"
+[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 1, 21)))')" = "Sun Feb 21 2016 00:00:00 GMT-0300 (BRT)" ]; test $? "daylight saving ends at midnight"
+[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 9, 15)))')" = "Sat Oct 15 2016 00:00:00 GMT-0300 (BRT)" ]; test $? "daylight saving begins at midnight"
+[ "$(TZ=America/Sao_Paulo node -e 'd3 = require("./"); console.log(d3.timeDay(new Date(2016, 9, 16)))')" = "Sun Oct 16 2016 01:00:00 GMT-0200 (BRST)" ]; test $? "daylight saving begins at midnight"

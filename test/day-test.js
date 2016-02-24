@@ -208,6 +208,12 @@ tape("timeDay.count(start, end) observes daylight saving", function(test) {
   test.end();
 });
 
+tape("timeDay.count(start, stop) does not exhibit floating-point rounding error", function(test) {
+  var date = new Date(2011, 4, 9);
+  test.equal(time.timeDay.count(time.timeYear(date), date), 128);
+  test.end();
+});
+
 tape("timeDay.count(start, end) returns 364 or 365 for a full year", function(test) {
   test.equal(time.timeDay.count(date.local(1999, 00, 01), date.local(1999, 11, 31)), 364);
   test.equal(time.timeDay.count(date.local(2000, 00, 01), date.local(2000, 11, 31)), 365); // leap year

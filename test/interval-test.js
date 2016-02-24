@@ -2,6 +2,11 @@ var tape = require("tape"),
     time = require("../"),
     date = require("./date");
 
+tape("timeInterval is an alias for timeInterval.floor", function(test) {
+  test.equal(time.timeYear, time.timeYear.floor);
+  test.end();
+});
+
 tape("timeInterval(floor, offset) returns a custom time interval", function(test) {
   var i = time.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);

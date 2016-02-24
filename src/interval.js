@@ -30,9 +30,9 @@ export default function newInterval(floori, offseti, count, field) {
     stop = new Date(+stop);
     step = step == null ? 1 : Math.floor(step);
     if (!(start < stop) || !(step > 0)) return range; // also handles Invalid Date
-    offseti(start, 1), floori(start);
+    floori(start), offseti(start, 1);
     if (start < stop) range.push(new Date(+start));
-    while (offseti(start, step), floori(start), start < stop) range.push(new Date(+start));
+    while (offseti(start, step), start < stop) range.push(new Date(+start));
     return range;
   };
 

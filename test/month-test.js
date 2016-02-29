@@ -135,6 +135,9 @@ tape("timeMonth.round(date) handles midnight for leap years", function(test) {
 tape("timeMonth.ceil(date) returns months", function(test) {
   test.deepEqual(time.timeMonth.ceil(date.local(2010, 10, 30, 23)), date.local(2010, 11, 01));
   test.deepEqual(time.timeMonth.ceil(date.local(2010, 11, 01, 01)), date.local(2011, 00, 01));
+  test.deepEqual(time.timeMonth.ceil(date.local(2011, 1, 1)), date.local(2011, 1, 1));
+  test.deepEqual(time.timeMonth.ceil(date.local(2011, 2, 1)), date.local(2011, 2, 1));
+  test.deepEqual(time.timeMonth.ceil(date.local(2011, 3, 1)), date.local(2011, 3, 1));
   test.end();
 });
 

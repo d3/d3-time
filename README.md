@@ -89,7 +89,7 @@ Returns a new date equal to *date* plus *step* intervals. If *step* is not speci
 
 Returns every an array of dates representing every interval boundary after or equal to *start* (inclusive) and before *stop* (exclusive). If *step* is specified, then every *step*th boundary will be returned; for example, for the [timeDay](#timeDay) interval a *step* of 2 will return every other day. If *step* is not an integer, it is [floored](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor).
 
-The first date in the returned array is the earliest boundary after or equal to *start*; subsequent dates are [offset](#interval_offset) by *step* intervals. Thus, two overlapping ranges may be consistent. For example, this range contains odd days:
+The first date in the returned array is the earliest boundary after or equal to *start*; subsequent dates are [offset](#interval_offset) by *step* intervals and [floored](#interval_floor). Thus, two overlapping ranges may be consistent. For example, this range contains odd days:
 
 ```js
 d3.timeDay.range(new Date(2015, 0, 1), new Date(2015, 0, 7), 2);

@@ -16,7 +16,7 @@ You can, however, use [timeDay](#timeDay).[count](#interval_count):
 d3.timeDay.count(start, end); // 31
 ```
 
-The [timeDay](#day) [time interval](#api-reference) is one of several provided by d3-time. Each interval represents a conventional unit of time—[hours](#timeHour), [weeks](#timeWeek), [months](#timeMonth), *etc.*—and has methods to calculate boundary dates. For example, [timeDay](#timeDay) computes midnight (typically 12:00 AM local time) of the corresponding day. In addition to [rounding](#interval_round) and [counting](#interval_count), intervals can also be used to generate arrays of boundary dates. For example, to compute each Sunday in the current month:
+The [timeDay](#day) [interval](#api-reference) is one of several provided by d3-time. Each interval represents a conventional unit of time—[hours](#timeHour), [weeks](#timeWeek), [months](#timeMonth), *etc.*—and has methods to calculate boundary dates. For example, [timeDay](#timeDay) computes midnight (typically 12:00 AM local time) of the corresponding day. In addition to [rounding](#interval_round) and [counting](#interval_count), intervals can also be used to generate arrays of boundary dates. For example, to compute each Sunday in the current month:
 
 ```js
 var now = new Date;
@@ -87,7 +87,27 @@ Returns a new date equal to *date* plus *step* intervals. If *step* is not speci
 
 <a name="interval_range" href="#interval_range">#</a> <i>interval</i>.<b>range</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Returns every an array of dates representing every interval boundary after or equal to *start* (inclusive) and before *stop* (exclusive). If *step* is specified, then every *step*th interval will be returned; for example, for the [timeDay](#timeDay) interval a *step* of 2 will return every other day. If *step* is not an integer, it is [floored](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor).
+Returns every an array of dates representing every interval boundary after or equal to *start* (inclusive) and before *stop* (exclusive). If *step* is specified, then every *step*th boundary will be returned; for example, for the [timeDay](#timeDay) interval a *step* of 2 will return every other day. If *step* is not an integer, it is [floored](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor).
+
+The first date in the returned array is the earliest boundary after or equal to *start*; subsequent dates are [offset](#interval_offset) by *step* intervals. Thus, two overlapping ranges may be consistent. For example, this range contains odd days:
+
+```js
+d3.timeDay.range(new Date(2015, 0, 1), new Date(2015, 0, 7), 2);
+// [Thu Jan 01 2015 00:00:00 GMT-0800 (PST),
+//  Sat Jan 03 2015 00:00:00 GMT-0800 (PST),
+//  Mon Jan 05 2015 00:00:00 GMT-0800 (PST)]
+```
+
+While this contains even days:
+
+```js
+d3.timeDay.range(new Date(2015, 0, 2), new Date(2015, 0, 8), 2);
+// [Fri Jan 02 2015 00:00:00 GMT-0800 (PST),
+//  Sun Jan 04 2015 00:00:00 GMT-0800 (PST),
+//  Tue Jan 06 2015 00:00:00 GMT-0800 (PST)]
+```
+
+To make ranges consistent when a *step* is specified, use [*interval*.every](#interval_every) instead.
 
 <a name="interval_filter" href="#interval_filter">#</a> <i>interval</i>.<b>filter</b>(<i>test</i>)
 
@@ -101,7 +121,27 @@ The returned filtered interval does not support [count](#interval_count). See al
 
 <a name="interval_every" href="#interval_every">#</a> <i>interval</i>.<b>every</b>(<i>step</i>)
 
-Returns a [filtered](#interval_filter) view of this interval representing every *step*th date. The meaning of *step* is dependent on this interval’s parent interval as defined by the field function. For example, minute.every(15) returns an interval representing every fifteen minutes, starting on the hour: :00, :15, :30, :45, <i>etc.</i> Note that for some intervals, such as [timeDay](#timeDay), the resulting dates may be irregularly spaced. If *step* is not valid, returns null. If *step* is one, returns this interval.
+Returns a [filtered](#interval_filter) view of this interval representing every *step*th date. The meaning of *step* is dependent on this interval’s parent interval as defined by the field function. For example, [timeMinute](#timeMinute).every(15) returns an interval representing every fifteen minutes, starting on the hour: :00, :15, :30, :45, <i>etc.</i> Note that for some intervals, the resulting dates may not be uniformly-spaced; [timeDay](#timeDay)’s parent interval is [timeMonth](#timeMonth), and thus the interval number resets at the start of each month. If *step* is not valid, returns null. If *step* is one, returns this interval.
+
+This method can be used in conjunction with [*interval*.range](#interval_range) to ensure that two overlapping ranges are consistent. For example, this range contains odd days:
+
+```js
+d3.timeDay.every(2).range(new Date(2015, 0, 1), new Date(2015, 0, 7));
+// [Thu Jan 01 2015 00:00:00 GMT-0800 (PST),
+//  Sat Jan 03 2015 00:00:00 GMT-0800 (PST),
+//  Mon Jan 05 2015 00:00:00 GMT-0800 (PST)]
+```
+
+As does this one:
+
+```js
+d3.timeDay.every(2).range(new Date(2015, 0, 2), new Date(2015, 0, 8));
+// [Sat Jan 03 2015 00:00:00 GMT-0800 (PST),
+//  Mon Jan 05 2015 00:00:00 GMT-0800 (PST),
+//  Wed Jan 07 2015 00:00:00 GMT-0800 (PST)]
+```
+
+See also [*interval*.filter](#interval_filter).
 
 <a name="interval_count" href="#interval_count">#</a> <i>interval</i>.<b>count</b>(<i>start</i>, <i>end</i>)
 

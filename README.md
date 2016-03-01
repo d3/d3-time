@@ -158,7 +158,7 @@ Likewise, to compute the current zero-based week-of-year number for weeks that s
 d3.timeSunday.count(d3.timeYear(now), now); // 25
 ```
 
-<a name="interval" href="#interval">#</a> d3.<b>timeInterval</b>(<i>floor</i>, <i>offset</i>[, <i>count</i>[, <i>field</i>]])
+<a name="timeInterval" href="#timeInterval">#</a> d3.<b>timeInterval</b>(<i>floor</i>, <i>offset</i>[, <i>count</i>[, <i>field</i>]])
 
 Constructs a new custom interval given the specified *floor* and *offset* functions and an optional *count* function.
 

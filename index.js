@@ -67,7 +67,6 @@ export {
   week as timeWeek,
   month as timeMonth,
   year as timeYear,
-  utcSecond,
   utcMinute,
   utcHour,
   utcDay,

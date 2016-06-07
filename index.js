@@ -33,9 +33,7 @@ export var timeWeeks = week.range;
 export var timeMonths = month.range;
 export var timeYears = year.range;
 
-export var utcMillisecond = millisecond;
 export var utcMilliseconds = timeMilliseconds;
-export var utcSecond = second;
 export var utcSeconds = timeSeconds;
 export var utcMinutes = utcMinute.range;
 export var utcHours = utcHour.range;
@@ -67,7 +65,8 @@ export {
   week as timeWeek,
   month as timeMonth,
   year as timeYear,
-  utcSecond,
+  millisecond as utcMillisecond,
+  second as utcSecond,
   utcMinute,
   utcHour,
   utcDay,

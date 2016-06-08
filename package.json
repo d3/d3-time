@@ -8,7 +8,7 @@
     "interval",
     "calendar"
   ],
-  "homepage": "https://github.com/d3/d3-time",
+  "homepage": "https://d3js.org/d3-time/",
   "license": "BSD-3-Clause",
   "author": {
     "name": "Mike Bostock",
@@ -21,15 +21,15 @@
     "url": "https://github.com/d3/d3-time.git"
   },
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -f umd -n d3_time -o build/d3-time.js -- index.js",
+    "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -n d3 -o build/d3-time.js -- index.js",
     "test": "TZ=America/Los_Angeles tape 'test/**/*-test.js' && test/test-time-zones && eslint index.js src",
-    "prepublish": "npm run test && uglifyjs build/d3-time.js -c -m -o build/d3-time.min.js",
-    "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git push --tags && cp build/d3-time.js ../d3.github.com/d3-time.v0.2.js && cp build/d3-time.min.js ../d3.github.com/d3-time.v0.2.min.js && cd ../d3.github.com && git add d3-time.v0.2.js d3-time.v0.2.min.js && git commit -m \"d3-time ${VERSION}\" && git push && cd - && zip -j build/d3-time.zip -- LICENSE README.md build/d3-time.js build/d3-time.min.js"
+    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-time.js -c -m -o build/d3-time.min.js",
+    "postpublish": "VERSION=`node -e 'console.log(require(\"./package.json\").version)'`; git push && git push --tags && cp build/d3-time.js ../d3.github.com/d3-time.v0.3.js && cp build/d3-time.min.js ../d3.github.com/d3-time.v0.3.min.js && cd ../d3.github.com && git add d3-time.v0.3.js d3-time.v0.3.min.js && git commit -m \"d3-time ${VERSION}\" && git push && cd - && zip -j build/d3-time.zip -- LICENSE README.md build/d3-time.js build/d3-time.min.js"
   },
   "devDependencies": {
     "eslint": "2",
-    "json2module": "0.0",
-    "rollup": "0.26",
+    "package-preamble": "0.0",
+    "rollup": "0.27",
     "tape": "4",
     "uglify-js": "2"
   }

@@ -1,4 +1,3 @@
-export {version} from "./build/package";
 export {default as timeInterval} from "./src/interval";
 
 import millisecond from "./src/millisecond";

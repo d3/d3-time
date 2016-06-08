@@ -1,5 +1,5 @@
 import interval from "./interval";
-import {minute, week} from "./duration";
+import {durationMinute, durationWeek} from "./duration";
 
 function weekday(i) {
   return interval(function(date) {
@@ -8,7 +8,7 @@ function weekday(i) {
   }, function(date, step) {
     date.setDate(date.getDate() + step * 7);
   }, function(start, end) {
-    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * minute) / week;
+    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationWeek;
   });
 }
 
@@ -19,4 +19,11 @@ export var wednesday = weekday(3);
 export var thursday = weekday(4);
 export var friday = weekday(5);
 export var saturday = weekday(6);
-export default sunday;
+
+export var sundays = sunday.range;
+export var mondays = monday.range;
+export var tuesdays = tuesday.range;
+export var wednesdays = wednesday.range;
+export var thursdays = thursday.range;
+export var fridays = friday.range;
+export var saturdays = saturday.range;

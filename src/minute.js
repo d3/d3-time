@@ -1,12 +1,15 @@
 import interval from "./interval";
-import {minute} from "./duration";
+import {durationMinute} from "./duration";
 
-export default interval(function(date) {
-  date.setTime(Math.floor(date / minute) * minute);
+var minute = interval(function(date) {
+  date.setTime(Math.floor(date / durationMinute) * durationMinute);
 }, function(date, step) {
-  date.setTime(+date + step * minute);
+  date.setTime(+date + step * durationMinute);
 }, function(start, end) {
-  return (end - start) / minute;
+  return (end - start) / durationMinute;
 }, function(date) {
   return date.getMinutes();
 });
+
+export default minute;
+export var minutes = minute.range;

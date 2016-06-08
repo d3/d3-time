@@ -1,6 +1,6 @@
 import interval from "./interval";
 
-export default interval(function(date) {
+var month = interval(function(date) {
   date.setHours(0, 0, 0, 0);
   date.setDate(1);
 }, function(date, step) {
@@ -10,3 +10,6 @@ export default interval(function(date) {
 }, function(date) {
   return date.getMonth();
 });
+
+export default month;
+export var months = month.range;

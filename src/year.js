@@ -1,6 +1,6 @@
 import interval from "./interval";
 
-export default interval(function(date) {
+var year = interval(function(date) {
   date.setHours(0, 0, 0, 0);
   date.setMonth(0, 1);
 }, function(date, step) {
@@ -10,3 +10,6 @@ export default interval(function(date) {
 }, function(date) {
   return date.getFullYear();
 });
+
+export default year;
+export var years = year.range;

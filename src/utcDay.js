@@ -1,12 +1,15 @@
 import interval from "./interval";
-import {day} from "./duration";
+import {durationDay} from "./duration";
 
-export default interval(function(date) {
+var utcDay = interval(function(date) {
   date.setUTCHours(0, 0, 0, 0);
 }, function(date, step) {
   date.setUTCDate(date.getUTCDate() + step);
 }, function(start, end) {
-  return (end - start) / day;
+  return (end - start) / durationDay;
 }, function(date) {
   return date.getUTCDate() - 1;
 });
+
+export default utcDay;
+export var utcDays = utcDay.range;

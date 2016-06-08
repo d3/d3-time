@@ -23,3 +23,4 @@ millisecond.every = function(k) {
 };
 
 export default millisecond;
+export var milliseconds = millisecond.range;

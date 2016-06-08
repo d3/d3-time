@@ -1,6 +1,6 @@
 import interval from "./interval";
 
-export default interval(function(date) {
+var utcMonth = interval(function(date) {
   date.setUTCHours(0, 0, 0, 0);
   date.setUTCDate(1);
 }, function(date, step) {
@@ -10,3 +10,6 @@ export default interval(function(date) {
 }, function(date) {
   return date.getUTCMonth();
 });
+
+export default utcMonth;
+export var utcMonths = utcMonth.range;

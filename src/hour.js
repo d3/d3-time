@@ -1,14 +1,17 @@
 import interval from "./interval";
-import {hour, minute} from "./duration";
+import {durationHour, durationMinute} from "./duration";
 
-export default interval(function(date) {
-  var offset = date.getTimezoneOffset() * minute % hour;
-  if (offset < 0) offset += hour;
-  date.setTime(Math.floor((+date - offset) / hour) * hour + offset);
+var hour = interval(function(date) {
+  var offset = date.getTimezoneOffset() * durationMinute % durationHour;
+  if (offset < 0) offset += durationHour;
+  date.setTime(Math.floor((+date - offset) / durationHour) * durationHour + offset);
 }, function(date, step) {
-  date.setTime(+date + step * hour);
+  date.setTime(+date + step * durationHour);
 }, function(start, end) {
-  return (end - start) / hour;
+  return (end - start) / durationHour;
 }, function(date) {
   return date.getHours();
 });
+
+export default hour;
+export var hours = hour.range;

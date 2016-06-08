@@ -1,12 +1,15 @@
 import interval from "./interval";
-import {hour} from "./duration";
+import {durationHour} from "./duration";
 
-export default interval(function(date) {
+var utcHour = interval(function(date) {
   date.setUTCMinutes(0, 0, 0);
 }, function(date, step) {
-  date.setTime(+date + step * hour);
+  date.setTime(+date + step * durationHour);
 }, function(start, end) {
-  return (end - start) / hour;
+  return (end - start) / durationHour;
 }, function(date) {
   return date.getUTCHours();
 });
+
+export default utcHour;
+export var utcHours = utcHour.range;

@@ -3,8 +3,8 @@ import {durationMinute, durationWeek} from "./duration";
 
 function weekday(i) {
   return interval(function(date) {
-    date.setHours(0, 0, 0, 0);
     date.setDate(date.getDate() - (date.getDay() + 7 - i) % 7);
+    date.setHours(0, 0, 0, 0);
   }, function(date, step) {
     date.setDate(date.getDate() + step * 7);
   }, function(start, end) {

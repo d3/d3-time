@@ -1,8 +1,8 @@
 import interval from "./interval";
 
 var year = interval(function(date) {
-  date.setHours(0, 0, 0, 0);
   date.setMonth(0, 1);
+  date.setHours(0, 0, 0, 0);
 }, function(date, step) {
   date.setFullYear(date.getFullYear() + step);
 }, function(start, end) {

@@ -1,8 +1,8 @@
 import interval from "./interval";
 
 var utcMonth = interval(function(date) {
-  date.setUTCHours(0, 0, 0, 0);
   date.setUTCDate(1);
+  date.setUTCHours(0, 0, 0, 0);
 }, function(date, step) {
   date.setUTCMonth(date.getUTCMonth() + step);
 }, function(start, end) {

@@ -276,7 +276,7 @@ Aliases for [timeHour](#timeHour).[range](#interval_range) and [utcHour](#timeHo
 <a name="timeDays" href="#timeDays">#</a> d3.<b>timeDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#timeDays">#</a> d3.<b>utcDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 
-Aliases for [timeTimeDay](#timeTimeDay).[range](#interval_range) and [utcDay](#timeTimeDay).[range](#interval_range).
+Aliases for [timeDay](#timeDay).[range](#interval_range) and [utcDay](#timeDay).[range](#interval_range).
 
 <a name="timeWeeks" href="#timeWeeks">#</a> d3.<b>timeWeeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#timeWeeks">#</a> d3.<b>utcWeeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])

@@ -1,5 +1,5 @@
 parserOptions:
-    sourceType: "module"
+    sourceType: module
 
 env:
     es6: true
@@ -7,6 +7,3 @@ env:
 
 extends:
     "eslint:recommended"
-
-rules:
-    no-cond-assign: 0

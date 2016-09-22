@@ -34,9 +34,9 @@ export default function newInterval(floori, offseti, count, field) {
 
   interval.filter = function(test) {
     return newInterval(function(date) {
-      while (floori(date), !test(date)) date.setTime(date - 1);
+      if (date >= date) while (floori(date), !test(date)) date.setTime(date - 1);
     }, function(date, step) {
-      while (--step >= 0) while (offseti(date, 1), !test(date)) {} // eslint-disable-line no-empty
+      if (date >= date) while (--step >= 0) while (offseti(date, 1), !test(date)) {} // eslint-disable-line no-empty
     });
   };
 

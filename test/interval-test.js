@@ -81,3 +81,8 @@ tape("timeInterval.every(step) returns interval if step is one", function(test) 
   test.equal(time.timeSecond.every(1.8), time.timeSecond);
   test.end();
 });
+
+tape("timeInterval.every(step).range(invalid, invalid) returns the empty array", function(test) {
+  test.deepEqual(time.timeMinute.every(15).range(NaN, NaN), []);
+  test.end();
+});

@@ -141,7 +141,7 @@ d3.timeDay.every(2).range(new Date(2015, 0, 2), new Date(2015, 0, 8));
 //  Wed Jan 07 2015 00:00:00 GMT-0800 (PST)]
 ```
 
-See also [*interval*.filter](#interval_filter).
+The returned filtered interval does not support [count](#interval_count). See also [*interval*.filter](#interval_filter).
 
 <a name="interval_count" href="#interval_count">#</a> <i>interval</i>.<b>count</b>(<i>start</i>, <i>end</i>) [<>](https://github.com/d3/d3-time/blob/master/src/interval.js#L44 "Source")
 

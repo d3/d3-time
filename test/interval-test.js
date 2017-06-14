@@ -86,3 +86,29 @@ tape("timeInterval.every(step).range(invalid, invalid) returns the empty array",
   test.deepEqual(time.timeMinute.every(15).range(NaN, NaN), []);
   test.end();
 });
+
+tape("timeInterval.every(…).offset(date, step) returns the expected value when step is positive", function(test) {
+  var i = time.timeMinute.every(15);
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 0), date.local(2015, 0, 1, 12, 34));
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 1), date.local(2015, 0, 1, 12, 45));
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 2), date.local(2015, 0, 1, 13, 00));
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 3), date.local(2015, 0, 1, 13, 15));
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 4), date.local(2015, 0, 1, 13, 30));
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 5), date.local(2015, 0, 1, 13, 45));
+  test.end();
+});
+
+tape("timeInterval.every(…).offset(date, step) returns the expected value when step is negative", function(test) {
+  var i = time.timeMinute.every(15);
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), -1), date.local(2015, 0, 1, 12, 30));
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), -2), date.local(2015, 0, 1, 12, 15));
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), -3), date.local(2015, 0, 1, 12, 00));
+  test.end();
+});
+
+tape("timeInterval.every(…).offset(date, step) returns the expected value when step is not an integer", function(test) {
+  var i = time.timeMinute.every(15);
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 1.2), date.local(2015, 0, 1, 12, 45));
+  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), -0.8), date.local(2015, 0, 1, 12, 30));
+  test.end();
+});

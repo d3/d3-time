@@ -1,12 +1,10 @@
 import interval from "./interval";
-import {durationHour, durationMinute} from "./duration";
+import {durationHour} from "./duration";
 
 var hour = interval(function(date) {
-  var offset = date.getTimezoneOffset() * durationMinute % durationHour;
-  if (offset < 0) offset += durationHour;
-  date.setTime(Math.floor((+date - offset) / durationHour) * durationHour + offset);
+  date.setMinutes(0, 0, 0);
 }, function(date, step) {
-  date.setTime(+date + step * durationHour);
+  date.setHours(date.getHours() + step);
 }, function(start, end) {
   return (end - start) / durationHour;
 }, function(date) {

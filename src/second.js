@@ -2,13 +2,13 @@ import interval from "./interval";
 import {durationSecond} from "./duration";
 
 var second = interval(function(date) {
-  date.setTime(Math.floor(date / durationSecond) * durationSecond);
+  date.setMilliseconds(0);
 }, function(date, step) {
-  date.setTime(+date + step * durationSecond);
+  date.setSeconds(date.getSeconds() + step);
 }, function(start, end) {
   return (end - start) / durationSecond;
 }, function(date) {
-  return date.getUTCSeconds();
+  return date.getSeconds();
 });
 
 export default second;

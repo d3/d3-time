@@ -4,7 +4,7 @@ import {durationHour} from "./duration";
 var utcHour = interval(function(date) {
   date.setUTCMinutes(0, 0, 0);
 }, function(date, step) {
-  date.setTime(+date + step * durationHour);
+  date.setUTCHours(date.getUTCHours() + step);
 }, function(start, end) {
   return (end - start) / durationHour;
 }, function(date) {

@@ -11,9 +11,7 @@ export {
 
 export {
   default as timeSecond,
-  seconds as timeSeconds,
-  default as utcSecond,
-  seconds as utcSeconds
+  seconds as timeSeconds
 } from "./second";
 
 export {
@@ -61,18 +59,23 @@ export {
 } from "./year";
 
 export {
+  default as utcSecond,
+  utcSeconds
+} from "./utcSecond";
+
+export {
   default as utcMinute,
-  utcMinutes as utcMinutes
+  utcMinutes
 } from "./utcMinute";
 
 export {
   default as utcHour,
-  utcHours as utcHours
+  utcHours
 } from "./utcHour";
 
 export {
   default as utcDay,
-  utcDays as utcDays
+  utcDays
 } from "./utcDay";
 
 export {
@@ -96,10 +99,10 @@ export {
 
 export {
   default as utcMonth,
-  utcMonths as utcMonths
+  utcMonths
 } from "./utcMonth";
 
 export {
   default as utcYear,
-  utcYears as utcYears
+  utcYears
 } from "./utcYear";

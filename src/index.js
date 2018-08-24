@@ -1,35 +1,35 @@
 export {
   default as timeInterval
-} from "./src/interval";
+} from "./interval";
 
 export {
   default as timeMillisecond,
   milliseconds as timeMilliseconds,
   default as utcMillisecond,
   milliseconds as utcMilliseconds
-} from "./src/millisecond";
+} from "./millisecond";
 
 export {
   default as timeSecond,
   seconds as timeSeconds,
   default as utcSecond,
   seconds as utcSeconds
-} from "./src/second";
+} from "./second";
 
 export {
   default as timeMinute,
   minutes as timeMinutes
-} from "./src/minute";
+} from "./minute";
 
 export {
   default as timeHour,
   hours as timeHours
-} from "./src/hour";
+} from "./hour";
 
 export {
   default as timeDay,
   days as timeDays
-} from "./src/day";
+} from "./day";
 
 export {
   sunday as timeWeek,
@@ -48,32 +48,32 @@ export {
   fridays as timeFridays,
   saturday as timeSaturday,
   saturdays as timeSaturdays
-} from "./src/week";
+} from "./week";
 
 export {
   default as timeMonth,
   months as timeMonths
-} from "./src/month";
+} from "./month";
 
 export {
   default as timeYear,
   years as timeYears
-} from "./src/year";
+} from "./year";
 
 export {
   default as utcMinute,
   utcMinutes as utcMinutes
-} from "./src/utcMinute";
+} from "./utcMinute";
 
 export {
   default as utcHour,
   utcHours as utcHours
-} from "./src/utcHour";
+} from "./utcHour";
 
 export {
   default as utcDay,
   utcDays as utcDays
-} from "./src/utcDay";
+} from "./utcDay";
 
 export {
   utcSunday as utcWeek,
@@ -92,14 +92,14 @@ export {
   utcFridays as utcFridays,
   utcSaturday as utcSaturday,
   utcSaturdays as utcSaturdays
-} from "./src/utcWeek";
+} from "./utcWeek";
 
 export {
   default as utcMonth,
   utcMonths as utcMonths
-} from "./src/utcMonth";
+} from "./utcMonth";
 
 export {
   default as utcYear,
   utcYears as utcYears
-} from "./src/utcYear";
+} from "./utcYear";

@@ -94,7 +94,8 @@ tape("timeSecond.range(start, stop) observes start of daylight savings time", fu
   test.end();
 });
 
-tape("timeSecond.range(start, stop) observes end of daylight savings time", function(test) {
+// https://github.com/d3/d3-time/issues/29
+tape.skip("timeSecond.range(start, stop) observes end of daylight savings time", function(test) {
   test.deepEqual(time.timeSecond.range(date.utc(2011, 10, 6, 8, 59, 59), date.utc(2011, 10, 6, 9, 0, 2)), [
     date.utc(2011, 10, 6, 8, 59, 59),
     date.utc(2011, 10, 6, 9, 0, 0),
@@ -109,7 +110,8 @@ tape("timeSecond.every(step) returns every stepth second, starting with the firs
   test.end();
 });
 
-tape("timeSecond.range(start, stop) returns every second crossing the daylight savings boundary", function(test) {
+// https://github.com/d3/d3-time/issues/29
+tape.skip("timeSecond.range(start, stop) returns every second crossing the daylight savings boundary", function(test) {
   test.deepEqual(time.timeSecond.range(new Date(1478422800000 - 2 * 1e3), new Date(1478422800000 + 2 * 1e3)), [
     new Date(1478422798000), // Sun Nov 06 2016 01:59:58 GMT-0700 (PDT)
     new Date(1478422799000), // Sun Nov 06 2016 01:59:59 GMT-0700 (PDT)

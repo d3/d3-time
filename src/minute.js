@@ -1,8 +1,8 @@
 import interval from "./interval";
-import {durationMinute} from "./duration";
+import {durationMinute, durationSecond} from "./duration";
 
 var minute = interval(function(date) {
-  date.setTime(Math.floor(date / durationMinute) * durationMinute);
+  date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond);
 }, function(date, step) {
   date.setTime(+date + step * durationMinute);
 }, function(start, end) {

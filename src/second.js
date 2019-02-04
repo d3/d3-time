@@ -2,7 +2,7 @@ import interval from "./interval";
 import {durationSecond} from "./duration";
 
 var second = interval(function(date) {
-  date.setTime(Math.floor(date / durationSecond) * durationSecond);
+  date.setTime(date - date.getMilliseconds());
 }, function(date, step) {
   date.setTime(+date + step * durationSecond);
 }, function(start, end) {

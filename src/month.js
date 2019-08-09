@@ -1,4 +1,4 @@
-import interval from "./interval";
+import interval from "./interval.js";
 
 var month = interval(function(date) {
   date.setDate(1);

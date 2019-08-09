@@ -1,5 +1,5 @@
-import interval from "./interval";
-import {durationHour} from "./duration";
+import interval from "./interval.js";
+import {durationHour} from "./duration.js";
 
 var utcHour = interval(function(date) {
   date.setUTCMinutes(0, 0, 0);

@@ -1,4 +1,4 @@
-import interval from "./interval";
+import interval from "./interval.js";
 
 var utcYear = interval(function(date) {
   date.setUTCMonth(0, 1);

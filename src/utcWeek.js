@@ -1,5 +1,5 @@
-import interval from "./interval";
-import {durationWeek} from "./duration";
+import interval from "./interval.js";
+import {durationWeek} from "./duration.js";
 
 function utcWeekday(i) {
   return interval(function(date) {

@@ -1,5 +1,5 @@
-import interval from "./interval";
-import {durationSecond} from "./duration";
+import interval from "./interval.js";
+import {durationSecond} from "./duration.js";
 
 var second = interval(function(date) {
   date.setTime(date - date.getMilliseconds());

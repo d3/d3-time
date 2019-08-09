@@ -1,5 +1,5 @@
-import interval from "./interval";
-import {durationHour, durationMinute, durationSecond} from "./duration";
+import interval from "./interval.js";
+import {durationHour, durationMinute, durationSecond} from "./duration.js";
 
 var hour = interval(function(date) {
   date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond - date.getMinutes() * durationMinute);

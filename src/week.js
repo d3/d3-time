@@ -1,5 +1,5 @@
-import interval from "./interval";
-import {durationMinute, durationWeek} from "./duration";
+import interval from "./interval.js";
+import {durationMinute, durationWeek} from "./duration.js";
 
 function weekday(i) {
   return interval(function(date) {

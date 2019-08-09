@@ -1,5 +1,5 @@
-import interval from "./interval";
-import {durationDay, durationMinute} from "./duration";
+import interval from "./interval.js";
+import {durationDay, durationMinute} from "./duration.js";
 
 var day = interval(function(date) {
   date.setHours(0, 0, 0, 0);

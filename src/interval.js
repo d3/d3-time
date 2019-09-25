@@ -4,10 +4,12 @@ var t0 = new Date,
 export default function newInterval(floori, offseti, count, field) {
 
   function interval(date) {
-    return floori(date = new Date(+date)), date;
+    return floori(date = arguments.length === 0 ? new Date : new Date(+date)), date;
   }
 
-  interval.floor = interval;
+  interval.floor = function(date) {
+    return floori(date = new Date(+date)), date;
+  };
 
   interval.ceil = function(date) {
     return floori(date = new Date(date - 1)), offseti(date, 1), floori(date), date;

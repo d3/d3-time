@@ -7,8 +7,15 @@ tape("timeDays in an alias for timeDay.range", function(test) {
   test.end();
 });
 
-tape("timeDay is an alias for timeDay.floor", function(test) {
-  test.equal(time.timeDay, time.timeDay.floor);
+tape("timeDay() is equivalent to timeDay.floor(new Date)", function(test) {
+  var t = new Date;
+  test.deepEqual(time.timeDay(), time.timeDay.floor(t));
+  test.end();
+});
+
+tape("timeDay(date) is equivalent to timeDay.floor(date)", function(test) {
+  var t = new Date;
+  test.deepEqual(time.timeDay(t), time.timeDay.floor(t));
   test.end();
 });
 

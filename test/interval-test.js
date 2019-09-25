@@ -2,8 +2,15 @@ var tape = require("tape"),
     time = require("../"),
     date = require("./date");
 
-tape("timeInterval is an alias for timeInterval.floor", function(test) {
-  test.equal(time.timeYear, time.timeYear.floor);
+tape("timeInterval() is equivalent to timeInterval.floor(new Date)", function(test) {
+  var t = new Date;
+  test.deepEqual(time.timeYear(), time.timeYear.floor(t));
+  test.end();
+});
+
+tape("timeInterval(date) is equivalent to timeInterval.floor(date)", function(test) {
+  var t = new Date;
+  test.deepEqual(time.timeYear(t), time.timeYear.floor(t));
   test.end();
 });
 

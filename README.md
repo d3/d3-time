@@ -44,7 +44,7 @@ var day = d3.timeDay(new Date);
 </script>
 ```
 
-[Try d3-time in your browser.](https://tonicdev.com/npm/d3-time)
+[Try d3-time in your browser.](https://observablehq.com/collection/@d3/d3-time)
 
 ## API Reference
 

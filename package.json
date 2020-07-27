@@ -1,6 +1,9 @@
 {
   "name": "d3-time",
-  "version": "1.1.0",
+  "version": "2.0.0-rc.1",
+  "publishConfig": {
+    "tag": "next"
+  },
   "description": "A calculator for humanity’s peculiar conventions of time.",
   "keywords": [
     "d3",

@@ -166,7 +166,7 @@ tape("timeMonth.offset(date) is an alias for timeMonth.offset(date, 1)", functio
 
 tape("timeMonth.offset(date, step) does not modify the passed-in date", function(test) {
   var d = date.local(2010, 11, 31, 23, 59, 59, 999);
-  time.timeMonth.offset(date, +1);
+  time.timeMonth.offset(d, +1);
   test.deepEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
   test.end();
 });

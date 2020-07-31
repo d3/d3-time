@@ -103,7 +103,7 @@ tape("timeDay.offset(date) is an alias for timeDay.offset(date, 1)", function(te
 
 tape("timeDay.offset(date, step) does not modify the passed-in date", function(test) {
   var d = date.local(2010, 11, 31, 23, 59, 59, 999);
-  time.timeDay.offset(date, +1);
+  time.timeDay.offset(d, +1);
   test.deepEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
   test.end();
 });

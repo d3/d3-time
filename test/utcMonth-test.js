@@ -86,7 +86,7 @@ tape("utcMonth.offset(date) is an alias for utcMonth.offset(date, 1)", function(
 
 tape("utcMonth.offset(date, step) does not modify the passed-in date", function(test) {
   var d = date.utc(2010, 11, 31, 23, 59, 59, 999);
-  time.utcMonth.offset(date, +1);
+  time.utcMonth.offset(d, +1);
   test.deepEqual(d, date.utc(2010, 11, 31, 23, 59, 59, 999));
   test.end();
 });

@@ -1,0 +1,78 @@
+import {bisector, tickStep} from "d3-array";
+
+import millisecond from "./millisecond.js";
+import second from "./second.js";
+import minute from "./minute.js";
+import hour from "./hour.js";
+import day from "./day.js";
+import {sunday as week} from "./week.js";
+import month from "./month.js";
+import year from "./year.js";
+import utcMinute from "./utcMinute.js";
+import utcHour from "./utcHour.js";
+import utcDay from "./utcDay.js";
+import {utcSunday as utcWeek} from "./utcWeek.js";
+import utcMonth from "./utcMonth.js";
+import utcYear from "./utcYear.js";
+
+const durationSecond = 1000;
+const durationMinute = durationSecond * 60;
+const durationHour = durationMinute * 60;
+const durationDay = durationHour * 24;
+const durationWeek = durationDay * 7;
+const durationMonth = durationDay * 30;
+const durationYear = durationDay * 365;
+
+function ticker(year, month, week, day, hour, minute) {
+
+  const tickIntervals = [
+    [second,  1,      durationSecond],
+    [second,  5,  5 * durationSecond],
+    [second, 15, 15 * durationSecond],
+    [second, 30, 30 * durationSecond],
+    [minute,  1,      durationMinute],
+    [minute,  5,  5 * durationMinute],
+    [minute, 15, 15 * durationMinute],
+    [minute, 30, 30 * durationMinute],
+    [  hour,  1,      durationHour  ],
+    [  hour,  3,  3 * durationHour  ],
+    [  hour,  6,  6 * durationHour  ],
+    [  hour, 12, 12 * durationHour  ],
+    [   day,  1,      durationDay   ],
+    [   day,  2,  2 * durationDay   ],
+    [  week,  1,      durationWeek  ],
+    [ month,  1,      durationMonth ],
+    [ month,  3,  3 * durationMonth ],
+    [  year,  1,      durationYear  ]
+  ];
+
+  function ticks(start, stop, interval) {
+    const reverse = stop < start;
+    if (reverse) [start, stop] = [stop, start];
+    interval = tickInterval(start, stop, interval);
+    const ticks = interval ? interval.range(start, +stop + 1) : []; // inclusive stop
+    return reverse ? ticks.reverse() : ticks;
+  }
+
+  // If a desired tick count is specified, pick a reasonable tick interval based
+  // on the extent of the domain and a rough estimate of tick size. Otherwise,
+  // assume interval is already a time interval and use it.
+  function tickInterval(start, stop, interval = 10) {
+    if (typeof interval === "number") {
+      const target = Math.abs(stop - start) / interval;
+      const i = bisector(([,, step]) => step).right(tickIntervals, target);
+      if (i === tickIntervals.length) return year.every(tickStep(start / durationYear, stop / durationYear, interval));
+      if (i === 0) return millisecond.every(Math.max(tickStep(start, stop, interval), 1));
+      const [t, step] = tickIntervals[target / tickIntervals[i - 1][2] < tickIntervals[i][2] / target ? i - 1 : i];
+      return t.every(step);
+    }
+    return interval;
+  }
+
+  return [ticks, tickInterval];
+}
+
+const [utcTicks, utcTickInterval] = ticker(utcYear, utcMonth, utcWeek, utcDay, utcHour, utcMinute);
+const [timeTicks, timeTickInterval] = ticker(year, month, week, day, hour, minute);
+
+export {utcTicks, utcTickInterval, timeTicks, timeTickInterval};

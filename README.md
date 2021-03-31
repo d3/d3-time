@@ -332,3 +332,34 @@ Aliases for [d3.timeMonth](#timeMonth).[range](#interval_range) and [d3.utcMonth
 <br><a href="#timeYears">#</a> d3.<b>utcYears</b>(<i>start</i>, <i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/utcYear.js)
 
 Aliases for [d3.timeYear](#timeYear).[range](#interval_range) and [d3.utcYear](#timeYear).[range](#interval_range).
+
+### Ticks
+
+<a name="timeTicks" href="#timeTicks">#</a> d3.<b>timeTicks</b>(<i>start</i>, <i>stop</i>[, <i>interval</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
+
+Returns an array of date ticks between *start* and *end*, following the given *interval*. If *interval* is specified as a number *n*, which defaults to 10, a suitable interval is selected to return approximately *n* ticks.
+
+Example:
+```js
+d3.timeTicks(new Date(1970, 2, 1), new Date(1996, 2, 19), 4);
+// [ 1975-01-01, 1980-01-01, 1985-01-01, 1990-01-01, 1995-01-01 ]
+```
+
+<a name="timeTickInterval" href="#timeTickInterval">#</a> d3.<b>timeTickInterval</b>(<i>start</i>, <i>stop</i>[, <i>count</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
+
+Returns a filtered *interval* suitable for generating an array of approximately *count* date ticks between *start* and *end*. *count* defaults to 10.
+
+Example:
+```js
+const interval = d3.timeTickInterval(new Date(1970, 2, 1), new Date(1996, 2, 19), 4);
+interval.ceil(new Date()) - interval(new Date()); // 157852800000
+```
+
+<a name="utcTicks" href="#utcTicks">#</a> d3.<b>utcTicks</b>(<i>start</i>, <i>stop</i>[, <i>interval</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
+
+Returns an array of UTC date ticks between *start* and *end*, following the given *interval*. If *interval* is specified as a number *n*, which defaults to 10, a suitable interval is selected to return approximately *n* ticks.
+
+<a name="utcTickInterval" href="#utcTickInterval">#</a> d3.<b>utcTickInterval</b>(<i>start</i>, <i>stop</i>[, <i>count</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
+
+Returns a filtered *interval* suitable for generating an array of approximately *count* UTC date ticks between *start* and *end*. *count* defaults to 10.
+

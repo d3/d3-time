@@ -363,4 +363,4 @@ If *count* is a time interval, this function behaves similarly to [*interval*.ra
 
 <a name="utcTickInterval" href="#utcTickInterval">#</a> d3.<b>utcTickInterval</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
 
-Returns the time interval that would be used by [d3.utcTicks](#utcTicks) given the same arguments.
+Returns the time interval that would be used by [d3.utcTicks](#utcTicks) given the same arguments. If there is no associated interval, such as when *start* or *stop* is invalid, returns null.

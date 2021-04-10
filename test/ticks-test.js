@@ -12,6 +12,11 @@ tape("timeTicks(start, stop, interval) respects the specified interval", functio
   test.end();
 });
 
+tape("timeTicks(start, stop, interval) returns the empty array for invalid intervals", function(test) {
+  test.deepEqual(time.timeTicks(NaN, NaN, 10), []);
+  test.end();
+});
+
 tape("timeTicks(start, stop, interval.every(step)) observes the specified tick interval and step", function(test) {
   test.deepEqual(time.timeTicks(date.local(2011, 0, 1, 12, 0, 0), date.local(2011, 0, 1, 12, 33, 4), time.timeMinute.every(10)), [
     date.local(2011, 0, 1, 12, 0),

@@ -38,10 +38,10 @@ function ticker(year, month, week, day, hour, minute) {
     [  year,  1,      durationYear  ]
   ];
 
-  function ticks(start, stop, interval) {
+  function ticks(start, stop, count) {
     const reverse = stop < start;
     if (reverse) [start, stop] = [stop, start];
-    interval = tickInterval(start, stop, interval);
+    const interval = typeof count === "number" ? tickInterval(start, stop, count) : count;
     const ticks = interval ? interval.range(start, +stop + 1) : []; // inclusive stop
     return reverse ? ticks.reverse() : ticks;
   }
@@ -49,16 +49,13 @@ function ticker(year, month, week, day, hour, minute) {
   // If a desired tick count is specified, pick a reasonable tick interval based
   // on the extent of the domain and a rough estimate of tick size. Otherwise,
   // assume interval is already a time interval and use it.
-  function tickInterval(start, stop, interval = 10) {
-    if (typeof interval === "number") {
-      const target = Math.abs(stop - start) / interval;
-      const i = bisector(([,, step]) => step).right(tickIntervals, target);
-      if (i === tickIntervals.length) return year.every(tickStep(start / durationYear, stop / durationYear, interval));
-      if (i === 0) return millisecond.every(Math.max(tickStep(start, stop, interval), 1));
-      const [t, step] = tickIntervals[target / tickIntervals[i - 1][2] < tickIntervals[i][2] / target ? i - 1 : i];
-      return t.every(step);
-    }
-    return interval;
+  function tickInterval(start, stop, count) {
+    const target = Math.abs(stop - start) / count;
+    const i = bisector(([,, step]) => step).right(tickIntervals, target);
+    if (i === tickIntervals.length) return year.every(tickStep(start / durationYear, stop / durationYear, count));
+    if (i === 0) return millisecond.every(Math.max(tickStep(start, stop, count), 1));
+    const [t, step] = tickIntervals[target / tickIntervals[i - 1][2] < tickIntervals[i][2] / target ? i - 1 : i];
+    return t.every(step);
   }
 
   return [ticks, tickInterval];

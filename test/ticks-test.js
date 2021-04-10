@@ -2,13 +2,6 @@ const tape = require("tape");
 const time = require("../");
 const date = require("./date");
 
-tape("timeTicks(start, stop) is equivalent to timeTicks(start, stop, 10)", function(test) {
-  const start = date.local(2011, 0, 1, 12, 1, 0);
-  const stop = date.local(2011, 0, 1, 12, 4, 4);
-  test.deepEqual(time.timeTicks(start, stop), time.timeTicks(start, stop, 10));
-  test.end();
-});
-
 tape("timeTicks(start, stop, interval) respects the specified interval", function(test) {
   test.deepEqual(time.timeTicks(date.local(2011, 0, 1, 12, 1, 0), date.local(2011, 0, 1, 12, 4, 4), time.timeMinute), [
     date.local(2011, 0, 1, 12, 1),

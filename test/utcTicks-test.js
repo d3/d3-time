@@ -2,13 +2,6 @@ const tape = require("tape");
 const time = require("../");
 const date = require("./date");
 
-tape("utcTicks(start, stop) is equivalent to timeTicks(start, stop, 10)", function(test) {
-  const start = date.utc(2011, 0, 1, 12, 1, 0);
-  const stop = date.utc(2011, 0, 1, 12, 4, 4);
-  test.deepEqual(time.utcTicks(start, stop), time.utcTicks(start, stop, 10));
-  test.end();
-});
-
 tape("utcTicks(start, stop, interval) respects the specified interval", function(test) {
   test.deepEqual(time.utcTicks(date.utc(2011, 0, 1, 12, 1, 0), date.utc(2011, 0, 1, 12, 4, 4), time.utcMinute), [
     date.utc(2011, 0, 1, 12, 1),

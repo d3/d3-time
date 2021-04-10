@@ -335,31 +335,50 @@ Aliases for [d3.timeYear](#timeYear).[range](#interval_range) and [d3.utcYear](#
 
 ### Ticks
 
-<a name="timeTicks" href="#timeTicks">#</a> d3.<b>timeTicks</b>(<i>start</i>, <i>stop</i>[, <i>interval</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
+<a name="timeTicks" href="#timeTicks">#</a> d3.<b>timeTicks</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
 
-Returns an array of date ticks between *start* and *end*, following the given *interval*. If *interval* is specified as a number *n*, which defaults to 10, a suitable interval is selected to return approximately *n* ticks.
+Equvalent to [d3.utcTicks](#utcTicks), but in local time.
 
-Example:
+<a name="timeTickInterval" href="#timeTickInterval">#</a> d3.<b>timeTickInterval</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
+
+Returns the time interval that would be used by [d3.timeTicks](#timeTicks) given the same arguments.
+
+<a name="utcTicks" href="#utcTicks">#</a> d3.<b>utcTicks</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
+
+Returns an array of approximately *count* dates at regular intervals between *start* and *stop* (inclusive). The following intervals (in UTC time) are considered:
+
+* 1 second
+* 5 seconds
+* 15 seconds
+* 30 seconds
+* 1 minute
+* 5 minutes
+* 15 minutes
+* 30 minutes
+* 1 hour
+* 3 hours
+* 6 hours
+* 12 hours
+* 1 day
+* 2 days
+* 1 week
+* 1 month
+* 3 months
+* 1 year
+
+Multiples of milliseconds (for small ranges) and years (for large ranges) are also considered, following the rules of [d3.ticks](https://github.com/d3/d3-array/blob/master/README.md#ticks). The interval producing the number of dates that is closest to *count* is used. For example:
+
 ```js
-d3.timeTicks(new Date(1970, 2, 1), new Date(1996, 2, 19), 4);
-// [ 1975-01-01, 1980-01-01, 1985-01-01, 1990-01-01, 1995-01-01 ]
+start = new Date(Date.UTC(1970, 2, 1))
+stop = new Date(Date.UTC(1996, 2, 19))
+count = 4
+d3.utcTicks(start, stop, count) // [1975-01-01, 1980-01-01, 1985-01-01, 1990-01-01, 1995-01-01]
 ```
 
-<a name="timeTickInterval" href="#timeTickInterval">#</a> d3.<b>timeTickInterval</b>(<i>start</i>, <i>stop</i>[, <i>count</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
+If *stop* is before *start*, dates are returned in reverse chronological order; otherwise dates are returned in chronological order.
 
-Returns a filtered *interval* suitable for generating an array of approximately *count* date ticks between *start* and *end*. *count* defaults to 10.
+If *count* is a time interval, this function behaves similarly to [*interval*.range](#interval_range) except that both *start* and *stop* are inclusive and it may return dates in reverse chronological order if *stop* is before *start*.
 
-Example:
-```js
-const interval = d3.timeTickInterval(new Date(1970, 2, 1), new Date(1996, 2, 19), 4);
-interval.ceil(new Date()) - interval(new Date()); // 157852800000
-```
+<a name="utcTickInterval" href="#utcTickInterval">#</a> d3.<b>utcTickInterval</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
 
-<a name="utcTicks" href="#utcTicks">#</a> d3.<b>utcTicks</b>(<i>start</i>, <i>stop</i>[, <i>interval</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
-
-Returns an array of UTC date ticks between *start* and *end*, following the given *interval*. If *interval* is specified as a number *n*, which defaults to 10, a suitable interval is selected to return approximately *n* ticks.
-
-<a name="utcTickInterval" href="#utcTickInterval">#</a> d3.<b>utcTickInterval</b>(<i>start</i>, <i>stop</i>[, <i>count</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
-
-Returns a filtered *interval* suitable for generating an array of approximately *count* UTC date ticks between *start* and *end*. *count* defaults to 10.
-
+Returns the time interval that would be used by [d3.utcTicks](#utcTicks) given the same arguments.

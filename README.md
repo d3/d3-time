@@ -110,7 +110,7 @@ To make ranges consistent when a *step* is specified, use [*interval*.every](#in
 Returns a new interval that is a filtered subset of this interval using the specified *test* function. The *test* function is passed a date and should return true if and only if the specified date should be considered part of the interval. For example, to create an interval that returns the 1st, 11th, 21th and 31th (if it exists) of each month:
 
 ```js
-var i = d3.timeDay.filter(function(d) { return (d.getDate() - 1) % 10 === 0; });
+d3.timeDay.filter(d => (d.getDate() - 1) % 10 === 0)
 ```
 
 The returned filtered interval does not support [*interval*.count](#interval_count). See also [*interval*.every](#interval_every).

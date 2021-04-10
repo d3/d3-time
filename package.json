@@ -39,5 +39,8 @@
     "rollup": "1",
     "rollup-plugin-terser": "5",
     "tape": "4"
+  },
+  "dependencies": {
+    "d3-array": "2"
   }
 }

@@ -329,7 +329,7 @@ Returns the time interval that would be used by [d3.timeTicks](#timeTicks) given
 
 <a name="utcTicks" href="#utcTicks">#</a> d3.<b>utcTicks</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
 
-Returns an array of approximately *count* dates at regular intervals between *start* and *stop* (inclusive). If *stop* is before *start*, dates are returned in reverse chronological order; otherwise dates are returned in chronological order. The following intervals (in UTC time) are considered:
+Returns an array of approximately *count* dates at regular intervals between *start* and *stop* (inclusive). If *stop* is before *start*, dates are returned in reverse chronological order; otherwise dates are returned in chronological order. The following UTC time intervals are considered:
 
 * 1 second
 * 5 seconds

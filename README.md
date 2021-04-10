@@ -329,7 +329,7 @@ Returns the time interval that would be used by [d3.timeTicks](#timeTicks) given
 
 <a name="utcTicks" href="#utcTicks">#</a> d3.<b>utcTicks</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
 
-Returns an array of approximately *count* dates at regular intervals between *start* and *stop* (inclusive). The following intervals (in UTC time) are considered:
+Returns an array of approximately *count* dates at regular intervals between *start* and *stop* (inclusive). If *stop* is before *start*, dates are returned in reverse chronological order; otherwise dates are returned in chronological order. The following intervals (in UTC time) are considered:
 
 * 1 second
 * 5 seconds
@@ -358,8 +358,6 @@ stop = new Date(Date.UTC(1996, 2, 19))
 count = 4
 d3.utcTicks(start, stop, count) // [1975-01-01, 1980-01-01, 1985-01-01, 1990-01-01, 1995-01-01]
 ```
-
-If *stop* is before *start*, dates are returned in reverse chronological order; otherwise dates are returned in chronological order.
 
 If *count* is a time interval, this function behaves similarly to [*interval*.range](#interval_range) except that both *start* and *stop* are inclusive and it may return dates in reverse chronological order if *stop* is before *start*.
 

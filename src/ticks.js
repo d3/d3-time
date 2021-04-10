@@ -1,5 +1,5 @@
 import {bisector, tickStep} from "d3-array";
-
+import {durationDay, durationHour, durationMinute, durationMonth, durationSecond, durationWeek, durationYear} from "./duration.js";
 import millisecond from "./millisecond.js";
 import second from "./second.js";
 import minute from "./minute.js";
@@ -14,14 +14,6 @@ import utcDay from "./utcDay.js";
 import {utcSunday as utcWeek} from "./utcWeek.js";
 import utcMonth from "./utcMonth.js";
 import utcYear from "./utcYear.js";
-
-const durationSecond = 1000;
-const durationMinute = durationSecond * 60;
-const durationHour = durationMinute * 60;
-const durationDay = durationHour * 24;
-const durationWeek = durationDay * 7;
-const durationMonth = durationDay * 30;
-const durationYear = durationDay * 365;
 
 function ticker(year, month, week, day, hour, minute) {
 

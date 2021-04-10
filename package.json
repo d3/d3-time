@@ -41,6 +41,6 @@
     "tape": "4"
   },
   "dependencies": {
-    "d3-array": "^2.12.1"
+    "d3-array": "2"
   }
 }

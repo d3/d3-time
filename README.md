@@ -5,26 +5,23 @@ When visualizing time series data, analyzing temporal patterns, or working with 
 As a result of these temporal peculiarities, it can be difficult to perform seemingly-trivial tasks. For example, if you want to compute the number of days that have passed between two dates, you can’t simply subtract and divide by 24 hours (86,400,000 ms):
 
 ```js
-var start = new Date(2015, 02, 01), // Sun Mar 01 2015 00:00:00 GMT-0800 (PST)
-    end = new Date(2015, 03, 01); // Wed Apr 01 2015 00:00:00 GMT-0700 (PDT)
-(end - start) / 864e5; // 30.958333333333332, oops!
+start = new Date(2015, 02, 01) // 2015-03-01T00:00
+end = new Date(2015, 03, 01) // 2015-04-01T00:00
+(end - start) / 864e5 // 30.958333333333332, oops! 🤯
 ```
 
 You can, however, use [d3.timeDay](#timeDay).[count](#interval_count):
 
 ```js
-d3.timeDay.count(start, end); // 31
+d3.timeDay.count(start, end) // 31 😌
 ```
 
 The [day](#day) [interval](#api-reference) is one of several provided by d3-time. Each interval represents a conventional unit of time—[hours](#timeHour), [weeks](#timeWeek), [months](#timeMonth), *etc.*—and has methods to calculate boundary dates. For example, [d3.timeDay](#timeDay) computes midnight (typically 12:00 AM local time) of the corresponding day. In addition to [rounding](#interval_round) and [counting](#interval_count), intervals can also be used to generate arrays of boundary dates. For example, to compute each Sunday in the current month:
 
 ```js
-var now = new Date;
-d3.timeWeek.range(d3.timeMonth.floor(now), d3.timeMonth.ceil(now));
-// [Sun Jun 07 2015 00:00:00 GMT-0700 (PDT),
-//  Sun Jun 14 2015 00:00:00 GMT-0700 (PDT),
-//  Sun Jun 21 2015 00:00:00 GMT-0700 (PDT),
-//  Sun Jun 28 2015 00:00:00 GMT-0700 (PDT)]
+start = d3.timeMonth.floor() // 2015-01-01T00:00
+stop = d3.timeMonth.ceil() // 2015-02-01T00:00
+d3.timeWeek.range(start, stop) // [2015-01-07T00:00, 2015-01-14T00:00, 2015-01-21T00:00, 2015-01-28T00:00]
 ```
 
 The d3-time module does not implement its own calendaring system; it merely implements a convenient API for calendar math on top of ECMAScript [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date). Thus, it ignores leap seconds and can only work with the local time zone and [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC).
@@ -54,7 +51,7 @@ var day = d3.timeDay(new Date);
 Equivalent to [*interval*.floor](#interval_floor), except it *date* is not specified, it defaults to the current time. For example, [d3.timeYear](#timeYear)(*date*) and d3.timeYear.floor(*date*) are equivalent.
 
 ```js
-var monday = d3.timeMonday(); // The latest preceeding Monday, local time.
+monday = d3.timeMonday() // the latest preceeding Monday, local time
 ```
 
 <a name="interval_floor" href="#interval_floor">#</a> <i>interval</i>.<b>floor</b>(<i>date</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/interval.js)
@@ -97,19 +94,13 @@ Returns an array of dates representing every interval boundary after or equal to
 The first date in the returned array is the earliest boundary after or equal to *start*; subsequent dates are [offset](#interval_offset) by *step* intervals and [floored](#interval_floor). Thus, two overlapping ranges may be consistent. For example, this range contains odd days:
 
 ```js
-d3.timeDay.range(new Date(2015, 0, 1), new Date(2015, 0, 7), 2);
-// [Thu Jan 01 2015 00:00:00 GMT-0800 (PST),
-//  Sat Jan 03 2015 00:00:00 GMT-0800 (PST),
-//  Mon Jan 05 2015 00:00:00 GMT-0800 (PST)]
+d3.timeDay.range(new Date(2015, 0, 1), new Date(2015, 0, 7), 2) // [2015-01-01T00:00, 2015-01-03T00:00, 2015-01-05T00:00]
 ```
 
 While this contains even days:
 
 ```js
-d3.timeDay.range(new Date(2015, 0, 2), new Date(2015, 0, 8), 2);
-// [Fri Jan 02 2015 00:00:00 GMT-0800 (PST),
-//  Sun Jan 04 2015 00:00:00 GMT-0800 (PST),
-//  Tue Jan 06 2015 00:00:00 GMT-0800 (PST)]
+d3.timeDay.range(new Date(2015, 0, 2), new Date(2015, 0, 8), 2) // [2015-01-02T00:00, 2015-01-04T00:00, 2015-01-06T00:00]
 ```
 
 To make ranges consistent when a *step* is specified, use [*interval*.every](#interval_every) instead.
@@ -131,19 +122,13 @@ Returns a [filtered](#interval_filter) view of this interval representing every 
 This method can be used in conjunction with [*interval*.range](#interval_range) to ensure that two overlapping ranges are consistent. For example, this range contains odd days:
 
 ```js
-d3.timeDay.every(2).range(new Date(2015, 0, 1), new Date(2015, 0, 7));
-// [Thu Jan 01 2015 00:00:00 GMT-0800 (PST),
-//  Sat Jan 03 2015 00:00:00 GMT-0800 (PST),
-//  Mon Jan 05 2015 00:00:00 GMT-0800 (PST)]
+d3.timeDay.every(2).range(new Date(2015, 0, 1), new Date(2015, 0, 7)) // [2015-01-01T00:00, 2015-01-03T00:00, 2015-01-05T00:00]
 ```
 
 As does this one:
 
 ```js
-d3.timeDay.every(2).range(new Date(2015, 0, 2), new Date(2015, 0, 8));
-// [Sat Jan 03 2015 00:00:00 GMT-0800 (PST),
-//  Mon Jan 05 2015 00:00:00 GMT-0800 (PST),
-//  Wed Jan 07 2015 00:00:00 GMT-0800 (PST)]
+d3.timeDay.every(2).range(new Date(2015, 0, 2), new Date(2015, 0, 8)) // [2015-01-03T00:00, 2015-01-05T00:00, 2015-01-07T00:00]
 ```
 
 The returned filtered interval does not support [*interval*.count](#interval_count). See also [*interval*.filter](#interval_filter).
@@ -153,14 +138,13 @@ The returned filtered interval does not support [*interval*.count](#interval_cou
 Returns the number of interval boundaries after *start* (exclusive) and before or equal to *end* (inclusive). Note that this behavior is slightly different than [*interval*.range](#interval_range) because its purpose is to return the zero-based number of the specified *end* date relative to the specified *start* date. For example, to compute the current zero-based day-of-year number:
 
 ```js
-var now = new Date;
-d3.timeDay.count(d3.timeYear(now), now); // 177
+d3.timeDay.count(d3.timeYear(now), now) // 177
 ```
 
 Likewise, to compute the current zero-based week-of-year number for weeks that start on Sunday:
 
 ```js
-d3.timeSunday.count(d3.timeYear(now), now); // 25
+d3.timeSunday.count(d3.timeYear(now), now) // 25
 ```
 
 <a name="timeInterval" href="#timeInterval">#</a> d3.<b>timeInterval</b>(<i>floor</i>, <i>offset</i>[, <i>count</i>[, <i>field</i>]]) · [Source](https://github.com/d3/d3-time/blob/master/src/interval.js)

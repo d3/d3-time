@@ -37,7 +37,7 @@ If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](
 <script src="https://d3js.org/d3-time.v2.min.js"></script>
 <script>
 
-var day = d3.timeDay(new Date);
+const day = d3.timeDay(new Date);
 
 </script>
 ```

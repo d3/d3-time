@@ -46,9 +46,6 @@ function ticker(year, month, week, day, hour, minute) {
     return reverse ? ticks.reverse() : ticks;
   }
 
-  // If a desired tick count is specified, pick a reasonable tick interval based
-  // on the extent of the domain and a rough estimate of tick size. Otherwise,
-  // assume interval is already a time interval and use it.
   function tickInterval(start, stop, count) {
     const target = Math.abs(stop - start) / count;
     const i = bisector(([,, step]) => step).right(tickIntervals, target);

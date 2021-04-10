@@ -42,7 +42,7 @@ function ticker(year, month, week, day, hour, minute) {
     const reverse = stop < start;
     if (reverse) [start, stop] = [stop, start];
     const interval = count && typeof count.range === "function" ? count : tickInterval(start, stop, count);
-    const ticks = interval ? interval.range(start, +stop + 1) : []; // inclusive stop
+    const ticks = interval.range(start, +stop + 1); // inclusive stop
     return reverse ? ticks.reverse() : ticks;
   }
 

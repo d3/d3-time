@@ -48,7 +48,7 @@ const day = d3.timeDay(new Date);
 
 <a name="_interval" href="#_interval">#</a> <i>interval</i>([<i>date</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/interval.js)
 
-Equivalent to [*interval*.floor](#interval_floor), except it *date* is not specified, it defaults to the current time. For example, [d3.timeYear](#timeYear)(*date*) and d3.timeYear.floor(*date*) are equivalent.
+Equivalent to [*interval*.floor](#interval_floor), except if *date* is not specified, it defaults to the current time. For example, [d3.timeYear](#timeYear)(*date*) and d3.timeYear.floor(*date*) are equivalent.
 
 ```js
 monday = d3.timeMonday() // the latest preceeding Monday, local time

@@ -1,7 +1,6 @@
-var tape = require("tape"),
-    time = require("../");
+import assert from "assert";
+import * as d3 from "../src/index.js";
 
-tape("utcMillisecond is an alias for timeMillisecond", function(test) {
-  test.equal(time.utcMillisecond, time.timeMillisecond);
-  test.end();
+it("utcMillisecond is an alias for timeMillisecond", () => {
+  assert.strictEqual(d3.utcMillisecond, d3.timeMillisecond);
 });

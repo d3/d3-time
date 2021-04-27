@@ -1,65 +1,59 @@
-var tape = require("tape"),
-    time = require("../"),
-    date = require("./date");
+import assert from "assert";
+import * as date from "./date.js";
+import * as d3 from "../src/index.js";
 
-tape("timeInterval() is equivalent to timeInterval.floor(new Date)", function(test) {
-  var t = new Date;
-  test.deepEqual(time.timeYear(), time.timeYear.floor(t));
-  test.end();
+it("timeInterval() is equivalent to timeInterval.floor(new Date)", () => {
+  const t = new Date;
+  assert.deepStrictEqual(d3.timeYear(), d3.timeYear.floor(t));
 });
 
-tape("timeInterval(date) is equivalent to timeInterval.floor(date)", function(test) {
-  var t = new Date;
-  test.deepEqual(time.timeYear(t), time.timeYear.floor(t));
-  test.end();
+it("timeInterval(date) is equivalent to timeInterval.floor(date)", () => {
+  const t = new Date;
+  assert.deepStrictEqual(d3.timeYear(t), d3.timeYear.floor(t));
 });
 
-tape("timeInterval(floor, offset) returns a custom time interval", function(test) {
-  var i = time.timeInterval(function(date) {
+it("timeInterval(floor, offset) returns a custom time interval", () => {
+  const i = d3.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     date.setUTCHours(date.getUTCHours() + step);
   });
-  test.deepEqual(i(date.utc(2015, 0, 1, 12, 34, 56, 789)), date.utc(2015, 0, 1, 12));
-  test.end();
+  assert.deepStrictEqual(i(date.utc(2015, 0, 1, 12, 34, 56, 789)), date.utc(2015, 0, 1, 12));
 });
 
-tape("timeInterval(floor, offset) does not define a count method", function(test) {
-  var i = time.timeInterval(function(date) {
+it("timeInterval(floor, offset) does not define a count method", () => {
+  const i = d3.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     date.setUTCHours(date.getUTCHours() + step);
   });
-  test.ok(!("count" in i));
-  test.end();
+  assert(!("count" in i));
 });
 
-tape("timeInterval(floor, offset) floors the step before passing it to offset", function(test) {
-  var steps = [], i = time.timeInterval(function(date) {
+it("timeInterval(floor, offset) floors the step before passing it to offset", () => {
+  const steps = [], i = d3.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     steps.push(+step), date.setUTCHours(date.getUTCHours() + step);
   });
-  test.deepEqual(i.offset(date.utc(2015, 0, 1, 12, 34, 56, 789), 1.5), date.utc(2015, 0, 1, 13, 34, 56, 789));
-  test.deepEqual(i.range(date.utc(2015, 0, 1, 12), date.utc(2015, 0, 1, 15), 1.5), [date.utc(2015, 0, 1, 12), date.utc(2015, 0, 1, 13), date.utc(2015, 0, 1, 14)]);
-  test.ok(steps.every(function(step) { return step === 1; }));
-  test.end();
+  assert.deepStrictEqual(i.offset(date.utc(2015, 0, 1, 12, 34, 56, 789), 1.5), date.utc(2015, 0, 1, 13, 34, 56, 789));
+  assert.deepStrictEqual(i.range(date.utc(2015, 0, 1, 12), date.utc(2015, 0, 1, 15), 1.5), [date.utc(2015, 0, 1, 12), date.utc(2015, 0, 1, 13), date.utc(2015, 0, 1, 14)]);
+  assert(steps.every(function(step) { return step === 1; }));
 });
 
-tape("timeInterval(floor, offset, count) defines a count method", function(test) {
-  var i = time.timeInterval(function(date) {
+it("timeInterval(floor, offset, count) defines a count method", () => {
+  const i = d3.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     date.setUTCHours(date.getUTCHours() + step);
   }, function(start, end) {
     return (end - start) / 36e5;
   });
-  test.equal(i.count(date.utc(2015, 0, 1, 12, 34), date.utc(2015, 0, 1, 15, 56)), 3);
-  test.end();
+  assert.strictEqual(i.count(date.utc(2015, 0, 1, 12, 34), date.utc(2015, 0, 1, 15, 56)), 3);
 });
 
-tape("timeInterval(floor, offset, count) floors dates before passing them to count", function(test) {
-  var dates = [], i = time.timeInterval(function(date) {
+it("timeInterval(floor, offset, count) floors dates before passing them to count", () => {
+  const dates = [], i = d3.timeInterval(function(date) {
     date.setUTCMinutes(0, 0, 0);
   }, function(date, step) {
     date.setUTCHours(date.getUTCHours() + step);
@@ -67,55 +61,48 @@ tape("timeInterval(floor, offset, count) floors dates before passing them to cou
     return dates.push(new Date(+start), new Date(+end)), (end - start) / 36e5;
   });
   i.count(date.utc(2015, 0, 1, 12, 34), date.utc(2015, 0, 1, 15, 56));
-  test.deepEqual(dates, [date.utc(2015, 0, 1, 12), date.utc(2015, 0, 1, 15)]);
-  test.end();
+  assert.deepStrictEqual(dates, [date.utc(2015, 0, 1, 12), date.utc(2015, 0, 1, 15)]);
 });
 
-tape("timeInterval.every(step) returns null if step is invalid", function(test) {
-  test.equal(time.timeDay.every(), null);
-  test.equal(time.timeMinute.every(null), null);
-  test.equal(time.timeSecond.every(undefined), null);
-  test.equal(time.timeDay.every(NaN), null);
-  test.equal(time.timeMinute.every(0), null);
-  test.equal(time.timeSecond.every(0.8), null);
-  test.equal(time.timeHour.every(-1), null);
-  test.end();
+it("timeInterval.every(step) returns null if step is invalid", () => {
+  assert.strictEqual(d3.timeDay.every(), null);
+  assert.strictEqual(d3.timeMinute.every(null), null);
+  assert.strictEqual(d3.timeSecond.every(undefined), null);
+  assert.strictEqual(d3.timeDay.every(NaN), null);
+  assert.strictEqual(d3.timeMinute.every(0), null);
+  assert.strictEqual(d3.timeSecond.every(0.8), null);
+  assert.strictEqual(d3.timeHour.every(-1), null);
 });
 
-tape("timeInterval.every(step) returns interval if step is one", function(test) {
-  test.equal(time.timeDay.every("1"), time.timeDay);
-  test.equal(time.timeMinute.every(1), time.timeMinute);
-  test.equal(time.timeSecond.every(1.8), time.timeSecond);
-  test.end();
+it("timeInterval.every(step) returns interval if step is one", () => {
+  assert.strictEqual(d3.timeDay.every("1"), d3.timeDay);
+  assert.strictEqual(d3.timeMinute.every(1), d3.timeMinute);
+  assert.strictEqual(d3.timeSecond.every(1.8), d3.timeSecond);
 });
 
-tape("timeInterval.every(step).range(invalid, invalid) returns the empty array", function(test) {
-  test.deepEqual(time.timeMinute.every(15).range(NaN, NaN), []);
-  test.end();
+it("timeInterval.every(step).range(invalid, invalid) returns the empty array", () => {
+  assert.deepStrictEqual(d3.timeMinute.every(15).range(NaN, NaN), []);
 });
 
-tape("timeInterval.every(…).offset(date, step) returns the expected value when step is positive", function(test) {
-  var i = time.timeMinute.every(15);
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 0), date.local(2015, 0, 1, 12, 34));
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 1), date.local(2015, 0, 1, 12, 45));
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 2), date.local(2015, 0, 1, 13, 00));
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 3), date.local(2015, 0, 1, 13, 15));
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 4), date.local(2015, 0, 1, 13, 30));
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 5), date.local(2015, 0, 1, 13, 45));
-  test.end();
+it("timeInterval.every(…).offset(date, step) returns the expected value when step is positive", () => {
+  const i = d3.timeMinute.every(15);
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), 0), date.local(2015, 0, 1, 12, 34));
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), 1), date.local(2015, 0, 1, 12, 45));
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), 2), date.local(2015, 0, 1, 13,  0));
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), 3), date.local(2015, 0, 1, 13, 15));
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), 4), date.local(2015, 0, 1, 13, 30));
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), 5), date.local(2015, 0, 1, 13, 45));
 });
 
-tape("timeInterval.every(…).offset(date, step) returns the expected value when step is negative", function(test) {
-  var i = time.timeMinute.every(15);
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), -1), date.local(2015, 0, 1, 12, 30));
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), -2), date.local(2015, 0, 1, 12, 15));
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), -3), date.local(2015, 0, 1, 12, 00));
-  test.end();
+it("timeInterval.every(…).offset(date, step) returns the expected value when step is negative", () => {
+  const i = d3.timeMinute.every(15);
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), -1), date.local(2015, 0, 1, 12, 30));
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), -2), date.local(2015, 0, 1, 12, 15));
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), -3), date.local(2015, 0, 1, 12,  0));
 });
 
-tape("timeInterval.every(…).offset(date, step) returns the expected value when step is not an integer", function(test) {
-  var i = time.timeMinute.every(15);
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), 1.2), date.local(2015, 0, 1, 12, 45));
-  test.deepEqual(i.offset(date.local(2015, 0, 1, 12, 34), -0.8), date.local(2015, 0, 1, 12, 30));
-  test.end();
+it("timeInterval.every(…).offset(date, step) returns the expected value when step is not an integer", () => {
+  const i = d3.timeMinute.every(15);
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), 1.2), date.local(2015, 0, 1, 12, 45));
+  assert.deepStrictEqual(i.offset(date.local(2015, 0, 1, 12, 34), -0.8), date.local(2015, 0, 1, 12, 30));
 });

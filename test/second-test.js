@@ -1,120 +1,104 @@
-var tape = require("tape"),
-    time = require("../"),
-    date = require("./date");
+import assert from "assert";
+import * as date from "./date.js";
+import * as d3 from "../src/index.js";
 
-tape("timeSecond.floor(date) returns seconds", function(test) {
-  test.deepEqual(time.timeSecond.floor(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2010, 11, 31, 23, 59, 59));
-  test.deepEqual(time.timeSecond.floor(date.local(2011, 00, 01, 00, 00, 00, 000)), date.local(2011, 00, 01, 00, 00, 00));
-  test.deepEqual(time.timeSecond.floor(date.local(2011, 00, 01, 00, 00, 00, 001)), date.local(2011, 00, 01, 00, 00, 00));
-  test.end();
+it("timeSecond.floor(date) returns seconds", () => {
+  assert.deepStrictEqual(d3.timeSecond.floor(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2010, 11, 31, 23, 59, 59));
+  assert.deepStrictEqual(d3.timeSecond.floor(date.local(2011,  0,  1,  0,  0,  0,   0)), date.local(2011,  0,  1,  0,  0,  0));
+  assert.deepStrictEqual(d3.timeSecond.floor(date.local(2011,  0,  1,  0,  0,  0,   1)), date.local(2011,  0,  1,  0,  0,  0));
 });
 
-tape("timeSecond.round(date) returns seconds", function(test) {
-  test.deepEqual(time.timeSecond.round(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2011, 00, 01, 00, 00, 00));
-  test.deepEqual(time.timeSecond.round(date.local(2011, 00, 01, 00, 00, 00, 499)), date.local(2011, 00, 01, 00, 00, 00));
-  test.deepEqual(time.timeSecond.round(date.local(2011, 00, 01, 00, 00, 00, 500)), date.local(2011, 00, 01, 00, 00, 01));
-  test.end();
+it("timeSecond.round(date) returns seconds", () => {
+  assert.deepStrictEqual(d3.timeSecond.round(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2011,  0,  1,  0,  0,  0));
+  assert.deepStrictEqual(d3.timeSecond.round(date.local(2011,  0,  1,  0,  0,  0, 499)), date.local(2011,  0,  1,  0,  0,  0));
+  assert.deepStrictEqual(d3.timeSecond.round(date.local(2011,  0,  1,  0,  0,  0, 500)), date.local(2011,  0,  1,  0,  0,  1));
 });
 
-tape("timeSecond.ceil(date) returns seconds", function(test) {
-  test.deepEqual(time.timeSecond.ceil(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2011, 00, 01, 00, 00, 00));
-  test.deepEqual(time.timeSecond.ceil(date.local(2011, 00, 01, 00, 00, 00, 000)), date.local(2011, 00, 01, 00, 00, 00));
-  test.deepEqual(time.timeSecond.ceil(date.local(2011, 00, 01, 00, 00, 00, 001)), date.local(2011, 00, 01, 00, 00, 01));
-  test.end();
+it("timeSecond.ceil(date) returns seconds", () => {
+  assert.deepStrictEqual(d3.timeSecond.ceil(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2011,  0,  1,  0,  0,  0));
+  assert.deepStrictEqual(d3.timeSecond.ceil(date.local(2011,  0,  1,  0,  0,  0,   0)), date.local(2011,  0,  1,  0,  0,  0));
+  assert.deepStrictEqual(d3.timeSecond.ceil(date.local(2011,  0,  1,  0,  0,  0,   1)), date.local(2011,  0,  1,  0,  0,  1));
 });
 
-tape("timeSecond.offset(date, step) does not modify the passed-in date", function(test) {
-  var d = date.local(2010, 11, 31, 23, 59, 59, 999);
-  time.timeSecond.offset(d, +1);
-  test.deepEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
-  test.end();
+it("timeSecond.offset(date, step) does not modify the passed-in date", () => {
+  const d = date.local(2010, 11, 31, 23, 59, 59, 999);
+  d3.timeSecond.offset(d, +1);
+  assert.deepStrictEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
 });
 
-tape("timeSecond.offset(date, step) does not round the passed-in-date", function(test) {
-  test.deepEqual(time.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011, 00, 01, 00, 00, 00, 999));
-  test.deepEqual(time.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 11, 31, 23, 59, 57, 456));
-  test.end();
+it("timeSecond.offset(date, step) does not round the passed-in-date", () => {
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011,  0,  1,  0,  0,  0, 999));
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 11, 31, 23, 59, 57, 456));
 });
 
-tape("timeSecond.offset(date, step) allows negative offsets", function(test) {
-  test.deepEqual(time.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59), -1), date.local(2010, 11, 31, 23, 59, 58));
-  test.deepEqual(time.timeSecond.offset(date.local(2011, 00, 01, 00, 00, 00), -2), date.local(2010, 11, 31, 23, 59, 58));
-  test.deepEqual(time.timeSecond.offset(date.local(2011, 00, 01, 00, 00, 00), -1), date.local(2010, 11, 31, 23, 59, 59));
-  test.end();
+it("timeSecond.offset(date, step) allows negative offsets", () => {
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59), -1), date.local(2010, 11, 31, 23, 59, 58));
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2011,  0,  1,  0,  0,  0), -2), date.local(2010, 11, 31, 23, 59, 58));
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2011,  0,  1,  0,  0,  0), -1), date.local(2010, 11, 31, 23, 59, 59));
 });
 
-tape("timeSecond.offset(date, step) allows positive offsets", function(test) {
-  test.deepEqual(time.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 58), +1), date.local(2010, 11, 31, 23, 59, 59));
-  test.deepEqual(time.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 58), +2), date.local(2011, 00, 01, 00, 00, 00));
-  test.deepEqual(time.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59), +1), date.local(2011, 00, 01, 00, 00, 00));
-  test.end();
+it("timeSecond.offset(date, step) allows positive offsets", () => {
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 58), +1), date.local(2010, 11, 31, 23, 59, 59));
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 58), +2), date.local(2011,  0,  1,  0,  0,  0));
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59), +1), date.local(2011,  0,  1,  0,  0,  0));
 });
 
-tape("timeSecond.offset(date, step) allows zero offset", function(test) {
-  test.deepEqual(time.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
-  test.deepEqual(time.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
-  test.end();
+it("timeSecond.offset(date, step) allows zero offset", () => {
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
+  assert.deepStrictEqual(d3.timeSecond.offset(date.local(2010, 11, 31, 23, 59, 58,   0), 0), date.local(2010, 11, 31, 23, 59, 58,   0));
 });
 
-tape("timeSecond.range(start, stop) returns seconds", function(test) {
-  test.deepEqual(time.timeSecond.range(date.local(2010, 11, 31, 23, 59, 59), date.local(2011, 0, 1, 0, 0, 2)), [
+it("timeSecond.range(start, stop) returns seconds", () => {
+  assert.deepStrictEqual(d3.timeSecond.range(date.local(2010, 11, 31, 23, 59, 59), date.local(2011, 0, 1, 0, 0, 2)), [
     date.local(2010, 11, 31, 23, 59, 59),
     date.local(2011, 0, 1, 0, 0, 0),
     date.local(2011, 0, 1, 0, 0, 1)
   ]);
-  test.end();
 });
 
-tape("timeSecond.range(start, stop) has an inclusive lower bound", function(test) {
-  test.deepEqual(time.timeSecond.range(date.local(2010, 11, 31, 23, 59, 59), date.local(2011, 0, 1, 0, 0, 2))[0], date.local(2010, 11, 31, 23, 59, 59));
-  test.end();
+it("timeSecond.range(start, stop) has an inclusive lower bound", () => {
+  assert.deepStrictEqual(d3.timeSecond.range(date.local(2010, 11, 31, 23, 59, 59), date.local(2011, 0, 1, 0, 0, 2))[0], date.local(2010, 11, 31, 23, 59, 59));
 });
 
-tape("timeSecond.range(start, stop) has an exclusive upper bound", function(test) {
-  test.deepEqual(time.timeSecond.range(date.local(2010, 11, 31, 23, 59, 59), date.local(2011, 0, 1, 0, 0, 2))[2], date.local(2011, 0, 1, 0, 0, 1));
-  test.end();
+it("timeSecond.range(start, stop) has an exclusive upper bound", () => {
+  assert.deepStrictEqual(d3.timeSecond.range(date.local(2010, 11, 31, 23, 59, 59), date.local(2011, 0, 1, 0, 0, 2))[2], date.local(2011, 0, 1, 0, 0, 1));
 });
 
-tape("timeSecond.range(start, stop, step) can skip seconds", function(test) {
-  test.deepEqual(time.timeSecond.range(date.local(2011, 1, 1, 12, 0, 7), date.local(2011, 1, 1, 12, 1, 7), 15), [
+it("timeSecond.range(start, stop, step) can skip seconds", () => {
+  assert.deepStrictEqual(d3.timeSecond.range(date.local(2011, 1, 1, 12, 0, 7), date.local(2011, 1, 1, 12, 1, 7), 15), [
     date.local(2011, 1, 1, 12, 0, 7),
     date.local(2011, 1, 1, 12, 0, 22),
     date.local(2011, 1, 1, 12, 0, 37),
     date.local(2011, 1, 1, 12, 0, 52)
   ]);
-  test.end();
 });
 
-tape("timeSecond.range(start, stop) observes start of daylight savings time", function(test) {
-  test.deepEqual(time.timeSecond.range(date.utc(2011, 2, 13, 9, 59, 59), date.utc(2011, 2, 13, 10, 0, 2)), [
+it("timeSecond.range(start, stop) observes start of daylight savings time", () => {
+  assert.deepStrictEqual(d3.timeSecond.range(date.utc(2011, 2, 13, 9, 59, 59), date.utc(2011, 2, 13, 10, 0, 2)), [
     date.utc(2011, 2, 13, 9, 59, 59),
     date.utc(2011, 2, 13, 10, 0, 0),
     date.utc(2011, 2, 13, 10, 0, 1)
   ]);
-  test.end();
 });
 
-tape("timeSecond.range(start, stop) observes end of daylight savings time", function(test) {
-  test.deepEqual(time.timeSecond.range(date.utc(2011, 10, 6, 8, 59, 59), date.utc(2011, 10, 6, 9, 0, 2)), [
+it("timeSecond.range(start, stop) observes end of daylight savings time", () => {
+  assert.deepStrictEqual(d3.timeSecond.range(date.utc(2011, 10, 6, 8, 59, 59), date.utc(2011, 10, 6, 9, 0, 2)), [
     date.utc(2011, 10, 6, 8, 59, 59),
     date.utc(2011, 10, 6, 9, 0, 0),
     date.utc(2011, 10, 6, 9, 0, 1)
   ]);
-  test.end();
 });
 
-tape("timeSecond.every(step) returns every stepth second, starting with the first second of the minute", function(test) {
-  test.deepEqual(time.timeSecond.every(15).range(date.local(2008, 11, 30, 12, 36, 47), date.local(2008, 11, 30, 12, 37, 57)), [date.local(2008, 11, 30, 12, 37, 0), date.local(2008, 11, 30, 12, 37, 15), date.local(2008, 11, 30, 12, 37, 30), date.local(2008, 11, 30, 12, 37, 45)]);
-  test.deepEqual(time.timeSecond.every(30).range(date.local(2008, 11, 30, 12, 36, 47), date.local(2008, 11, 30, 12, 37, 57)), [date.local(2008, 11, 30, 12, 37, 0), date.local(2008, 11, 30, 12, 37, 30)]);
-  test.end();
+it("timeSecond.every(step) returns every stepth second, starting with the first second of the minute", () => {
+  assert.deepStrictEqual(d3.timeSecond.every(15).range(date.local(2008, 11, 30, 12, 36, 47), date.local(2008, 11, 30, 12, 37, 57)), [date.local(2008, 11, 30, 12, 37, 0), date.local(2008, 11, 30, 12, 37, 15), date.local(2008, 11, 30, 12, 37, 30), date.local(2008, 11, 30, 12, 37, 45)]);
+  assert.deepStrictEqual(d3.timeSecond.every(30).range(date.local(2008, 11, 30, 12, 36, 47), date.local(2008, 11, 30, 12, 37, 57)), [date.local(2008, 11, 30, 12, 37, 0), date.local(2008, 11, 30, 12, 37, 30)]);
 });
 
-tape("timeSecond.range(start, stop) returns every second crossing the daylight savings boundary", function(test) {
-  test.deepEqual(time.timeSecond.range(new Date(1478422800000 - 2 * 1e3), new Date(1478422800000 + 2 * 1e3)), [
-    new Date(1478422798000), // Sun Nov 06 2016 01:59:58 GMT-0700 (PDT)
-    new Date(1478422799000), // Sun Nov 06 2016 01:59:59 GMT-0700 (PDT)
-    new Date(1478422800000), // Sun Nov 06 2016 01:00:00 GMT-0800 (PDT)
-    new Date(1478422801000)  // Sun Nov 06 2016 01:00:01 GMT-0800 (PDT)
+it("timeSecond.range(start, stop) returns every second crossing the daylight savings boundary", () => {
+  assert.deepStrictEqual(d3.timeSecond.range(new Date(1478422800000 - 2 * 1e3), new Date(1478422800000 + 2 * 1e3)), [
+    new Date(1478422798000), // Sun Nov  6 2016  1:59:58 GMT-0700 (PDT)
+    new Date(1478422799000), // Sun Nov  6 2016  1:59:59 GMT-0700 (PDT)
+    new Date(1478422800000), // Sun Nov  6 2016  1:00:00 GMT-0800 (PDT)
+    new Date(1478422801000)  // Sun Nov  6 2016  1:00:01 GMT-0800 (PDT)
   ]);
-  test.end();
 });

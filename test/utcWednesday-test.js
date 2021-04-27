@@ -1,23 +1,21 @@
-var tape = require("tape"),
-    time = require("../"),
-    date = require("./date");
+import assert from "assert";
+import * as date from "./date.js";
+import * as d3 from "../src/index.js";
 
-tape("utcWednesdays in an alias for utcWednesday.range", function(test) {
-  test.equal(time.utcWednesdays, time.utcWednesday.range);
-  test.end();
+it("utcWednesdays in an alias for utcWednesday.range", () => {
+  assert.strictEqual(d3.utcWednesdays, d3.utcWednesday.range);
 });
 
-tape("utcWednesday.floor(date) returns Wednesdays", function(test) {
-  test.deepEqual(time.utcWednesday.floor(date.utc(2011, 00, 03, 23, 59, 59)), date.utc(2010, 11, 29));
-  test.deepEqual(time.utcWednesday.floor(date.utc(2011, 00, 04, 00, 00, 00)), date.utc(2010, 11, 29));
-  test.deepEqual(time.utcWednesday.floor(date.utc(2011, 00, 04, 00, 00, 01)), date.utc(2010, 11, 29));
-  test.deepEqual(time.utcWednesday.floor(date.utc(2011, 00, 04, 23, 59, 59)), date.utc(2010, 11, 29));
-  test.deepEqual(time.utcWednesday.floor(date.utc(2011, 00, 05, 00, 00, 00)), date.utc(2011, 00, 05));
-  test.deepEqual(time.utcWednesday.floor(date.utc(2011, 00, 05, 00, 00, 01)), date.utc(2011, 00, 05));
-  test.end();
+it("utcWednesday.floor(date) returns Wednesdays", () => {
+  assert.deepStrictEqual(d3.utcWednesday.floor(date.utc(2011,  0,  3, 23, 59, 59)), date.utc(2010, 11, 29));
+  assert.deepStrictEqual(d3.utcWednesday.floor(date.utc(2011,  0,  4,  0,  0,  0)), date.utc(2010, 11, 29));
+  assert.deepStrictEqual(d3.utcWednesday.floor(date.utc(2011,  0,  4,  0,  0,  1)), date.utc(2010, 11, 29));
+  assert.deepStrictEqual(d3.utcWednesday.floor(date.utc(2011,  0,  4, 23, 59, 59)), date.utc(2010, 11, 29));
+  assert.deepStrictEqual(d3.utcWednesday.floor(date.utc(2011,  0,  5,  0,  0,  0)), date.utc(2011,  0,  5));
+  assert.deepStrictEqual(d3.utcWednesday.floor(date.utc(2011,  0,  5,  0,  0,  1)), date.utc(2011,  0,  5));
 });
 
-tape("utcWednesday.count(start, end) counts Wednesdays after start (exclusive) and before end (inclusive)", function(test) {
+it("utcWednesday.count(start, end) counts Wednesdays after start (exclusive) and before end (inclusive)", () => {
   //       January 2012
   // Su Mo Tu We Th Fr Sa
   //  1  2  3  4  5  6  7
@@ -25,10 +23,10 @@ tape("utcWednesday.count(start, end) counts Wednesdays after start (exclusive) a
   // 15 16 17 18 19 20 21
   // 22 23 24 25 26 27 28
   // 29 30 31
-  test.equal(time.utcWednesday.count(date.utc(2012, 00, 01), date.utc(2012, 00, 03)), 0);
-  test.equal(time.utcWednesday.count(date.utc(2012, 00, 01), date.utc(2012, 00, 04)), 1);
-  test.equal(time.utcWednesday.count(date.utc(2012, 00, 01), date.utc(2012, 00, 05)), 1);
-  test.equal(time.utcWednesday.count(date.utc(2012, 00, 01), date.utc(2012, 00, 11)), 2);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2012,  0,  1), date.utc(2012,  0,  3)), 0);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2012,  0,  1), date.utc(2012,  0,  4)), 1);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2012,  0,  1), date.utc(2012,  0,  5)), 1);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2012,  0,  1), date.utc(2012,  0, 11)), 2);
 
   //     January 2014
   // Su Mo Tu We Th Fr Sa
@@ -37,18 +35,16 @@ tape("utcWednesday.count(start, end) counts Wednesdays after start (exclusive) a
   // 12 13 14 15 16 17 18
   // 19 20 21 22 23 24 25
   // 26 27 28 29 30 31
-  test.equal(time.utcWednesday.count(date.utc(2014, 00, 01), date.utc(2014, 00, 07)), 0);
-  test.equal(time.utcWednesday.count(date.utc(2014, 00, 01), date.utc(2014, 00, 08)), 1);
-  test.equal(time.utcWednesday.count(date.utc(2014, 00, 01), date.utc(2014, 00, 09)), 1);
-  test.end();
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2014,  0,  1), date.utc(2014,  0,  7)), 0);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2014,  0,  1), date.utc(2014,  0,  8)), 1);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2014,  0,  1), date.utc(2014,  0,  9)), 1);
 });
 
-tape("utcWednesday.count(start, end) does not observe daylight saving", function(test) {
-  test.equal(time.utcWednesday.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 01)), 10);
-  test.equal(time.utcWednesday.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 03)), 10);
-  test.equal(time.utcWednesday.count(date.utc(2011, 00, 01), date.utc(2011, 02, 13, 04)), 10);
-  test.equal(time.utcWednesday.count(date.utc(2011, 00, 01), date.utc(2011, 10, 06, 00)), 44);
-  test.equal(time.utcWednesday.count(date.utc(2011, 00, 01), date.utc(2011, 10, 06, 01)), 44);
-  test.equal(time.utcWednesday.count(date.utc(2011, 00, 01), date.utc(2011, 10, 06, 02)), 44);
-  test.end();
+it("utcWednesday.count(start, end) does not observe daylight saving", () => {
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2011,  0,  1), date.utc(2011,  2, 13,  1)), 10);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2011,  0,  1), date.utc(2011,  2, 13,  3)), 10);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2011,  0,  1), date.utc(2011,  2, 13,  4)), 10);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2011,  0,  1), date.utc(2011, 10,  6,  0)), 44);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2011,  0,  1), date.utc(2011, 10,  6,  1)), 44);
+  assert.strictEqual(d3.utcWednesday.count(date.utc(2011,  0,  1), date.utc(2011, 10,  6,  2)), 44);
 });

@@ -1,144 +1,126 @@
-var tape = require("tape"),
-    time = require("../"),
-    date = require("./date");
+import assert from "assert";
+import * as date from "./date.js";
+import * as d3 from "../src/index.js";
 
-tape("timeSundays in an alias for timeSunday.range", function(test) {
-  test.equal(time.timeSundays, time.timeSunday.range);
-  test.end();
+it("timeSundays in an alias for timeSunday.range", () => {
+  assert.strictEqual(d3.timeSundays, d3.timeSunday.range);
 });
 
-tape("timeSunday.floor(date) returns Sundays", function(test) {
-  test.deepEqual(time.timeSunday.floor(date.local(2010, 11, 31, 23, 59, 59)), date.local(2010, 11, 26));
-  test.deepEqual(time.timeSunday.floor(date.local(2011, 00, 01, 00, 00, 00)), date.local(2010, 11, 26));
-  test.deepEqual(time.timeSunday.floor(date.local(2011, 00, 01, 00, 00, 01)), date.local(2010, 11, 26));
-  test.deepEqual(time.timeSunday.floor(date.local(2011, 00, 01, 23, 59, 59)), date.local(2010, 11, 26));
-  test.deepEqual(time.timeSunday.floor(date.local(2011, 00, 02, 00, 00, 00)), date.local(2011, 00, 02));
-  test.deepEqual(time.timeSunday.floor(date.local(2011, 00, 02, 00, 00, 01)), date.local(2011, 00, 02));
-  test.end();
+it("timeSunday.floor(date) returns Sundays", () => {
+  assert.deepStrictEqual(d3.timeSunday.floor(date.local(2010, 11, 31, 23, 59, 59)), date.local(2010, 11, 26));
+  assert.deepStrictEqual(d3.timeSunday.floor(date.local(2011,  0,  1,  0,  0,  0)), date.local(2010, 11, 26));
+  assert.deepStrictEqual(d3.timeSunday.floor(date.local(2011,  0,  1,  0,  0,  1)), date.local(2010, 11, 26));
+  assert.deepStrictEqual(d3.timeSunday.floor(date.local(2011,  0,  1, 23, 59, 59)), date.local(2010, 11, 26));
+  assert.deepStrictEqual(d3.timeSunday.floor(date.local(2011,  0,  2,  0,  0,  0)), date.local(2011,  0,  2));
+  assert.deepStrictEqual(d3.timeSunday.floor(date.local(2011,  0,  2,  0,  0,  1)), date.local(2011,  0,  2));
 });
 
-tape("timeSunday.floor(date) observes daylight saving", function(test) {
-  test.deepEqual(time.timeSunday.floor(date.local(2011, 02, 13, 01)), date.local(2011, 02, 13));
-  test.deepEqual(time.timeSunday.floor(date.local(2011, 10, 06, 01)), date.local(2011, 10, 06));
-  test.end();
+it("timeSunday.floor(date) observes daylight saving", () => {
+  assert.deepStrictEqual(d3.timeSunday.floor(date.local(2011,  2, 13,  1)), date.local(2011,  2, 13));
+  assert.deepStrictEqual(d3.timeSunday.floor(date.local(2011, 10,  6,  1)), date.local(2011, 10,  6));
 });
 
-tape("timeSunday.floor(date) handles years in the first century", function(test) {
-  test.deepEqual(time.timeSunday.floor(date.local(0011, 10, 06, 07)), date.local(0011, 10, 01));
-  test.end();
+it("timeSunday.floor(date) handles years in the first century", () => {
+  assert.deepStrictEqual(d3.timeSunday.floor(date.local(9, 10,  6,  7)), date.local(9, 10,  1));
 });
 
-tape("timeSunday.ceil(date) returns Sundays", function(test) {
-  test.deepEqual(time.timeSunday.ceil(date.local(2010, 11, 31, 23, 59, 59)), date.local(2011, 00, 02));
-  test.deepEqual(time.timeSunday.ceil(date.local(2011, 00, 01, 00, 00, 00)), date.local(2011, 00, 02));
-  test.deepEqual(time.timeSunday.ceil(date.local(2011, 00, 01, 00, 00, 01)), date.local(2011, 00, 02));
-  test.deepEqual(time.timeSunday.ceil(date.local(2011, 00, 01, 23, 59, 59)), date.local(2011, 00, 02));
-  test.deepEqual(time.timeSunday.ceil(date.local(2011, 00, 02, 00, 00, 00)), date.local(2011, 00, 02));
-  test.deepEqual(time.timeSunday.ceil(date.local(2011, 00, 02, 00, 00, 01)), date.local(2011, 00, 09));
-  test.end();
+it("timeSunday.ceil(date) returns Sundays", () => {
+  assert.deepStrictEqual(d3.timeSunday.ceil(date.local(2010, 11, 31, 23, 59, 59)), date.local(2011,  0,  2));
+  assert.deepStrictEqual(d3.timeSunday.ceil(date.local(2011,  0,  1,  0,  0,  0)), date.local(2011,  0,  2));
+  assert.deepStrictEqual(d3.timeSunday.ceil(date.local(2011,  0,  1,  0,  0,  1)), date.local(2011,  0,  2));
+  assert.deepStrictEqual(d3.timeSunday.ceil(date.local(2011,  0,  1, 23, 59, 59)), date.local(2011,  0,  2));
+  assert.deepStrictEqual(d3.timeSunday.ceil(date.local(2011,  0,  2,  0,  0,  0)), date.local(2011,  0,  2));
+  assert.deepStrictEqual(d3.timeSunday.ceil(date.local(2011,  0,  2,  0,  0,  1)), date.local(2011,  0,  9));
 });
 
-tape("timeSunday.ceil(date) observes daylight saving", function(test) {
-  test.deepEqual(time.timeSunday.ceil(date.local(2011, 02, 13, 01)), date.local(2011, 02, 20));
-  test.deepEqual(time.timeSunday.ceil(date.local(2011, 10, 06, 01)), date.local(2011, 10, 13));
-  test.end();
+it("timeSunday.ceil(date) observes daylight saving", () => {
+  assert.deepStrictEqual(d3.timeSunday.ceil(date.local(2011,  2, 13,  1)), date.local(2011,  2, 20));
+  assert.deepStrictEqual(d3.timeSunday.ceil(date.local(2011, 10,  6,  1)), date.local(2011, 10, 13));
 });
 
-tape("timeSunday.offset(date) is an alias for timeSunday.offset(date, 1)", function(test) {
-  test.deepEqual(time.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2011, 00, 07, 23, 59, 59, 999));
-  test.end();
+it("timeSunday.offset(date) is an alias for timeSunday.offset(date, 1)", () => {
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2011,  0,  7, 23, 59, 59, 999));
 });
 
-tape("timeSunday.offset(date, step) does not modify the passed-in date", function(test) {
-  var d = date.local(2010, 11, 31, 23, 59, 59, 999);
-  time.timeSunday.offset(d, +1);
-  test.deepEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
-  test.end();
+it("timeSunday.offset(date, step) does not modify the passed-in date", () => {
+  const d = date.local(2010, 11, 31, 23, 59, 59, 999);
+  d3.timeSunday.offset(d, +1);
+  assert.deepStrictEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
 });
 
-tape("timeSunday.offset(date, step) does not round the passed-in date", function(test) {
-  test.deepEqual(time.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011, 00, 07, 23, 59, 59, 999));
-  test.deepEqual(time.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 11, 17, 23, 59, 59, 456));
-  test.end();
+it("timeSunday.offset(date, step) does not round the passed-in date", () => {
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011,  0,  7, 23, 59, 59, 999));
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 11, 17, 23, 59, 59, 456));
 });
 
-tape("timeSunday.offset(date, step) allows step to be negative", function(test) {
-  test.deepEqual(time.timeSunday.offset(date.local(2010, 11, 01), -1), date.local(2010, 10, 24));
-  test.deepEqual(time.timeSunday.offset(date.local(2011, 00, 01), -2), date.local(2010, 11, 18));
-  test.deepEqual(time.timeSunday.offset(date.local(2011, 00, 01), -1), date.local(2010, 11, 25));
-  test.end();
+it("timeSunday.offset(date, step) allows step to be negative", () => {
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2010, 11,  1), -1), date.local(2010, 10, 24));
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2011,  0,  1), -2), date.local(2010, 11, 18));
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2011,  0,  1), -1), date.local(2010, 11, 25));
 });
 
-tape("timeSunday.offset(date, step) allows step to be positive", function(test) {
-  test.deepEqual(time.timeSunday.offset(date.local(2010, 10, 24), +1), date.local(2010, 11, 01));
-  test.deepEqual(time.timeSunday.offset(date.local(2010, 11, 18), +2), date.local(2011, 00, 01));
-  test.deepEqual(time.timeSunday.offset(date.local(2010, 11, 25), +1), date.local(2011, 00, 01));
-  test.end();
+it("timeSunday.offset(date, step) allows step to be positive", () => {
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2010, 10, 24), +1), date.local(2010, 11,  1));
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2010, 11, 18), +2), date.local(2011,  0,  1));
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2010, 11, 25), +1), date.local(2011,  0,  1));
 });
 
-tape("timeSunday.offset(date, step) allows step to be zero", function(test) {
-  test.deepEqual(time.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
-  test.deepEqual(time.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
-  test.end();
+it("timeSunday.offset(date, step) allows step to be zero", () => {
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
+  assert.deepStrictEqual(d3.timeSunday.offset(date.local(2010, 11, 31, 23, 59, 58,   0), 0), date.local(2010, 11, 31, 23, 59, 58,   0));
 });
 
-tape("timeSunday.range(start, stop) returns Sundays between start (inclusive) and stop (exclusive)", function(test) {
-  test.deepEqual(time.timeSunday.range(date.local(2011, 11, 01), date.local(2012, 00, 15)), [
-    date.local(2011, 11, 04),
+it("timeSunday.range(start, stop) returns Sundays between start (inclusive) and stop (exclusive)", () => {
+  assert.deepStrictEqual(d3.timeSunday.range(date.local(2011, 11,  1), date.local(2012,  0, 15)), [
+    date.local(2011, 11,  4),
     date.local(2011, 11, 11),
     date.local(2011, 11, 18),
     date.local(2011, 11, 25),
-    date.local(2012, 00, 01),
-    date.local(2012, 00, 08)
+    date.local(2012,  0,  1),
+    date.local(2012,  0,  8)
   ]);
-  test.end();
 });
 
-tape("timeSunday.range(start, stop) returns Sundays", function(test) {
-  test.deepEqual(time.timeSunday.range(date.local(2011, 11, 01, 12, 23), date.local(2012, 00, 14, 12, 23)), [
-    date.local(2011, 11, 04),
+it("timeSunday.range(start, stop) returns Sundays", () => {
+  assert.deepStrictEqual(d3.timeSunday.range(date.local(2011, 11,  1, 12, 23), date.local(2012,  0, 14, 12, 23)), [
+    date.local(2011, 11,  4),
     date.local(2011, 11, 11),
     date.local(2011, 11, 18),
     date.local(2011, 11, 25),
-    date.local(2012, 00, 01),
-    date.local(2012, 00, 08)
+    date.local(2012,  0,  1),
+    date.local(2012,  0,  8)
   ]);
-  test.end();
 });
 
-tape("timeSunday.range(start, stop) coerces start and stop to dates", function(test) {
-  test.deepEqual(time.timeSunday.range(+date.local(2011, 11, 01), +date.local(2012, 00, 15)), [
-    date.local(2011, 11, 04),
+it("timeSunday.range(start, stop) coerces start and stop to dates", () => {
+  assert.deepStrictEqual(d3.timeSunday.range(+date.local(2011, 11,  1), +date.local(2012,  0, 15)), [
+    date.local(2011, 11,  4),
     date.local(2011, 11, 11),
     date.local(2011, 11, 18),
     date.local(2011, 11, 25),
-    date.local(2012, 00, 01),
-    date.local(2012, 00, 08)
+    date.local(2012,  0,  1),
+    date.local(2012,  0,  8)
   ]);
-  test.end();
 });
 
-tape("timeSunday.range(start, stop) returns the empty array for invalid dates", function(test) {
-  test.deepEqual(time.timeSunday.range(new Date(NaN), Infinity), []);
-  test.end();
+it("timeSunday.range(start, stop) returns the empty array for invalid dates", () => {
+  assert.deepStrictEqual(d3.timeSunday.range(new Date(NaN), Infinity), []);
 });
 
-tape("timeSunday.range(start, stop) returns the empty array if start >= stop", function(test) {
-  test.deepEqual(time.timeSunday.range(date.local(2011, 11, 10), date.local(2011, 10, 04)), []);
-  test.deepEqual(time.timeSunday.range(date.local(2011, 10, 01), date.local(2011, 10, 01)), []);
-  test.end();
+it("timeSunday.range(start, stop) returns the empty array if start >= stop", () => {
+  assert.deepStrictEqual(d3.timeSunday.range(date.local(2011, 11, 10), date.local(2011, 10,  4)), []);
+  assert.deepStrictEqual(d3.timeSunday.range(date.local(2011, 10,  1), date.local(2011, 10,  1)), []);
 });
 
-tape("timeSunday.range(start, stop, step) returns every step Sunday", function(test) {
-  test.deepEqual(time.timeSunday.range(date.local(2011, 11, 01), date.local(2012, 00, 15), 2), [
-    date.local(2011, 11, 04),
+it("timeSunday.range(start, stop, step) returns every step Sunday", () => {
+  assert.deepStrictEqual(d3.timeSunday.range(date.local(2011, 11,  1), date.local(2012,  0, 15), 2), [
+    date.local(2011, 11,  4),
     date.local(2011, 11, 18),
-    date.local(2012, 00, 01)
+    date.local(2012,  0,  1)
   ]);
-  test.end();
 });
 
-tape("timeSunday.count(start, end) counts Sundays after start (exclusive) and before end (inclusive)", function(test) {
+it("timeSunday.count(start, end) counts Sundays after start (exclusive) and before end (inclusive)", () => {
   //     January 2014
   // Su Mo Tu We Th Fr Sa
   //           1  2  3  4
@@ -146,10 +128,10 @@ tape("timeSunday.count(start, end) counts Sundays after start (exclusive) and be
   // 12 13 14 15 16 17 18
   // 19 20 21 22 23 24 25
   // 26 27 28 29 30 31
-  test.equal(time.timeSunday.count(date.local(2014, 00, 01), date.local(2014, 00, 04)), 0);
-  test.equal(time.timeSunday.count(date.local(2014, 00, 01), date.local(2014, 00, 05)), 1);
-  test.equal(time.timeSunday.count(date.local(2014, 00, 01), date.local(2014, 00, 06)), 1);
-  test.equal(time.timeSunday.count(date.local(2014, 00, 01), date.local(2014, 00, 12)), 2);
+  assert.strictEqual(d3.timeSunday.count(date.local(2014,  0,  1), date.local(2014,  0,  4)), 0);
+  assert.strictEqual(d3.timeSunday.count(date.local(2014,  0,  1), date.local(2014,  0,  5)), 1);
+  assert.strictEqual(d3.timeSunday.count(date.local(2014,  0,  1), date.local(2014,  0,  6)), 1);
+  assert.strictEqual(d3.timeSunday.count(date.local(2014,  0,  1), date.local(2014,  0, 12)), 2);
 
   //       January 2012
   // Su Mo Tu We Th Fr Sa
@@ -158,18 +140,16 @@ tape("timeSunday.count(start, end) counts Sundays after start (exclusive) and be
   // 15 16 17 18 19 20 21
   // 22 23 24 25 26 27 28
   // 29 30 31
-  test.equal(time.timeSunday.count(date.local(2012, 00, 01), date.local(2012, 00, 07)), 0);
-  test.equal(time.timeSunday.count(date.local(2012, 00, 01), date.local(2012, 00, 08)), 1);
-  test.equal(time.timeSunday.count(date.local(2012, 00, 01), date.local(2012, 00, 09)), 1);
-  test.end();
+  assert.strictEqual(d3.timeSunday.count(date.local(2012,  0,  1), date.local(2012,  0,  7)), 0);
+  assert.strictEqual(d3.timeSunday.count(date.local(2012,  0,  1), date.local(2012,  0,  8)), 1);
+  assert.strictEqual(d3.timeSunday.count(date.local(2012,  0,  1), date.local(2012,  0,  9)), 1);
 });
 
-tape("timeSunday.count(start, end) observes daylight saving", function(test) {
-  test.equal(time.timeSunday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 01)), 11);
-  test.equal(time.timeSunday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 03)), 11);
-  test.equal(time.timeSunday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 04)), 11);
-  test.equal(time.timeSunday.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 00)), 45);
-  test.equal(time.timeSunday.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 01)), 45);
-  test.equal(time.timeSunday.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 02)), 45);
-  test.end();
+it("timeSunday.count(start, end) observes daylight saving", () => {
+  assert.strictEqual(d3.timeSunday.count(date.local(2011,  0,  1), date.local(2011,  2, 13,  1)), 11);
+  assert.strictEqual(d3.timeSunday.count(date.local(2011,  0,  1), date.local(2011,  2, 13,  3)), 11);
+  assert.strictEqual(d3.timeSunday.count(date.local(2011,  0,  1), date.local(2011,  2, 13,  4)), 11);
+  assert.strictEqual(d3.timeSunday.count(date.local(2011,  0,  1), date.local(2011, 10,  6,  0)), 45);
+  assert.strictEqual(d3.timeSunday.count(date.local(2011,  0,  1), date.local(2011, 10,  6,  1)), 45);
+  assert.strictEqual(d3.timeSunday.count(date.local(2011,  0,  1), date.local(2011, 10,  6,  2)), 45);
 });

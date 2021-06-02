@@ -321,7 +321,7 @@ Aliases for [d3.timeYear](#timeYear).[range](#interval_range) and [d3.utcYear](#
 
 <a name="timeTicks" href="#timeTicks">#</a> d3.<b>timeTicks</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
 
-Equvalent to [d3.utcTicks](#utcTicks), but in local time.
+Equivalent to [d3.utcTicks](#utcTicks), but in local time.
 
 <a name="timeTickInterval" href="#timeTickInterval">#</a> d3.<b>timeTickInterval</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-time/blob/master/src/ticks.js)
 

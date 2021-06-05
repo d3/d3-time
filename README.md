@@ -34,9 +34,11 @@ If you use npm, `npm install d3-time`. You can also download the [latest release
 
 ```html
 <script type="module">
+
 import {timeDay} from "https://cdn.skypack.dev/d3-time@3";
 
-const day = timeDay(new Date);
+const day = timeDay();
+
 </script>
 ```
 
@@ -47,7 +49,8 @@ For legacy environments, you can load d3-time’s UMD bundle from an npm-based C
 <script src="https://cdn.jsdelivr.net/npm/d3-time@3"></script>
 <script>
 
-const day = d3.timeDay(new Date);
+const day = d3.timeDay();
+
 </script>
 ```
 

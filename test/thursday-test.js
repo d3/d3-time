@@ -1,23 +1,21 @@
-var tape = require("tape"),
-    time = require("../"),
-    date = require("./date");
+import assert from "assert";
+import {timeThursday, timeThursdays} from "../src/index.js";
+import {local} from "./date.js";
 
-tape("timeThursdays in an alias for timeThursday.range", function(test) {
-  test.equal(time.timeThursdays, time.timeThursday.range);
-  test.end();
+it("timeThursdays in an alias for timeThursday.range", () => {
+  assert.strictEqual(timeThursdays, timeThursday.range);
 });
 
-tape("timeThursday.floor(date) returns Thursdays", function(test) {
-  test.deepEqual(time.timeThursday.floor(date.local(2011, 00, 04, 23, 59, 59)), date.local(2010, 11, 30));
-  test.deepEqual(time.timeThursday.floor(date.local(2011, 00, 05, 00, 00, 00)), date.local(2010, 11, 30));
-  test.deepEqual(time.timeThursday.floor(date.local(2011, 00, 05, 00, 00, 01)), date.local(2010, 11, 30));
-  test.deepEqual(time.timeThursday.floor(date.local(2011, 00, 05, 23, 59, 59)), date.local(2010, 11, 30));
-  test.deepEqual(time.timeThursday.floor(date.local(2011, 00, 06, 00, 00, 00)), date.local(2011, 00, 06));
-  test.deepEqual(time.timeThursday.floor(date.local(2011, 00, 06, 00, 00, 01)), date.local(2011, 00, 06));
-  test.end();
+it("timeThursday.floor(date) returns Thursdays", () => {
+  assert.deepStrictEqual(timeThursday.floor(local(2011,  0,  4, 23, 59, 59)), local(2010, 11, 30));
+  assert.deepStrictEqual(timeThursday.floor(local(2011,  0,  5,  0,  0,  0)), local(2010, 11, 30));
+  assert.deepStrictEqual(timeThursday.floor(local(2011,  0,  5,  0,  0,  1)), local(2010, 11, 30));
+  assert.deepStrictEqual(timeThursday.floor(local(2011,  0,  5, 23, 59, 59)), local(2010, 11, 30));
+  assert.deepStrictEqual(timeThursday.floor(local(2011,  0,  6,  0,  0,  0)), local(2011,  0,  6));
+  assert.deepStrictEqual(timeThursday.floor(local(2011,  0,  6,  0,  0,  1)), local(2011,  0,  6));
 });
 
-tape("timeThursday.count(start, end) counts Thursdays after start (exclusive) and before end (inclusive)", function(test) {
+it("timeThursday.count(start, end) counts Thursdays after start (exclusive) and before end (inclusive)", () => {
   //       January 2012
   // Su Mo Tu We Th Fr Sa
   //  1  2  3  4  5  6  7
@@ -25,10 +23,10 @@ tape("timeThursday.count(start, end) counts Thursdays after start (exclusive) an
   // 15 16 17 18 19 20 21
   // 22 23 24 25 26 27 28
   // 29 30 31
-  test.equal(time.timeThursday.count(date.local(2012, 00, 01), date.local(2012, 00, 04)), 0);
-  test.equal(time.timeThursday.count(date.local(2012, 00, 01), date.local(2012, 00, 05)), 1);
-  test.equal(time.timeThursday.count(date.local(2012, 00, 01), date.local(2012, 00, 06)), 1);
-  test.equal(time.timeThursday.count(date.local(2012, 00, 01), date.local(2012, 00, 12)), 2);
+  assert.strictEqual(timeThursday.count(local(2012,  0,  1), local(2012,  0,  4)), 0);
+  assert.strictEqual(timeThursday.count(local(2012,  0,  1), local(2012,  0,  5)), 1);
+  assert.strictEqual(timeThursday.count(local(2012,  0,  1), local(2012,  0,  6)), 1);
+  assert.strictEqual(timeThursday.count(local(2012,  0,  1), local(2012,  0, 12)), 2);
 
   //     January 2015
   // Su Mo Tu We Th Fr Sa
@@ -37,18 +35,16 @@ tape("timeThursday.count(start, end) counts Thursdays after start (exclusive) an
   // 11 12 13 14 15 16 17
   // 18 19 20 21 22 23 24
   // 25 26 27 28 29 30 31
-  test.equal(time.timeThursday.count(date.local(2015, 00, 01), date.local(2015, 00, 07)), 0);
-  test.equal(time.timeThursday.count(date.local(2015, 00, 01), date.local(2015, 00, 08)), 1);
-  test.equal(time.timeThursday.count(date.local(2015, 00, 01), date.local(2015, 00, 09)), 1);
-  test.end();
+  assert.strictEqual(timeThursday.count(local(2015,  0,  1), local(2015,  0,  7)), 0);
+  assert.strictEqual(timeThursday.count(local(2015,  0,  1), local(2015,  0,  8)), 1);
+  assert.strictEqual(timeThursday.count(local(2015,  0,  1), local(2015,  0,  9)), 1);
 });
 
-tape("timeThursday.count(start, end) observes daylight saving", function(test) {
-  test.equal(time.timeThursday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 01)), 10);
-  test.equal(time.timeThursday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 03)), 10);
-  test.equal(time.timeThursday.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 04)), 10);
-  test.equal(time.timeThursday.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 00)), 44);
-  test.equal(time.timeThursday.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 01)), 44);
-  test.equal(time.timeThursday.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 02)), 44);
-  test.end();
+it("timeThursday.count(start, end) observes daylight saving", () => {
+  assert.strictEqual(timeThursday.count(local(2011,  0,  1), local(2011,  2, 13,  1)), 10);
+  assert.strictEqual(timeThursday.count(local(2011,  0,  1), local(2011,  2, 13,  3)), 10);
+  assert.strictEqual(timeThursday.count(local(2011,  0,  1), local(2011,  2, 13,  4)), 10);
+  assert.strictEqual(timeThursday.count(local(2011,  0,  1), local(2011, 10,  6,  0)), 44);
+  assert.strictEqual(timeThursday.count(local(2011,  0,  1), local(2011, 10,  6,  1)), 44);
+  assert.strictEqual(timeThursday.count(local(2011,  0,  1), local(2011, 10,  6,  2)), 44);
 });

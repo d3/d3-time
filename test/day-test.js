@@ -1,246 +1,215 @@
-var tape = require("tape"),
-    time = require("../"),
-    date = require("./date");
+import assert from "assert";
+import {timeDay, timeDays, timeYear} from "../src/index.js";
+import {local, utc} from "./date.js";
 
-tape("timeDays in an alias for timeDay.range", function(test) {
-  test.equal(time.timeDays, time.timeDay.range);
-  test.end();
+it("timeDays in an alias for timeDay.range", () => {
+  assert.strictEqual(timeDays, timeDay.range);
 });
 
-tape("timeDay() is equivalent to timeDay.floor(new Date)", function(test) {
-  var t = new Date;
-  test.deepEqual(time.timeDay(), time.timeDay.floor(t));
-  test.end();
+it("timeDay() is equivalent to timeDay.floor(new Date)", () => {
+  const t = new Date;
+  assert.deepStrictEqual(timeDay(), timeDay.floor(t));
 });
 
-tape("timeDay(date) is equivalent to timeDay.floor(date)", function(test) {
-  var t = new Date;
-  test.deepEqual(time.timeDay(t), time.timeDay.floor(t));
-  test.end();
+it("timeDay(date) is equivalent to timeDay.floor(date)", () => {
+  const t = new Date;
+  assert.deepStrictEqual(timeDay(t), timeDay.floor(t));
 });
 
-tape("timeDay.floor(date) returns days", function(test) {
-  test.deepEqual(time.timeDay.floor(date.local(2010, 11, 31, 23)), date.local(2010, 11, 31));
-  test.deepEqual(time.timeDay.floor(date.local(2011, 00, 01, 00)), date.local(2011, 00, 01));
-  test.deepEqual(time.timeDay.floor(date.local(2011, 00, 01, 01)), date.local(2011, 00, 01));
-  test.end();
+it("timeDay.floor(date) returns days", () => {
+  assert.deepStrictEqual(timeDay.floor(local(2010, 11, 31, 23)), local(2010, 11, 31));
+  assert.deepStrictEqual(timeDay.floor(local(2011,  0,  1,  0)), local(2011,  0,  1));
+  assert.deepStrictEqual(timeDay.floor(local(2011,  0,  1,  1)), local(2011,  0,  1));
 });
 
-tape("timeDay.floor(date) observes daylight saving", function(test) {
-  test.deepEqual(time.timeDay.floor(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 12));
-  test.deepEqual(time.timeDay.floor(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
-  test.deepEqual(time.timeDay.floor(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
-  test.deepEqual(time.timeDay.floor(date.utc(2011, 02, 13, 10)), date.local(2011, 02, 13));
-  test.deepEqual(time.timeDay.floor(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
-  test.deepEqual(time.timeDay.floor(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 06));
-  test.deepEqual(time.timeDay.floor(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 06));
-  test.deepEqual(time.timeDay.floor(date.utc(2011, 10, 06, 10)), date.local(2011, 10, 06));
-  test.end();
+it("timeDay.floor(date) observes daylight saving", () => {
+  assert.deepStrictEqual(timeDay.floor(utc(2011,  2, 13,  7)), local(2011,  2, 12));
+  assert.deepStrictEqual(timeDay.floor(utc(2011,  2, 13,  8)), local(2011,  2, 13));
+  assert.deepStrictEqual(timeDay.floor(utc(2011,  2, 13,  9)), local(2011,  2, 13));
+  assert.deepStrictEqual(timeDay.floor(utc(2011,  2, 13, 10)), local(2011,  2, 13));
+  assert.deepStrictEqual(timeDay.floor(utc(2011, 10,  6,  7)), local(2011, 10,  6));
+  assert.deepStrictEqual(timeDay.floor(utc(2011, 10,  6,  8)), local(2011, 10,  6));
+  assert.deepStrictEqual(timeDay.floor(utc(2011, 10,  6,  9)), local(2011, 10,  6));
+  assert.deepStrictEqual(timeDay.floor(utc(2011, 10,  6, 10)), local(2011, 10,  6));
 });
 
-tape("timeDay.floor(date) handles years in the first century", function(test) {
-  test.deepEqual(time.timeDay.floor(date.local(0011, 10, 06, 07)), date.local(0011, 10, 06));
-  test.end();
+it("timeDay.floor(date) handles years in the first century", () => {
+  assert.deepStrictEqual(timeDay.floor(local(9, 10,  6,  7)), local(9, 10,  6));
 });
 
-tape("timeDay.round(date) returns days", function(test) {
-  test.deepEqual(time.timeDay.round(date.local(2010, 11, 30, 13)), date.local(2010, 11, 31));
-  test.deepEqual(time.timeDay.round(date.local(2010, 11, 30, 11)), date.local(2010, 11, 30));
-  test.end();
+it("timeDay.round(date) returns days", () => {
+  assert.deepStrictEqual(timeDay.round(local(2010, 11, 30, 13)), local(2010, 11, 31));
+  assert.deepStrictEqual(timeDay.round(local(2010, 11, 30, 11)), local(2010, 11, 30));
 });
 
-tape("timeDay.round(date) observes daylight saving", function(test) {
-  test.deepEqual(time.timeDay.round(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 13));
-  test.deepEqual(time.timeDay.round(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
-  test.deepEqual(time.timeDay.round(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 13));
-  test.deepEqual(time.timeDay.round(date.utc(2011, 02, 13, 20)), date.local(2011, 02, 14));
-  test.deepEqual(time.timeDay.round(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
-  test.deepEqual(time.timeDay.round(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 06));
-  test.deepEqual(time.timeDay.round(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 06));
-  test.deepEqual(time.timeDay.round(date.utc(2011, 10, 06, 20)), date.local(2011, 10, 07));
-  test.end();
+it("timeDay.round(date) observes daylight saving", () => {
+  assert.deepStrictEqual(timeDay.round(utc(2011,  2, 13,  7)), local(2011,  2, 13));
+  assert.deepStrictEqual(timeDay.round(utc(2011,  2, 13,  8)), local(2011,  2, 13));
+  assert.deepStrictEqual(timeDay.round(utc(2011,  2, 13,  9)), local(2011,  2, 13));
+  assert.deepStrictEqual(timeDay.round(utc(2011,  2, 13, 20)), local(2011,  2, 14));
+  assert.deepStrictEqual(timeDay.round(utc(2011, 10,  6,  7)), local(2011, 10,  6));
+  assert.deepStrictEqual(timeDay.round(utc(2011, 10,  6,  8)), local(2011, 10,  6));
+  assert.deepStrictEqual(timeDay.round(utc(2011, 10,  6,  9)), local(2011, 10,  6));
+  assert.deepStrictEqual(timeDay.round(utc(2011, 10,  6, 20)), local(2011, 10,  7));
 });
 
-tape("timeDay.round(date) handles midnight in leap years", function(test) {
-  test.deepEqual(time.timeDay.round(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
-  test.deepEqual(time.timeDay.round(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
-  test.end();
+it("timeDay.round(date) handles midnight in leap years", () => {
+  assert.deepStrictEqual(timeDay.round(utc(2012,  2,  1,  0)), local(2012,  2,  1));
+  assert.deepStrictEqual(timeDay.round(utc(2012,  2,  1,  0)), local(2012,  2,  1));
 });
 
-tape("timeDay.ceil(date) returns days", function(test) {
-  test.deepEqual(time.timeDay.ceil(date.local(2010, 11, 30, 23)), date.local(2010, 11, 31));
-  test.deepEqual(time.timeDay.ceil(date.local(2010, 11, 31, 00)), date.local(2010, 11, 31));
-  test.deepEqual(time.timeDay.ceil(date.local(2010, 11, 31, 01)), date.local(2011, 00, 01));
-  test.end();
+it("timeDay.ceil(date) returns days", () => {
+  assert.deepStrictEqual(timeDay.ceil(local(2010, 11, 30, 23)), local(2010, 11, 31));
+  assert.deepStrictEqual(timeDay.ceil(local(2010, 11, 31,  0)), local(2010, 11, 31));
+  assert.deepStrictEqual(timeDay.ceil(local(2010, 11, 31,  1)), local(2011,  0,  1));
 });
 
-tape("timeDay.ceil(date) observes start of daylight saving", function(test) {
-  test.deepEqual(time.timeDay.ceil(date.utc(2011, 02, 13, 07)), date.local(2011, 02, 13));
-  test.deepEqual(time.timeDay.ceil(date.utc(2011, 02, 13, 08)), date.local(2011, 02, 13));
-  test.deepEqual(time.timeDay.ceil(date.utc(2011, 02, 13, 09)), date.local(2011, 02, 14));
-  test.deepEqual(time.timeDay.ceil(date.utc(2011, 02, 13, 10)), date.local(2011, 02, 14));
-  test.end();
+it("timeDay.ceil(date) observes start of daylight saving", () => {
+  assert.deepStrictEqual(timeDay.ceil(utc(2011,  2, 13,  7)), local(2011,  2, 13));
+  assert.deepStrictEqual(timeDay.ceil(utc(2011,  2, 13,  8)), local(2011,  2, 13));
+  assert.deepStrictEqual(timeDay.ceil(utc(2011,  2, 13,  9)), local(2011,  2, 14));
+  assert.deepStrictEqual(timeDay.ceil(utc(2011,  2, 13, 10)), local(2011,  2, 14));
 });
 
-tape("timeDay.ceil(date) observes end of daylight saving", function(test) {
-  test.deepEqual(time.timeDay.ceil(date.utc(2011, 10, 06, 07)), date.local(2011, 10, 06));
-  test.deepEqual(time.timeDay.ceil(date.utc(2011, 10, 06, 08)), date.local(2011, 10, 07));
-  test.deepEqual(time.timeDay.ceil(date.utc(2011, 10, 06, 09)), date.local(2011, 10, 07));
-  test.deepEqual(time.timeDay.ceil(date.utc(2011, 10, 06, 10)), date.local(2011, 10, 07));
-  test.end();
+it("timeDay.ceil(date) observes end of daylight saving", () => {
+  assert.deepStrictEqual(timeDay.ceil(utc(2011, 10,  6,  7)), local(2011, 10,  6));
+  assert.deepStrictEqual(timeDay.ceil(utc(2011, 10,  6,  8)), local(2011, 10,  7));
+  assert.deepStrictEqual(timeDay.ceil(utc(2011, 10,  6,  9)), local(2011, 10,  7));
+  assert.deepStrictEqual(timeDay.ceil(utc(2011, 10,  6, 10)), local(2011, 10,  7));
 });
 
-tape("timeDay.ceil(date) handles midnight for leap years", function(test) {
-  test.deepEqual(time.timeDay.ceil(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
-  test.deepEqual(time.timeDay.ceil(date.utc(2012, 02, 01, 00)), date.local(2012, 02, 01));
-  test.end();
+it("timeDay.ceil(date) handles midnight for leap years", () => {
+  assert.deepStrictEqual(timeDay.ceil(utc(2012,  2,  1,  0)), local(2012,  2,  1));
+  assert.deepStrictEqual(timeDay.ceil(utc(2012,  2,  1,  0)), local(2012,  2,  1));
 });
 
-tape("timeDay.offset(date) is an alias for timeDay.offset(date, 1)", function(test) {
-  test.deepEqual(time.timeDay.offset(date.local(2010, 11, 31, 23, 59, 59, 999)), date.local(2011, 00, 01, 23, 59, 59, 999));
-  test.end();
+it("timeDay.offset(date) is an alias for timeDay.offset(date, 1)", () => {
+  assert.deepStrictEqual(timeDay.offset(local(2010, 11, 31, 23, 59, 59, 999)), local(2011,  0,  1, 23, 59, 59, 999));
 });
 
-tape("timeDay.offset(date, step) does not modify the passed-in date", function(test) {
-  var d = date.local(2010, 11, 31, 23, 59, 59, 999);
-  time.timeDay.offset(d, +1);
-  test.deepEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
-  test.end();
+it("timeDay.offset(date, step) does not modify the passed-in date", () => {
+  const d = local(2010, 11, 31, 23, 59, 59, 999);
+  timeDay.offset(d, +1);
+  assert.deepStrictEqual(d, local(2010, 11, 31, 23, 59, 59, 999));
 });
 
-tape("timeDay.offset(date, step) does not round the passed-in date", function(test) {
-  test.deepEqual(time.timeDay.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011, 00, 01, 23, 59, 59, 999));
-  test.deepEqual(time.timeDay.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2010, 11, 29, 23, 59, 59, 456));
-  test.end();
+it("timeDay.offset(date, step) does not round the passed-in date", () => {
+  assert.deepStrictEqual(timeDay.offset(local(2010, 11, 31, 23, 59, 59, 999), +1), local(2011,  0,  1, 23, 59, 59, 999));
+  assert.deepStrictEqual(timeDay.offset(local(2010, 11, 31, 23, 59, 59, 456), -2), local(2010, 11, 29, 23, 59, 59, 456));
 });
 
-tape("timeDay.offset(date, step) allows step to be negative", function(test) {
-  test.deepEqual(time.timeDay.offset(date.local(2010, 11, 31), -1), date.local(2010, 11, 30));
-  test.deepEqual(time.timeDay.offset(date.local(2011, 00, 01), -2), date.local(2010, 11, 30));
-  test.deepEqual(time.timeDay.offset(date.local(2011, 00, 01), -1), date.local(2010, 11, 31));
-  test.end();
+it("timeDay.offset(date, step) allows step to be negative", () => {
+  assert.deepStrictEqual(timeDay.offset(local(2010, 11, 31), -1), local(2010, 11, 30));
+  assert.deepStrictEqual(timeDay.offset(local(2011,  0,  1), -2), local(2010, 11, 30));
+  assert.deepStrictEqual(timeDay.offset(local(2011,  0,  1), -1), local(2010, 11, 31));
 });
 
-tape("timeDay.offset(date, step) allows step to be positive", function(test) {
-  test.deepEqual(time.timeDay.offset(date.local(2010, 11, 31), +1), date.local(2011, 00, 01));
-  test.deepEqual(time.timeDay.offset(date.local(2010, 11, 30), +2), date.local(2011, 00, 01));
-  test.deepEqual(time.timeDay.offset(date.local(2010, 11, 30), +1), date.local(2010, 11, 31));
-  test.end();
+it("timeDay.offset(date, step) allows step to be positive", () => {
+  assert.deepStrictEqual(timeDay.offset(local(2010, 11, 31), +1), local(2011,  0,  1));
+  assert.deepStrictEqual(timeDay.offset(local(2010, 11, 30), +2), local(2011,  0,  1));
+  assert.deepStrictEqual(timeDay.offset(local(2010, 11, 30), +1), local(2010, 11, 31));
 });
 
-tape("timeDay.offset(date, step) allows step to be zero", function(test) {
-  test.deepEqual(time.timeDay.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
-  test.deepEqual(time.timeDay.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
-  test.end();
+it("timeDay.offset(date, step) allows step to be zero", () => {
+  assert.deepStrictEqual(timeDay.offset(local(2010, 11, 31, 23, 59, 59, 999), 0), local(2010, 11, 31, 23, 59, 59, 999));
+  assert.deepStrictEqual(timeDay.offset(local(2010, 11, 31, 23, 59, 58,   0), 0), local(2010, 11, 31, 23, 59, 58,   0));
 });
 
-tape("timeDay.range(start, stop) returns days between start (inclusive) and stop (exclusive)", function(test) {
-  test.deepEqual(time.timeDay.range(date.local(2011, 10, 04), date.local(2011, 10, 10)), [
-    date.local(2011, 10, 04),
-    date.local(2011, 10, 05),
-    date.local(2011, 10, 06),
-    date.local(2011, 10, 07),
-    date.local(2011, 10, 08),
-    date.local(2011, 10, 09)
+it("timeDay.range(start, stop) returns days between start (inclusive) and stop (exclusive)", () => {
+  assert.deepStrictEqual(timeDay.range(local(2011, 10,  4), local(2011, 10, 10)), [
+    local(2011, 10,  4),
+    local(2011, 10,  5),
+    local(2011, 10,  6),
+    local(2011, 10,  7),
+    local(2011, 10,  8),
+    local(2011, 10,  9)
   ]);
-  test.end();
 });
 
-tape("timeDay.range(start, stop) returns days", function(test) {
-  test.deepEqual(time.timeDay.range(date.local(2011, 10, 04, 02), date.local(2011, 10, 10, 13)), [
-    date.local(2011, 10, 05),
-    date.local(2011, 10, 06),
-    date.local(2011, 10, 07),
-    date.local(2011, 10, 08),
-    date.local(2011, 10, 09),
-    date.local(2011, 10, 10)
+it("timeDay.range(start, stop) returns days", () => {
+  assert.deepStrictEqual(timeDay.range(local(2011, 10,  4,  2), local(2011, 10, 10, 13)), [
+    local(2011, 10,  5),
+    local(2011, 10,  6),
+    local(2011, 10,  7),
+    local(2011, 10,  8),
+    local(2011, 10,  9),
+    local(2011, 10, 10)
   ]);
-  test.end();
 });
 
-tape("timeDay.range(start, stop) coerces start and stop to dates", function(test) {
-  test.deepEqual(time.timeDay.range(+date.local(2011, 10, 04), +date.local(2011, 10, 07)), [
-    date.local(2011, 10, 04),
-    date.local(2011, 10, 05),
-    date.local(2011, 10, 06)
+it("timeDay.range(start, stop) coerces start and stop to dates", () => {
+  assert.deepStrictEqual(timeDay.range(+local(2011, 10,  4), +local(2011, 10,  7)), [
+    local(2011, 10,  4),
+    local(2011, 10,  5),
+    local(2011, 10,  6)
   ]);
-  test.end();
 });
 
-tape("timeDay.range(start, stop) returns the empty array for invalid dates", function(test) {
-  test.deepEqual(time.timeDay.range(new Date(NaN), Infinity), []);
-  test.end();
+it("timeDay.range(start, stop) returns the empty array for invalid dates", () => {
+  assert.deepStrictEqual(timeDay.range(new Date(NaN), Infinity), []);
 });
 
-tape("timeDay.range(start, stop) returns the empty array if start >= stop", function(test) {
-  test.deepEqual(time.timeDay.range(date.local(2011, 10, 10), date.local(2011, 10, 04)), []);
-  test.deepEqual(time.timeDay.range(date.local(2011, 10, 10), date.local(2011, 10, 10)), []);
-  test.end();
+it("timeDay.range(start, stop) returns the empty array if start >= stop", () => {
+  assert.deepStrictEqual(timeDay.range(local(2011, 10, 10), local(2011, 10,  4)), []);
+  assert.deepStrictEqual(timeDay.range(local(2011, 10, 10), local(2011, 10, 10)), []);
 });
 
-tape("timeDay.range(start, stop, step) returns every step day", function(test) {
-  test.deepEqual(time.timeDay.range(date.local(2011, 10, 04, 02), date.local(2011, 10, 14, 13), 3), [
-    date.local(2011, 10, 05),
-    date.local(2011, 10, 08),
-    date.local(2011, 10, 11),
-    date.local(2011, 10, 14)
+it("timeDay.range(start, stop, step) returns every step day", () => {
+  assert.deepStrictEqual(timeDay.range(local(2011, 10,  4,  2), local(2011, 10, 14, 13), 3), [
+    local(2011, 10,  5),
+    local(2011, 10,  8),
+    local(2011, 10, 11),
+    local(2011, 10, 14)
   ]);
-  test.end();
 });
 
-tape("timeDay.range(start, stop, step) returns the empty array if step is zero, negative or NaN", function(test) {
-  test.deepEqual(time.timeDay.range(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00), 0), []);
-  test.deepEqual(time.timeDay.range(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00), -1), []);
-  test.deepEqual(time.timeDay.range(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00), 0.5), []);
-  test.deepEqual(time.timeDay.range(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00), NaN), []);
-  test.end();
+it("timeDay.range(start, stop, step) returns the empty array if step is zero, negative or NaN", () => {
+  assert.deepStrictEqual(timeDay.range(local(2011,  0,  1,  0), local(2011,  4,  9,  0), 0), []);
+  assert.deepStrictEqual(timeDay.range(local(2011,  0,  1,  0), local(2011,  4,  9,  0), -1), []);
+  assert.deepStrictEqual(timeDay.range(local(2011,  0,  1,  0), local(2011,  4,  9,  0), 0.5), []);
+  assert.deepStrictEqual(timeDay.range(local(2011,  0,  1,  0), local(2011,  4,  9,  0), NaN), []);
 });
 
-tape("timeDay.count(start, end) counts days after start (exclusive) and before end (inclusive)", function(test) {
-  test.equal(time.timeDay.count(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 00)), 128);
-  test.equal(time.timeDay.count(date.local(2011, 00, 01, 01), date.local(2011, 04, 09, 00)), 128);
-  test.equal(time.timeDay.count(date.local(2010, 11, 31, 23), date.local(2011, 04, 09, 00)), 129);
-  test.equal(time.timeDay.count(date.local(2011, 00, 01, 00), date.local(2011, 04, 08, 23)), 127);
-  test.equal(time.timeDay.count(date.local(2011, 00, 01, 00), date.local(2011, 04, 09, 01)), 128);
-  test.end();
+it("timeDay.count(start, end) counts days after start (exclusive) and before end (inclusive)", () => {
+  assert.strictEqual(timeDay.count(local(2011,  0,  1,  0), local(2011,  4,  9,  0)), 128);
+  assert.strictEqual(timeDay.count(local(2011,  0,  1,  1), local(2011,  4,  9,  0)), 128);
+  assert.strictEqual(timeDay.count(local(2010, 11, 31, 23), local(2011,  4,  9,  0)), 129);
+  assert.strictEqual(timeDay.count(local(2011,  0,  1,  0), local(2011,  4,  8, 23)), 127);
+  assert.strictEqual(timeDay.count(local(2011,  0,  1,  0), local(2011,  4,  9,  1)), 128);
 });
 
-tape("timeDay.count(start, end) observes daylight saving", function(test) {
-  test.equal(time.timeDay.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 01)), 71);
-  test.equal(time.timeDay.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 03)), 71);
-  test.equal(time.timeDay.count(date.local(2011, 00, 01), date.local(2011, 02, 13, 04)), 71);
-  test.equal(time.timeDay.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 00)), 309);
-  test.equal(time.timeDay.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 01)), 309);
-  test.equal(time.timeDay.count(date.local(2011, 00, 01), date.local(2011, 10, 06, 02)), 309);
-  test.end();
+it("timeDay.count(start, end) observes daylight saving", () => {
+  assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011,  2, 13,  1)), 71);
+  assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011,  2, 13,  3)), 71);
+  assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011,  2, 13,  4)), 71);
+  assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011, 10,  6,  0)), 309);
+  assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011, 10,  6,  1)), 309);
+  assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011, 10,  6,  2)), 309);
 });
 
-tape("timeDay.count(start, stop) does not exhibit floating-point rounding error", function(test) {
-  var date = new Date(2011, 4, 9);
-  test.equal(time.timeDay.count(time.timeYear(date), date), 128);
-  test.end();
+it("timeDay.count(start, stop) does not exhibit floating-point rounding error", () => {
+  const date = new Date(2011, 4, 9);
+  assert.strictEqual(timeDay.count(timeYear(date), date), 128);
 });
 
-tape("timeDay.count(start, end) returns 364 or 365 for a full year", function(test) {
-  test.equal(time.timeDay.count(date.local(1999, 00, 01), date.local(1999, 11, 31)), 364);
-  test.equal(time.timeDay.count(date.local(2000, 00, 01), date.local(2000, 11, 31)), 365); // leap year
-  test.equal(time.timeDay.count(date.local(2001, 00, 01), date.local(2001, 11, 31)), 364);
-  test.equal(time.timeDay.count(date.local(2002, 00, 01), date.local(2002, 11, 31)), 364);
-  test.equal(time.timeDay.count(date.local(2003, 00, 01), date.local(2003, 11, 31)), 364);
-  test.equal(time.timeDay.count(date.local(2004, 00, 01), date.local(2004, 11, 31)), 365); // leap year
-  test.equal(time.timeDay.count(date.local(2005, 00, 01), date.local(2005, 11, 31)), 364);
-  test.equal(time.timeDay.count(date.local(2006, 00, 01), date.local(2006, 11, 31)), 364);
-  test.equal(time.timeDay.count(date.local(2007, 00, 01), date.local(2007, 11, 31)), 364);
-  test.equal(time.timeDay.count(date.local(2008, 00, 01), date.local(2008, 11, 31)), 365); // leap year
-  test.equal(time.timeDay.count(date.local(2009, 00, 01), date.local(2009, 11, 31)), 364);
-  test.equal(time.timeDay.count(date.local(2010, 00, 01), date.local(2010, 11, 31)), 364);
-  test.equal(time.timeDay.count(date.local(2011, 00, 01), date.local(2011, 11, 31)), 364);
-  test.end();
+it("timeDay.count(start, end) returns 364 or 365 for a full year", () => {
+  assert.strictEqual(timeDay.count(local(1999,  0,  1), local(1999, 11, 31)), 364);
+  assert.strictEqual(timeDay.count(local(2000,  0,  1), local(2000, 11, 31)), 365); // leap year
+  assert.strictEqual(timeDay.count(local(2001,  0,  1), local(2001, 11, 31)), 364);
+  assert.strictEqual(timeDay.count(local(2002,  0,  1), local(2002, 11, 31)), 364);
+  assert.strictEqual(timeDay.count(local(2003,  0,  1), local(2003, 11, 31)), 364);
+  assert.strictEqual(timeDay.count(local(2004,  0,  1), local(2004, 11, 31)), 365); // leap year
+  assert.strictEqual(timeDay.count(local(2005,  0,  1), local(2005, 11, 31)), 364);
+  assert.strictEqual(timeDay.count(local(2006,  0,  1), local(2006, 11, 31)), 364);
+  assert.strictEqual(timeDay.count(local(2007,  0,  1), local(2007, 11, 31)), 364);
+  assert.strictEqual(timeDay.count(local(2008,  0,  1), local(2008, 11, 31)), 365); // leap year
+  assert.strictEqual(timeDay.count(local(2009,  0,  1), local(2009, 11, 31)), 364);
+  assert.strictEqual(timeDay.count(local(2010,  0,  1), local(2010, 11, 31)), 364);
+  assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011, 11, 31)), 364);
 });
 
-tape("timeDay.every(step) returns every stepth day, starting with the first day of the month", function(test) {
-  test.deepEqual(time.timeDay.every(3).range(date.local(2008, 11, 30, 0, 12), date.local(2009, 0, 5, 23, 48)), [date.local(2008, 11, 31), date.local(2009, 0, 1), date.local(2009, 0, 4)]);
-  test.deepEqual(time.timeDay.every(5).range(date.local(2008, 11, 30, 0, 12), date.local(2009, 0, 6, 23, 48)), [date.local(2008, 11, 31), date.local(2009, 0, 1), date.local(2009, 0, 6)]);
-  test.deepEqual(time.timeDay.every(7).range(date.local(2008, 11, 30, 0, 12), date.local(2009, 0, 8, 23, 48)), [date.local(2009, 0, 1), date.local(2009, 0, 8)]);
-  test.end();
+it("timeDay.every(step) returns every stepth day, starting with the first day of the month", () => {
+  assert.deepStrictEqual(timeDay.every(3).range(local(2008, 11, 30, 0, 12), local(2009, 0, 5, 23, 48)), [local(2008, 11, 31), local(2009, 0, 1), local(2009, 0, 4)]);
+  assert.deepStrictEqual(timeDay.every(5).range(local(2008, 11, 30, 0, 12), local(2009, 0, 6, 23, 48)), [local(2008, 11, 31), local(2009, 0, 1), local(2009, 0, 6)]);
+  assert.deepStrictEqual(timeDay.every(7).range(local(2008, 11, 30, 0, 12), local(2009, 0, 8, 23, 48)), [local(2009, 0, 1), local(2009, 0, 8)]);
 });

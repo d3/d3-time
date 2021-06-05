@@ -1,96 +1,82 @@
-var tape = require("tape"),
-    time = require("../"),
-    date = require("./date");
+import assert from "assert";
+import {timeYear} from "../src/index.js";
+import {local} from "./date.js";
 
-tape("timeYear.floor(date) returns years", function(test) {
-  test.deepEqual(time.timeYear.floor(date.local(2010, 11, 31, 23, 59, 59)), date.local(2010, 00, 01));
-  test.deepEqual(time.timeYear.floor(date.local(2011, 00, 01, 00, 00, 00)), date.local(2011, 00, 01));
-  test.deepEqual(time.timeYear.floor(date.local(2011, 00, 01, 00, 00, 01)), date.local(2011, 00, 01));
-  test.end();
+it("timeYear.floor(date) returns years", () => {
+  assert.deepStrictEqual(timeYear.floor(local(2010, 11, 31, 23, 59, 59)), local(2010,  0,  1));
+  assert.deepStrictEqual(timeYear.floor(local(2011,  0,  1,  0,  0,  0)), local(2011,  0,  1));
+  assert.deepStrictEqual(timeYear.floor(local(2011,  0,  1,  0,  0,  1)), local(2011,  0,  1));
 });
 
-tape("timeYear.floor(date) does not modify the specified date", function(test) {
-  var d = date.local(2010, 11, 31, 23, 59, 59);
-  test.deepEqual(time.timeYear.floor(d), date.local(2010, 00, 01));
-  test.deepEqual(d, date.local(2010, 11, 31, 23, 59, 59));
-  test.end();
+it("timeYear.floor(date) does not modify the specified date", () => {
+  const d = local(2010, 11, 31, 23, 59, 59);
+  assert.deepStrictEqual(timeYear.floor(d), local(2010,  0,  1));
+  assert.deepStrictEqual(d, local(2010, 11, 31, 23, 59, 59));
 });
 
-tape("timeYear.floor(date) correctly handles years in the first century", function(test) {
-  test.deepEqual(time.timeYear.floor(date.local(0011, 10, 06, 07)), date.local(0011, 00, 01));
-  test.end();
+it("timeYear.floor(date) correctly handles years in the first century", () => {
+  assert.deepStrictEqual(timeYear.floor(local(9, 10,  6,  7)), local(9,  0,  1));
 });
 
-tape("timeYear.ceil(date) returns years", function(test) {
-  test.deepEqual(time.timeYear.ceil(date.local(2010, 11, 31, 23, 59, 59)), date.local(2011, 00, 01));
-  test.deepEqual(time.timeYear.ceil(date.local(2011, 00, 01, 00, 00, 00)), date.local(2011, 00, 01));
-  test.deepEqual(time.timeYear.ceil(date.local(2011, 00, 01, 00, 00, 01)), date.local(2012, 00, 01));
-  test.end();
+it("timeYear.ceil(date) returns years", () => {
+  assert.deepStrictEqual(timeYear.ceil(local(2010, 11, 31, 23, 59, 59)), local(2011,  0,  1));
+  assert.deepStrictEqual(timeYear.ceil(local(2011,  0,  1,  0,  0,  0)), local(2011,  0,  1));
+  assert.deepStrictEqual(timeYear.ceil(local(2011,  0,  1,  0,  0,  1)), local(2012,  0,  1));
 });
 
-tape("timeYear.offset(date, count) does not modify the passed-in date", function(test) {
-  var d = date.local(2010, 11, 31, 23, 59, 59, 999);
-  time.timeYear.offset(d, +1);
-  test.deepEqual(d, date.local(2010, 11, 31, 23, 59, 59, 999));
-  test.end();
+it("timeYear.offset(date, count) does not modify the passed-in date", () => {
+  const d = local(2010, 11, 31, 23, 59, 59, 999);
+  timeYear.offset(d, +1);
+  assert.deepStrictEqual(d, local(2010, 11, 31, 23, 59, 59, 999));
 });
 
-tape("timeYear.offset(date, count) does not round the passed-in-date", function(test) {
-  test.deepEqual(time.timeYear.offset(date.local(2010, 11, 31, 23, 59, 59, 999), +1), date.local(2011, 11, 31, 23, 59, 59, 999));
-  test.deepEqual(time.timeYear.offset(date.local(2010, 11, 31, 23, 59, 59, 456), -2), date.local(2008, 11, 31, 23, 59, 59, 456));
-  test.end();
+it("timeYear.offset(date, count) does not round the passed-in-date", () => {
+  assert.deepStrictEqual(timeYear.offset(local(2010, 11, 31, 23, 59, 59, 999), +1), local(2011, 11, 31, 23, 59, 59, 999));
+  assert.deepStrictEqual(timeYear.offset(local(2010, 11, 31, 23, 59, 59, 456), -2), local(2008, 11, 31, 23, 59, 59, 456));
 });
 
-tape("timeYear.offset(date, count) allows negative offsets", function(test) {
-  test.deepEqual(time.timeYear.offset(date.local(2010, 11, 01), -1), date.local(2009, 11, 01));
-  test.deepEqual(time.timeYear.offset(date.local(2011, 00, 01), -2), date.local(2009, 00, 01));
-  test.deepEqual(time.timeYear.offset(date.local(2011, 00, 01), -1), date.local(2010, 00, 01));
-  test.end();
+it("timeYear.offset(date, count) allows negative offsets", () => {
+  assert.deepStrictEqual(timeYear.offset(local(2010, 11,  1), -1), local(2009, 11,  1));
+  assert.deepStrictEqual(timeYear.offset(local(2011,  0,  1), -2), local(2009,  0,  1));
+  assert.deepStrictEqual(timeYear.offset(local(2011,  0,  1), -1), local(2010,  0,  1));
 });
 
-tape("timeYear.offset(date, count) allows positive offsets", function(test) {
-  test.deepEqual(time.timeYear.offset(date.local(2009, 11, 01), +1), date.local(2010, 11, 01));
-  test.deepEqual(time.timeYear.offset(date.local(2009, 00, 01), +2), date.local(2011, 00, 01));
-  test.deepEqual(time.timeYear.offset(date.local(2010, 00, 01), +1), date.local(2011, 00, 01));
-  test.end();
+it("timeYear.offset(date, count) allows positive offsets", () => {
+  assert.deepStrictEqual(timeYear.offset(local(2009, 11,  1), +1), local(2010, 11,  1));
+  assert.deepStrictEqual(timeYear.offset(local(2009,  0,  1), +2), local(2011,  0,  1));
+  assert.deepStrictEqual(timeYear.offset(local(2010,  0,  1), +1), local(2011,  0,  1));
 });
 
-tape("timeYear.offset(date, count) allows zero offset", function(test) {
-  test.deepEqual(time.timeYear.offset(date.local(2010, 11, 31, 23, 59, 59, 999), 0), date.local(2010, 11, 31, 23, 59, 59, 999));
-  test.deepEqual(time.timeYear.offset(date.local(2010, 11, 31, 23, 59, 58, 000), 0), date.local(2010, 11, 31, 23, 59, 58, 000));
-  test.end();
+it("timeYear.offset(date, count) allows zero offset", () => {
+  assert.deepStrictEqual(timeYear.offset(local(2010, 11, 31, 23, 59, 59, 999), 0), local(2010, 11, 31, 23, 59, 59, 999));
+  assert.deepStrictEqual(timeYear.offset(local(2010, 11, 31, 23, 59, 58,   0), 0), local(2010, 11, 31, 23, 59, 58,   0));
 });
 
-tape("timeYear.every(step) returns every stepth year, starting with year zero", function(test) {
-  test.deepEqual(time.timeYear.every(5).range(date.local(2008), date.local(2023)), [date.local(2010), date.local(2015), date.local(2020)]);
-  test.end();
+it("timeYear.every(step) returns every stepth year, starting with year zero", () => {
+  assert.deepStrictEqual(timeYear.every(5).range(local(2008), local(2023)), [local(2010), local(2015), local(2020)]);
 });
 
-tape("timeYear.range(start, stop) returns years", function(test) {
-  test.deepEqual(time.timeYear.range(date.local(2010, 0, 1), date.local(2013, 0, 1)), [
-    date.local(2010, 0, 1),
-    date.local(2011, 0, 1),
-    date.local(2012, 0, 1)
+it("timeYear.range(start, stop) returns years", () => {
+  assert.deepStrictEqual(timeYear.range(local(2010, 0, 1), local(2013, 0, 1)), [
+    local(2010, 0, 1),
+    local(2011, 0, 1),
+    local(2012, 0, 1)
   ]);
-  test.end();
 });
 
-tape("timeYear.range(start, stop) has an inclusive lower bound", function(test) {
-  test.deepEqual(time.timeYear.range(date.local(2010, 0, 1), date.local(2013, 0, 1))[0], date.local(2010, 0, 1));
-  test.end();
+it("timeYear.range(start, stop) has an inclusive lower bound", () => {
+  assert.deepStrictEqual(timeYear.range(local(2010, 0, 1), local(2013, 0, 1))[0], local(2010, 0, 1));
 });
 
-tape("timeYear.range(start, stop) has an exclusive upper bound", function(test) {
-  test.deepEqual(time.timeYear.range(date.local(2010, 0, 1), date.local(2013, 0, 1))[2], date.local(2012, 0, 1));
-  test.end();
+it("timeYear.range(start, stop) has an exclusive upper bound", () => {
+  assert.deepStrictEqual(timeYear.range(local(2010, 0, 1), local(2013, 0, 1))[2], local(2012, 0, 1));
 });
 
-tape("timeYear.range(start, stop, step) can skip years", function(test) {
-  test.deepEqual(time.timeYear.range(date.local(2009, 0, 1), date.local(2029, 0, 1), 5), [
-    date.local(2009, 0, 1),
-    date.local(2014, 0, 1),
-    date.local(2019, 0, 1),
-    date.local(2024, 0, 1)
+it("timeYear.range(start, stop, step) can skip years", () => {
+  assert.deepStrictEqual(timeYear.range(local(2009, 0, 1), local(2029, 0, 1), 5), [
+    local(2009, 0, 1),
+    local(2014, 0, 1),
+    local(2019, 0, 1),
+    local(2024, 0, 1)
   ]);
-  test.end();
 });

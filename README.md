@@ -30,14 +30,26 @@ This module is used by D3’s time scales to generate sensible ticks, by D3’s 
 
 ## Installing
 
-If you use NPM, `npm install d3-time`. Otherwise, download the [latest release](https://github.com/d3/d3-time/releases/latest). You can also load directly from [d3js.org](https://d3js.org), either as a [standalone library](https://d3js.org/d3-time.v2.min.js) or as part of [D3](https://github.com/d3/d3). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
+If you use npm, `npm install d3-time`. You can also download the [latest release on GitHub](https://github.com/d3/d3-time/releases/latest). For vanilla HTML in modern browsers, import d3-time from Skypack:
 
 ```html
-<script src="https://d3js.org/d3-array.v2.min.js"></script>
-<script src="https://d3js.org/d3-time.v2.min.js"></script>
+<script type="module">
+
+import {timeDay} from "https://cdn.skypack.dev/d3-time@3";
+
+const day = timeDay();
+
+</script>
+```
+
+For legacy environments, you can load d3-time’s UMD bundle from an npm-based CDN such as jsDelivr; a `d3` global is exported:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-time@3"></script>
 <script>
 
-const day = d3.timeDay(new Date);
+const day = d3.timeDay();
 
 </script>
 ```

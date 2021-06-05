@@ -34,7 +34,7 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "d3-array": "2"
+    "d3-array": "2 - 3"
   },
   "devDependencies": {
     "eslint": "7",

@@ -203,7 +203,7 @@ Days (e.g., February 7, 2012 at 12:00 AM); typically 24 hours. Days in local tim
 <a name="timeWeek" href="#timeWeek">#</a> d3.<b>timeWeek</b> · [Source](https://github.com/d3/d3-time/blob/master/src/week.js "Source")
 <br><a href="#timeWeek">#</a> d3.<b>utcWeek</b> · [Source](https://github.com/d3/d3-time/blob/master/src/utcWeek.js "Source")
 
-Alias for [d3.timeSunday](#timeSunday); 7 days and typically 168 hours. Weeks in local time may range from 167 to 169 hours due on daylight saving.
+Alias for [d3.timeSunday](#timeSunday); 7 days and typically 168 hours. Weeks in local time may range from 167 to 169 hours due to daylight saving.
 
 <a name="timeSunday" href="#timeSunday">#</a> d3.<b>timeSunday</b> · [Source](https://github.com/d3/d3-time/blob/master/src/week.js)
 <br><a href="#timeSunday">#</a> d3.<b>utcSunday</b> · [Source](https://github.com/d3/d3-time/blob/master/src/utcWeek.js)

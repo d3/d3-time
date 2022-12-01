@@ -277,8 +277,9 @@ Aliases for [d3.timeHour](#timeHour).[range](#interval_range) and [d3.utcHour](#
 
 <a name="timeDays" href="#timeDays">#</a> d3.<b>timeDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/day.js)
 <br><a href="#timeDays">#</a> d3.<b>utcDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/utcDay.js)
+<br><a href="#timeDays">#</a> d3.<b>unixDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-time/blob/master/src/unixDay.js)
 
-Aliases for [d3.timeDay](#timeDay).[range](#interval_range) and [d3.utcDay](#timeDay).[range](#interval_range).
+Aliases for [d3.timeDay](#timeDay).[range](#interval_range), [d3.utcDay](#timeDay).[range](#interval_range), and [d3.unixDay](#timeDay).[range](#interval_range).
 
 <a name="timeWeeks" href="#timeWeeks">#</a> d3.<b>timeWeeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])
 <br><a href="#timeWeeks">#</a> d3.<b>utcWeeks</b>(<i>start</i>, <i>stop</i>[, <i>step</i>])

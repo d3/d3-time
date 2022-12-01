@@ -10,7 +10,7 @@ import month from "./month.js";
 import year from "./year.js";
 import utcMinute from "./utcMinute.js";
 import utcHour from "./utcHour.js";
-import utcDay from "./utcDay.js";
+import unixDay from "./unixDay.js";
 import {utcSunday as utcWeek} from "./utcWeek.js";
 import utcMonth from "./utcMonth.js";
 import utcYear from "./utcYear.js";
@@ -58,7 +58,7 @@ function ticker(year, month, week, day, hour, minute) {
   return [ticks, tickInterval];
 }
 
-const [utcTicks, utcTickInterval] = ticker(utcYear, utcMonth, utcWeek, utcDay, utcHour, utcMinute);
+const [utcTicks, utcTickInterval] = ticker(utcYear, utcMonth, utcWeek, unixDay, utcHour, utcMinute);
 const [timeTicks, timeTickInterval] = ticker(year, month, week, day, hour, minute);
 
 export {utcTicks, utcTickInterval, timeTicks, timeTickInterval};

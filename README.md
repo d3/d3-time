@@ -197,8 +197,9 @@ Hours (e.g., 01:00 AM); 60 minutes. Note that advancing time by one hour in loca
 
 <a name="timeDay" href="#timeDay">#</a> d3.<b>timeDay</b> · [Source](https://github.com/d3/d3-time/blob/master/src/day.js "Source")
 <br><a href="#timeDay">#</a> d3.<b>utcDay</b> · [Source](https://github.com/d3/d3-time/blob/master/src/utcDay.js "Source")
+<br><a href="#timeDay">#</a> d3.<b>unixDay</b> · [Source](https://github.com/d3/d3-time/blob/master/src/unixDay.js "Source")
 
-Days (e.g., February 7, 2012 at 12:00 AM); typically 24 hours. Days in local time may range from 23 to 25 hours due to daylight saving.
+Days (e.g., February 7, 2012 at 12:00 AM); typically 24 hours. Days in local time may range from 23 to 25 hours due to daylight saving. d3.unixDay is like [d3.utcDay](#timeDay), except it counts days since the UNIX epoch (January 1, 1970) such that *interval*.every returns uniformly-spaced dates rather than varying based on day-of-month.
 
 <a name="timeWeek" href="#timeWeek">#</a> d3.<b>timeWeek</b> · [Source](https://github.com/d3/d3-time/blob/master/src/week.js "Source")
 <br><a href="#timeWeek">#</a> d3.<b>utcWeek</b> · [Source](https://github.com/d3/d3-time/blob/master/src/utcWeek.js "Source")

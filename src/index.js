@@ -62,46 +62,51 @@ export {
 
 export {
   default as utcMinute,
-  utcMinutes as utcMinutes
+  utcMinutes
 } from "./utcMinute.js";
 
 export {
   default as utcHour,
-  utcHours as utcHours
+  utcHours
 } from "./utcHour.js";
 
 export {
   default as utcDay,
-  utcDays as utcDays
+  utcDays
 } from "./utcDay.js";
+
+export {
+  default as unixDay,
+  unixDays
+} from "./unixDay.js";
 
 export {
   utcSunday as utcWeek,
   utcSundays as utcWeeks,
-  utcSunday as utcSunday,
-  utcSundays as utcSundays,
-  utcMonday as utcMonday,
-  utcMondays as utcMondays,
-  utcTuesday as utcTuesday,
-  utcTuesdays as utcTuesdays,
-  utcWednesday as utcWednesday,
-  utcWednesdays as utcWednesdays,
-  utcThursday as utcThursday,
-  utcThursdays as utcThursdays,
-  utcFriday as utcFriday,
-  utcFridays as utcFridays,
-  utcSaturday as utcSaturday,
-  utcSaturdays as utcSaturdays
+  utcSunday,
+  utcSundays,
+  utcMonday,
+  utcMondays,
+  utcTuesday,
+  utcTuesdays,
+  utcWednesday,
+  utcWednesdays,
+  utcThursday,
+  utcThursdays,
+  utcFriday,
+  utcFridays,
+  utcSaturday,
+  utcSaturdays
 } from "./utcWeek.js";
 
 export {
   default as utcMonth,
-  utcMonths as utcMonths
+  utcMonths
 } from "./utcMonth.js";
 
 export {
   default as utcYear,
-  utcYears as utcYears
+  utcYears
 } from "./utcYear.js";
 
 export {

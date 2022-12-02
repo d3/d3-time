@@ -25,10 +25,10 @@ export function timeInterval(floori, offseti, count, field) {
 
   interval.range = (start, stop, step) => {
     const range = [];
-    let previous;
     start = interval.ceil(start);
     step = step == null ? 1 : Math.floor(step);
     if (!(start < stop) || !(step > 0)) return range; // also handles Invalid Date
+    let previous;
     do range.push(previous = new Date(+start)), offseti(start, step), floori(start);
     while (previous < start && start < stop);
     return range;

@@ -1,86 +1,61 @@
 export {
-  default as timeInterval
+  timeInterval
 } from "./interval.js";
 
 export {
-  default as timeMillisecond,
-  milliseconds as timeMilliseconds,
-  default as utcMillisecond,
-  milliseconds as utcMilliseconds
+  millisecond as utcMillisecond,
+  milliseconds as utcMilliseconds,
+  millisecond as timeMillisecond,
+  milliseconds as timeMilliseconds
 } from "./millisecond.js";
 
 export {
-  default as timeSecond,
-  seconds as timeSeconds,
-  default as utcSecond,
-  seconds as utcSeconds
+  second as utcSecond,
+  seconds as utcSeconds,
+  second as timeSecond,
+  seconds as timeSeconds
 } from "./second.js";
 
 export {
-  default as timeMinute,
-  minutes as timeMinutes
+  timeMinute,
+  timeMinutes,
+  utcMinute,
+  utcMinutes
 } from "./minute.js";
 
 export {
-  default as timeHour,
-  hours as timeHours
+  timeHour,
+  timeHours,
+  utcHour,
+  utcHours
 } from "./hour.js";
 
 export {
-  default as timeDay,
-  days as timeDays
+  timeDay,
+  timeDays,
+  utcDay,
+  utcDays,
+  unixDay,
+  unixDays
 } from "./day.js";
 
 export {
-  sunday as timeWeek,
-  sundays as timeWeeks,
-  sunday as timeSunday,
-  sundays as timeSundays,
-  monday as timeMonday,
-  mondays as timeMondays,
-  tuesday as timeTuesday,
-  tuesdays as timeTuesdays,
-  wednesday as timeWednesday,
-  wednesdays as timeWednesdays,
-  thursday as timeThursday,
-  thursdays as timeThursdays,
-  friday as timeFriday,
-  fridays as timeFridays,
-  saturday as timeSaturday,
-  saturdays as timeSaturdays
-} from "./week.js";
-
-export {
-  default as timeMonth,
-  months as timeMonths
-} from "./month.js";
-
-export {
-  default as timeYear,
-  years as timeYears
-} from "./year.js";
-
-export {
-  default as utcMinute,
-  utcMinutes
-} from "./utcMinute.js";
-
-export {
-  default as utcHour,
-  utcHours
-} from "./utcHour.js";
-
-export {
-  default as utcDay,
-  utcDays
-} from "./utcDay.js";
-
-export {
-  default as unixDay,
-  unixDays
-} from "./unixDay.js";
-
-export {
+  timeSunday as timeWeek,
+  timeSundays as timeWeeks,
+  timeSunday,
+  timeSundays,
+  timeMonday,
+  timeMondays,
+  timeTuesday,
+  timeTuesdays,
+  timeWednesday,
+  timeWednesdays,
+  timeThursday,
+  timeThursdays,
+  timeFriday,
+  timeFridays,
+  timeSaturday,
+  timeSaturdays,
   utcSunday as utcWeek,
   utcSundays as utcWeeks,
   utcSunday,
@@ -97,17 +72,21 @@ export {
   utcFridays,
   utcSaturday,
   utcSaturdays
-} from "./utcWeek.js";
+} from "./week.js";
 
 export {
-  default as utcMonth,
+  timeMonth,
+  timeMonths,
+  utcMonth,
   utcMonths
-} from "./utcMonth.js";
+} from "./month.js";
 
 export {
-  default as utcYear,
+  timeYear,
+  timeYears,
+  utcYear,
   utcYears
-} from "./utcYear.js";
+} from "./year.js";
 
 export {
   utcTicks,

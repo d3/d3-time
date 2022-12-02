@@ -1,32 +1,31 @@
-var t0 = new Date,
-    t1 = new Date;
+const t0 = new Date, t1 = new Date;
 
-export default function newInterval(floori, offseti, count, field) {
+export function timeInterval(floori, offseti, count, field) {
 
   function interval(date) {
     return floori(date = arguments.length === 0 ? new Date : new Date(+date)), date;
   }
 
-  interval.floor = function(date) {
+  interval.floor = (date) => {
     return floori(date = new Date(+date)), date;
   };
 
-  interval.ceil = function(date) {
+  interval.ceil = (date) => {
     return floori(date = new Date(date - 1)), offseti(date, 1), floori(date), date;
   };
 
-  interval.round = function(date) {
-    var d0 = interval(date),
-        d1 = interval.ceil(date);
+  interval.round = (date) => {
+    const d0 = interval(date), d1 = interval.ceil(date);
     return date - d0 < d1 - date ? d0 : d1;
   };
 
-  interval.offset = function(date, step) {
+  interval.offset = (date, step) => {
     return offseti(date = new Date(+date), step == null ? 1 : Math.floor(step)), date;
   };
 
-  interval.range = function(start, stop, step) {
-    var range = [], previous;
+  interval.range = (start, stop, step) => {
+    const range = [];
+    let previous;
     start = interval.ceil(start);
     step = step == null ? 1 : Math.floor(step);
     if (!(start < stop) || !(step > 0)) return range; // also handles Invalid Date
@@ -35,10 +34,10 @@ export default function newInterval(floori, offseti, count, field) {
     return range;
   };
 
-  interval.filter = function(test) {
-    return newInterval(function(date) {
+  interval.filter = (test) => {
+    return timeInterval((date) => {
       if (date >= date) while (floori(date), !test(date)) date.setTime(date - 1);
-    }, function(date, step) {
+    }, (date, step) => {
       if (date >= date) {
         if (step < 0) while (++step <= 0) {
           while (offseti(date, -1), !test(date)) {} // eslint-disable-line no-empty
@@ -50,19 +49,19 @@ export default function newInterval(floori, offseti, count, field) {
   };
 
   if (count) {
-    interval.count = function(start, end) {
+    interval.count = (start, end) => {
       t0.setTime(+start), t1.setTime(+end);
       floori(t0), floori(t1);
       return Math.floor(count(t0, t1));
     };
 
-    interval.every = function(step) {
+    interval.every = (step) => {
       step = Math.floor(step);
       return !isFinite(step) || !(step > 0) ? null
           : !(step > 1) ? interval
           : interval.filter(field
-              ? function(d) { return field(d) % step === 0; }
-              : function(d) { return interval.count(0, d) % step === 0; });
+              ? (d) => field(d) % step === 0
+              : (d) => interval.count(0, d) % step === 0);
     };
   }
 

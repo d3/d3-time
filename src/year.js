@@ -1,26 +1,49 @@
-import interval from "./interval.js";
+import {timeInterval} from "./interval.js";
 
-var year = interval(function(date) {
+export const timeYear = timeInterval((date) => {
   date.setMonth(0, 1);
   date.setHours(0, 0, 0, 0);
-}, function(date, step) {
+}, (date, step) => {
   date.setFullYear(date.getFullYear() + step);
-}, function(start, end) {
+}, (start, end) => {
   return end.getFullYear() - start.getFullYear();
-}, function(date) {
+}, (date) => {
   return date.getFullYear();
 });
 
 // An optimized implementation for this simple case.
-year.every = function(k) {
-  return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : interval(function(date) {
+timeYear.every = (k) => {
+  return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : timeInterval((date) => {
     date.setFullYear(Math.floor(date.getFullYear() / k) * k);
     date.setMonth(0, 1);
     date.setHours(0, 0, 0, 0);
-  }, function(date, step) {
+  }, (date, step) => {
     date.setFullYear(date.getFullYear() + step * k);
   });
 };
 
-export default year;
-export var years = year.range;
+export const timeYears = timeYear.range;
+
+export const utcYear = timeInterval((date) => {
+  date.setUTCMonth(0, 1);
+  date.setUTCHours(0, 0, 0, 0);
+}, (date, step) => {
+  date.setUTCFullYear(date.getUTCFullYear() + step);
+}, (start, end) => {
+  return end.getUTCFullYear() - start.getUTCFullYear();
+}, (date) => {
+  return date.getUTCFullYear();
+});
+
+// An optimized implementation for this simple case.
+utcYear.every = (k) => {
+  return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : timeInterval((date) => {
+    date.setUTCFullYear(Math.floor(date.getUTCFullYear() / k) * k);
+    date.setUTCMonth(0, 1);
+    date.setUTCHours(0, 0, 0, 0);
+  }, (date, step) => {
+    date.setUTCFullYear(date.getUTCFullYear() + step * k);
+  });
+};
+
+export const utcYears = utcYear.range;

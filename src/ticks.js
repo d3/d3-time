@@ -1,19 +1,13 @@
 import {bisector, tickStep} from "d3-array";
 import {durationDay, durationHour, durationMinute, durationMonth, durationSecond, durationWeek, durationYear} from "./duration.js";
-import millisecond from "./millisecond.js";
-import second from "./second.js";
-import minute from "./minute.js";
-import hour from "./hour.js";
-import day from "./day.js";
-import {sunday as week} from "./week.js";
-import month from "./month.js";
-import year from "./year.js";
-import utcMinute from "./utcMinute.js";
-import utcHour from "./utcHour.js";
-import unixDay from "./unixDay.js";
-import {utcSunday as utcWeek} from "./utcWeek.js";
-import utcMonth from "./utcMonth.js";
-import utcYear from "./utcYear.js";
+import {millisecond} from "./millisecond.js";
+import {second} from "./second.js";
+import {timeMinute, utcMinute} from "./minute.js";
+import {timeHour, utcHour} from "./hour.js";
+import {timeDay, unixDay} from "./day.js";
+import {timeSunday, utcSunday} from "./week.js";
+import {timeMonth, utcMonth} from "./month.js";
+import {timeYear, utcYear} from "./year.js";
 
 function ticker(year, month, week, day, hour, minute) {
 
@@ -58,7 +52,7 @@ function ticker(year, month, week, day, hour, minute) {
   return [ticks, tickInterval];
 }
 
-const [utcTicks, utcTickInterval] = ticker(utcYear, utcMonth, utcWeek, unixDay, utcHour, utcMinute);
-const [timeTicks, timeTickInterval] = ticker(year, month, week, day, hour, minute);
+const [utcTicks, utcTickInterval] = ticker(utcYear, utcMonth, utcSunday, unixDay, utcHour, utcMinute);
+const [timeTicks, timeTickInterval] = ticker(timeYear, timeMonth, timeSunday, timeDay, timeHour, timeMinute);
 
 export {utcTicks, utcTickInterval, timeTicks, timeTickInterval};

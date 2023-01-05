@@ -196,8 +196,8 @@ Minutes (e.g., 01:02:00 AM); 60 seconds. Note that ECMAScript [ignores leap seco
 Hours (e.g., 01:00 AM); 60 minutes. Note that advancing time by one hour in local time can return the same hour or skip an hour due to daylight saving.
 
 <a name="timeDay" href="#timeDay">#</a> d3.<b>timeDay</b> · [Source](https://github.com/d3/d3-time/blob/main/src/day.js "Source")
-<br><a href="#timeDay">#</a> d3.<b>utcDay</b> · [Source](https://github.com/d3/d3-time/blob/main/src/utcDay.js "Source")
-<br><a href="#timeDay">#</a> d3.<b>unixDay</b> · [Source](https://github.com/d3/d3-time/blob/main/src/unixDay.js "Source")
+<br><a href="#timeDay">#</a> d3.<b>utcDay</b> · [Source](https://github.com/d3/d3-time/blob/main/src/day.js#L13 "Source")
+<br><a href="#timeDay">#</a> d3.<b>unixDay</b> · [Source](https://github.com/d3/d3-time/blob/main/src/day.js#L25 "Source")
 
 Days (e.g., February 7, 2012 at 12:00 AM); typically 24 hours. Days in local time may range from 23 to 25 hours due to daylight saving. d3.unixDay is like [d3.utcDay](#timeDay), except it counts days since the UNIX epoch (January 1, 1970) such that *interval*.every returns uniformly-spaced dates rather than varying based on day-of-month.
 
@@ -276,8 +276,8 @@ Aliases for [d3.timeMinute](#timeMinute).[range](#interval_range) and [d3.utcMin
 Aliases for [d3.timeHour](#timeHour).[range](#interval_range) and [d3.utcHour](#timeHour).[range](#interval_range).
 
 <a name="timeDays" href="#timeDays">#</a> d3.<b>timeDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-time/blob/main/src/day.js)
-<br><a href="#timeDays">#</a> d3.<b>utcDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-time/blob/main/src/utcDay.js)
-<br><a href="#timeDays">#</a> d3.<b>unixDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-time/blob/main/src/unixDay.js)
+<br><a href="#timeDays">#</a> d3.<b>utcDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-time/blob/main/src/day.js#L23)
+<br><a href="#timeDays">#</a> d3.<b>unixDays</b>(<i>start</i>, <i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-time/blob/main/src/day.js#L35)
 
 Aliases for [d3.timeDay](#timeDay).[range](#interval_range), [d3.utcDay](#timeDay).[range](#interval_range), and [d3.unixDay](#timeDay).[range](#interval_range).
 

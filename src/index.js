@@ -33,10 +33,12 @@ export {
 export {
   timeDay,
   timeDays,
+  timeMonthDay,
+  timeMonthDays,
   utcDay,
   utcDays,
-  unixDay,
-  unixDays
+  utcMonthDay,
+  utcMonthDays
 } from "./day.js";
 
 export {

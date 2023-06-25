@@ -158,6 +158,16 @@ it("utcTicks(start, stop, count) can generate 2-day ticks", () => {
   ]);
 });
 
+it("utcTicks(start, stop, count) can generate regular 2-day ticks across month boundaries", () => {
+  assert.deepStrictEqual(utcTicks(utc(2011, 2, 25, 16, 28, 27), utc(2011, 3, 5, 21, 34, 12), 4), [
+    utc(2011, 2, 27, 0, 0),
+    utc(2011, 2, 29, 0, 0),
+    utc(2011, 2, 31, 0, 0),
+    utc(2011, 3, 2, 0, 0),
+    utc(2011, 3, 4, 0, 0)
+  ]);
+});
+
 it("utcTicks(start, stop, count) can generate 1-week ticks", () => {
   assert.deepStrictEqual(utcTicks(utc(2011, 0, 1, 16, 28, 27), utc(2011, 0, 23, 21, 34, 12), 4), [
     utc(2011, 0, 2, 0, 0),

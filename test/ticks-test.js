@@ -163,6 +163,16 @@ it("timeTicks(start, stop, count) can generate 2-day ticks", () => {
   ]);
 });
 
+it("timeTicks(start, stop, count) can generate regular 2-day ticks across month boundaries", () => {
+  assert.deepStrictEqual(timeTicks(local(2011, 0, 25, 16, 28, 27), local(2011, 1, 5, 21, 34, 12), 4), [
+    local(2011, 0, 27, 0, 0),
+    local(2011, 0, 29, 0, 0),
+    local(2011, 0, 31, 0, 0),
+    local(2011, 1, 2, 0, 0),
+    local(2011, 1, 4, 0, 0)
+  ]);
+});
+
 it("timeTicks(start, stop, count) can generate 1-week ticks", () => {
   assert.deepStrictEqual(timeTicks(local(2011, 0, 1, 16, 28, 27), local(2011, 0, 23, 21, 34, 12), 4), [
     local(2011, 0, 2, 0, 0),

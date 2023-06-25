@@ -33,10 +33,14 @@ export {
 export {
   timeDay,
   timeDays,
+  timeMonthDay,
+  timeMonthDays,
+  utcDay as unixDay, // deprecated; use utcDay
+  utcDays as unixDays, // deprecated; use utcDays
   utcDay,
   utcDays,
-  unixDay,
-  unixDays
+  utcMonthDay,
+  utcMonthDays
 } from "./day.js";
 
 export {

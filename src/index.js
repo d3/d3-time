@@ -35,6 +35,8 @@ export {
   timeDays,
   timeMonthDay,
   timeMonthDays,
+  utcDay as unixDay, // deprecated; use utcDay
+  utcDays as unixDays, // deprecated; use utcDays
   utcDay,
   utcDays,
   utcMonthDay,

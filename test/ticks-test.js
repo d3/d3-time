@@ -136,6 +136,16 @@ it("timeTicks(start, stop, count) can generate 6-hour ticks", () => {
   ]);
 });
 
+// Note: not aligned at midnight because of daylight savings time!
+it("timeTicks(start, stop, count) can generate 6-hour ticks across daylight savings time", () => {
+  assert.deepStrictEqual(timeTicks(local(2011, 3, 1, 16, 28, 27), local(2011, 3, 2, 14, 34, 12), 4), [
+    local(2011, 3, 1, 19, 0),
+    local(2011, 3, 2, 1, 0),
+    local(2011, 3, 2, 7, 0),
+    local(2011, 3, 2, 13, 0)
+  ]);
+});
+
 it("timeTicks(start, stop, count) can generate 12-hour ticks", () => {
   assert.deepStrictEqual(timeTicks(local(2011, 0, 1, 16, 28, 27), local(2011, 0, 3, 21, 34, 12), 4), [
     local(2011, 0, 2, 0, 0),
@@ -156,10 +166,9 @@ it("timeTicks(start, stop, count) can generate 1-day ticks", () => {
 
 it("timeTicks(start, stop, count) can generate 2-day ticks", () => {
   assert.deepStrictEqual(timeTicks(local(2011, 0, 2, 16, 28, 27), local(2011, 0, 9, 21, 34, 12), 4), [
-    local(2011, 0, 3, 0, 0),
-    local(2011, 0, 5, 0, 0),
-    local(2011, 0, 7, 0, 0),
-    local(2011, 0, 9, 0, 0)
+    local(2011, 0, 4, 0, 0),
+    local(2011, 0, 6, 0, 0),
+    local(2011, 0, 8, 0, 0)
   ]);
 });
 

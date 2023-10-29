@@ -35,8 +35,8 @@ export {
   timeDays,
   utcDay,
   utcDays,
-  unixDay,
-  unixDays
+  utcDay as unixDay, // deprecated! use utcDay
+  utcDays as unixDays // deprecated! use utcDays
 } from "./day.js";
 
 export {

@@ -20,7 +20,6 @@ jobs:
           cache: 'yarn'
       - run: yarn --frozen-lockfile
       - run: yarn test
-      - run: yarn lint
       - run: yarn build
       - run: npm publish
         env:

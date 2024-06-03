@@ -37,15 +37,16 @@
     "d3-array": "2 - 3"
   },
   "devDependencies": {
-    "eslint": "8",
-    "mocha": "10",
-    "rollup": "3",
-    "rollup-plugin-terser": "7"
+    "@rollup/plugin-terser": "^0.4.4",
+    "eslint": "^9.4.0",
+    "globals": "^15.3.0",
+    "mocha": "^10.4.0",
+    "rollup": "^4.18.0"
   },
   "scripts": {
     "test": "TZ=America/Los_Angeles mocha 'test/**/*-test.js' && eslint src test",
-    "prepublishOnly": "rm -rf dist && yarn test && rollup -c",
-    "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../${npm_package_name}/dist/${npm_package_name}.js ${npm_package_name}.v${npm_package_version%%.*}.js && cp ../${npm_package_name}/dist/${npm_package_name}.min.js ${npm_package_name}.v${npm_package_version%%.*}.min.js && git add ${npm_package_name}.v${npm_package_version%%.*}.js ${npm_package_name}.v${npm_package_version%%.*}.min.js && git commit -m \"${npm_package_name} ${npm_package_version}\" && git push && cd -"
+    "lint": "eslint src test",
+    "build": "rm -rf dist && rollup -c"
   },
   "engines": {
     "node": ">=12"

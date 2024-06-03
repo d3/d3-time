@@ -45,7 +45,6 @@
   },
   "scripts": {
     "test": "TZ=America/Los_Angeles mocha 'test/**/*-test.js' && eslint src test",
-    "lint": "eslint src test",
     "build": "rm -rf dist && rollup -c"
   },
   "engines": {

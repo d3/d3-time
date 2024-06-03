@@ -208,8 +208,8 @@ it("timeDay.count(start, end) returns 364 or 365 for a full year", () => {
   assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011, 11, 31)), 364);
 });
 
-it("timeDay.every(step) returns every stepth day, starting with the first day of the month", () => {
-  assert.deepStrictEqual(timeDay.every(3).range(local(2008, 11, 30, 0, 12), local(2009, 0, 5, 23, 48)), [local(2008, 11, 31), local(2009, 0, 1), local(2009, 0, 4)]);
-  assert.deepStrictEqual(timeDay.every(5).range(local(2008, 11, 30, 0, 12), local(2009, 0, 6, 23, 48)), [local(2008, 11, 31), local(2009, 0, 1), local(2009, 0, 6)]);
-  assert.deepStrictEqual(timeDay.every(7).range(local(2008, 11, 30, 0, 12), local(2009, 0, 8, 23, 48)), [local(2009, 0, 1), local(2009, 0, 8)]);
+it("timeDay.every(step) returns every stepth day without resetting on the first of the month", () => {
+  assert.deepStrictEqual(timeDay.every(3).range(local(2008, 11, 30, 0, 12), local(2009, 0, 5, 23, 48)), [local(2008, 11, 31), local(2009, 0, 3)]);
+  assert.deepStrictEqual(timeDay.every(5).range(local(2008, 11, 25, 0, 12), local(2009, 0, 6, 23, 48)), [local(2008, 11, 27), local(2009, 0, 1), local(2009, 0, 6)]);
+  assert.deepStrictEqual(timeDay.every(7).range(local(2008, 11, 23, 0, 12), local(2009, 0, 8, 23, 48)), [local(2008, 11, 25), local(2009, 0, 1), local(2009, 0, 8)]);
 });

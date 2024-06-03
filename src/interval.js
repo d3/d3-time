@@ -1,6 +1,6 @@
 const t0 = new Date, t1 = new Date;
 
-export function timeInterval(floori, offseti, count, field) {
+export function timeInterval(floori, offseti, count, epoch = 0) {
 
   function interval(date) {
     return floori(date = arguments.length === 0 ? new Date : new Date(+date)), date;
@@ -59,9 +59,9 @@ export function timeInterval(floori, offseti, count, field) {
       step = Math.floor(step);
       return !isFinite(step) || !(step > 0) ? null
           : !(step > 1) ? interval
-          : interval.filter(field
-              ? (d) => field(d) % step === 0
-              : (d) => interval.count(0, d) % step === 0);
+          : interval.filter(typeof epoch === "function" // deprecated field
+              ? (d) => epoch(d) % step === 0
+              : (d) => interval.count(epoch, d) % step === 0);
     };
   }
 

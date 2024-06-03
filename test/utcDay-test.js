@@ -110,8 +110,8 @@ it("utcDay.count(start, end) returns 364 or 365 for a full year", () => {
   assert.strictEqual(utcDay.count(utc(2011,  0,  1), utc(2011, 11, 31)), 364);
 });
 
-it("utcDay.every(step) returns every stepth day, starting with the first day of the month", () => {
-  assert.deepStrictEqual(utcDay.every(3).range(utc(2008, 11, 30, 0, 12), utc(2009, 0, 5, 23, 48)), [utc(2008, 11, 31), utc(2009, 0, 1), utc(2009, 0, 4)]);
-  assert.deepStrictEqual(utcDay.every(5).range(utc(2008, 11, 30, 0, 12), utc(2009, 0, 6, 23, 48)), [utc(2008, 11, 31), utc(2009, 0, 1), utc(2009, 0, 6)]);
-  assert.deepStrictEqual(utcDay.every(7).range(utc(2008, 11, 30, 0, 12), utc(2009, 0, 8, 23, 48)), [utc(2009, 0, 1), utc(2009, 0, 8)]);
+it("utcDay.every(step) returns every stepth day without resetting on the first of the month", () => {
+  assert.deepStrictEqual(utcDay.every(3).range(utc(2008, 11, 30, 0, 12), utc(2009, 0, 5, 23, 48)), [utc(2008, 11, 31), utc(2009, 0, 3)]);
+  assert.deepStrictEqual(utcDay.every(5).range(utc(2008, 11, 25, 0, 12), utc(2009, 0, 6, 23, 48)), [utc(2008, 11, 27), utc(2009, 0, 1), utc(2009, 0, 6)]);
+  assert.deepStrictEqual(utcDay.every(7).range(utc(2008, 11, 23, 0, 12), utc(2009, 0, 8, 23, 48)), [utc(2008, 11, 25), utc(2009, 0, 1), utc(2009, 0, 8)]);
 });

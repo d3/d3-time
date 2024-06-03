@@ -1,15 +1,14 @@
 import {timeInterval} from "./interval.js";
 import {durationMinute, durationWeek} from "./duration.js";
+import {timeEpoch} from "./epoch.js";
 
 function timeWeekday(i) {
-  return timeInterval((date) => {
-    date.setDate(date.getDate() - (date.getDay() + 7 - i) % 7);
-    date.setHours(0, 0, 0, 0);
-  }, (date, step) => {
-    date.setDate(date.getDate() + step * 7);
-  }, (start, end) => {
-    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationWeek;
-  });
+  return timeInterval(
+    (date) => (date.setDate(date.getDate() - (date.getDay() + 7 - i) % 7), date.setHours(0, 0, 0, 0)),
+    (date, step) => date.setDate(date.getDate() + step * 7),
+    (start, end) => (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationWeek,
+    timeEpoch
+  );
 }
 
 export const timeSunday = timeWeekday(0);
@@ -29,14 +28,11 @@ export const timeFridays = timeFriday.range;
 export const timeSaturdays = timeSaturday.range;
 
 function utcWeekday(i) {
-  return timeInterval((date) => {
-    date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 7 - i) % 7);
-    date.setUTCHours(0, 0, 0, 0);
-  }, (date, step) => {
-    date.setUTCDate(date.getUTCDate() + step * 7);
-  }, (start, end) => {
-    return (end - start) / durationWeek;
-  });
+  return timeInterval(
+    (date) => (date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 7 - i) % 7), date.setUTCHours(0, 0, 0, 0)),
+    (date, step) => date.setUTCDate(date.getUTCDate() + step * 7),
+    (start, end) => (end - start) / durationWeek
+  );
 }
 
 export const utcSunday = utcWeekday(0);

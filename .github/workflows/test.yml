@@ -17,6 +17,4 @@ jobs:
         cache: yarn
     - run: yarn --frozen-lockfile
     - run: yarn test
-    - run: |
-        echo ::add-matcher::.github/eslint.json
-        yarn run eslint src test --format=compact
+    - run: yarn lint

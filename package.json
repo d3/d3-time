@@ -22,31 +22,33 @@
   "type": "module",
   "files": [
     "dist/**/*.js",
-    "src/**/*.js"
+    "dist/**/*.mjs"
   ],
-  "module": "src/index.js",
-  "main": "src/index.js",
+  "module": "dist/d3-time.mjs",
+  "main": "dist/d3-time.mjs",
   "jsdelivr": "dist/d3-time.min.js",
   "unpkg": "dist/d3-time.min.js",
   "exports": {
     "umd": "./dist/d3-time.min.js",
-    "default": "./src/index.js"
+    "default": "./dist/d3-time.mjs"
   },
   "sideEffects": false,
   "dependencies": {
     "d3-array": "2 - 3"
   },
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.4",
-    "eslint": "^9.4.0",
-    "globals": "^15.3.0",
-    "mocha": "^10.4.0",
-    "rollup": "^4.18.0"
+    "@eslint/js": "^9.39.5",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.2",
+    "eslint": "^9.39.5",
+    "globals": "^15.15.0",
+    "mocha": "^10.8.2",
+    "rollup": "^4.67.4"
   },
   "scripts": {
     "test": "TZ=America/Los_Angeles mocha 'test/**/*-test.js' && eslint src test",
     "lint": "eslint src test",
-    "build": "rm -rf dist && rollup -c"
+    "prepublishOnly": "rm -rf dist && rollup -c"
   },
   "engines": {
     "node": ">=12"

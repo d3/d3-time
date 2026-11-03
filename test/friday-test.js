@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {timeFriday, timeFridays} from "../src/index.js";
+import {timeFriday, timeFridays} from "d3-time";
 import {local} from "./date.js";
 
 it("timeFridays in an alias for timeFriday.range", () => {

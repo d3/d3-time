@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {timeDay, timeHour, timeInterval, timeMinute, timeSecond, timeYear} from "../src/index.js";
+import {timeDay, timeHour, timeInterval, timeMinute, timeSecond, timeYear} from "d3-time";
 import {local, utc} from "./date.js";
 
 it("timeInterval() is equivalent to timeInterval.floor(new Date)", () => {

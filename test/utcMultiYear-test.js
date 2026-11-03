@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {utcYear} from "../src/index.js";
+import {utcYear} from "d3-time";
 import {utc} from "./date.js";
 
 it("utcYear.every(n).floor(date) returns integer multiples of n years", () => {

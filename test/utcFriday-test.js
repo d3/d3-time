@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {utcFriday, utcFridays} from "../src/index.js";
+import {utcFriday, utcFridays} from "d3-time";
 import {utc} from "./date.js";
 
 it("utcFridays in an alias for utcFriday.range", () => {

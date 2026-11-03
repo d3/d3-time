@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {utcSunday, utcWeek} from "../src/index.js";
 import {utc} from "./date.js";
 

@@ -1,12 +1,13 @@
+import {test} from "vitest";
 import assert from "assert";
 import {utcMonday, utcMondays} from "../src/index.js";
 import {utc} from "./date.js";
 
-it("utcMondays in an alias for utcMonday.range", () => {
+test("utcMondays in an alias for utcMonday.range", () => {
   assert.strictEqual(utcMondays, utcMonday.range);
 });
 
-it("utcMonday.floor(date) returns Mondays", () => {
+test("utcMonday.floor(date) returns Mondays", () => {
   assert.deepStrictEqual(utcMonday.floor(utc(2011,  0,  1, 23, 59, 59)), utc(2010, 11, 27));
   assert.deepStrictEqual(utcMonday.floor(utc(2011,  0,  2,  0,  0,  0)), utc(2010, 11, 27));
   assert.deepStrictEqual(utcMonday.floor(utc(2011,  0,  2,  0,  0,  1)), utc(2010, 11, 27));
@@ -15,7 +16,7 @@ it("utcMonday.floor(date) returns Mondays", () => {
   assert.deepStrictEqual(utcMonday.floor(utc(2011,  0,  3,  0,  0,  1)), utc(2011,  0,  3));
 });
 
-it("utcMonday.range(start, stop, step) returns every step Monday", () => {
+test("utcMonday.range(start, stop, step) returns every step Monday", () => {
   assert.deepStrictEqual(utcMonday.range(utc(2011, 11,  1), utc(2012,  0, 15), 2), [
     utc(2011, 11,  5),
     utc(2011, 11, 19),
@@ -23,7 +24,7 @@ it("utcMonday.range(start, stop, step) returns every step Monday", () => {
   ]);
 });
 
-it("utcMonday.count(start, end) counts Mondays after start (exclusive) and before end (inclusive)", () => {
+test("utcMonday.count(start, end) counts Mondays after start (exclusive) and before end (inclusive)", () => {
   //     January 2014
   // Su Mo Tu We Th Fr Sa
   //           1  2  3  4
@@ -48,7 +49,7 @@ it("utcMonday.count(start, end) counts Mondays after start (exclusive) and befor
   assert.strictEqual(utcMonday.count(utc(2018,  0,  1), utc(2018,  0,  9)), 1);
 });
 
-it("utcMonday.count(start, end) does not observe daylight saving", () => {
+test("utcMonday.count(start, end) does not observe daylight saving", () => {
   assert.strictEqual(utcMonday.count(utc(2011,  0,  1), utc(2011,  2, 13,  1)), 10);
   assert.strictEqual(utcMonday.count(utc(2011,  0,  1), utc(2011,  2, 13,  3)), 10);
   assert.strictEqual(utcMonday.count(utc(2011,  0,  1), utc(2011,  2, 13,  4)), 10);

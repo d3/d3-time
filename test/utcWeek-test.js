@@ -1,5 +1,6 @@
-import assert from "assert";
-import {utcSunday, utcWeek} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {utcSunday, utcWeek} from "d3-time";
 import {utc} from "./date.js";
 
 it("utcWeek.floor(date) returns sundays", () => {

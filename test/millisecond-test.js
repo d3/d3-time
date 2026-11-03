@@ -1,5 +1,6 @@
-import assert from "assert";
-import {timeMillisecond} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {timeMillisecond} from "d3-time";
 import {local, utc} from "./date.js";
 
 it("timeMillisecond.every(step) returns every stepth millisecond, starting with the first millisecond of the second", () => {

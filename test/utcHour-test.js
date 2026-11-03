@@ -1,5 +1,6 @@
-import assert from "assert";
-import {utcHour} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {utcHour} from "d3-time";
 import {utc} from "./date.js";
 
 it("utcHour.floor(date) returns hours", () => {

@@ -7,6 +7,6 @@ This module implements a convenient API for calendar math, allowing to work with
 ## Resources
 
 - [Documentation](https://d3js.org/d3-time)
-- [Examples](https://observablehq.com/collection/@d3/d3-time)
+- [Examples](https://observablehq.com/@d3/-/collection/d3-time)
 - [Releases](https://github.com/d3/d3-time/releases)
 - [Getting help](https://d3js.org/community)

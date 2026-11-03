@@ -1,5 +1,6 @@
-import assert from "assert";
-import {timeMonth, timeMonths} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {timeMonth, timeMonths} from "d3-time";
 import {local, utc} from "./date.js";
 
 it("timeMonths in an alias for timeMonth.range", () => {

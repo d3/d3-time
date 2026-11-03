@@ -1,5 +1,6 @@
-import assert from "assert";
-import {timeMinute, timeTicks} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {timeMinute, timeTicks} from "d3-time";
 import {local} from "./date.js";
 
 it("timeTicks(start, stop, interval) respects the specified interval", () => {

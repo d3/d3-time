@@ -1,5 +1,6 @@
-import assert from "assert";
-import {timeSunday, timeWeek} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {timeSunday, timeWeek} from "d3-time";
 import {local} from "./date.js";
 
 it("timeWeek.floor(date) returns sundays", () => {

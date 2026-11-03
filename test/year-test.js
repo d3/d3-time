@@ -1,5 +1,6 @@
-import assert from "assert";
-import {timeYear} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {timeYear} from "d3-time";
 import {local} from "./date.js";
 
 it("timeYear.floor(date) returns years", () => {

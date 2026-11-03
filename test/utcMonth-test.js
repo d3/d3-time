@@ -1,5 +1,6 @@
-import assert from "assert";
-import {utcMonth, utcMonths} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {utcMonth, utcMonths} from "d3-time";
 import {utc} from "./date.js";
 
 it("utcMonths in an alias for utcMonth.range", () => {

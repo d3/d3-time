@@ -1,13 +1,13 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {timeTuesday, timeTuesdays} from "../src/index.js";
 import {local} from "./date.js";
 
-test("timeTuesdays in an alias for timeTuesday.range", () => {
+it("timeTuesdays in an alias for timeTuesday.range", () => {
   assert.strictEqual(timeTuesdays, timeTuesday.range);
 });
 
-test("timeTuesday.floor(date) returns Tuesdays", () => {
+it("timeTuesday.floor(date) returns Tuesdays", () => {
   assert.deepStrictEqual(timeTuesday.floor(local(2011,  0,  2, 23, 59, 59)), local(2010, 11, 28));
   assert.deepStrictEqual(timeTuesday.floor(local(2011,  0,  3,  0,  0,  0)), local(2010, 11, 28));
   assert.deepStrictEqual(timeTuesday.floor(local(2011,  0,  3,  0,  0,  1)), local(2010, 11, 28));
@@ -16,7 +16,7 @@ test("timeTuesday.floor(date) returns Tuesdays", () => {
   assert.deepStrictEqual(timeTuesday.floor(local(2011,  0,  4,  0,  0,  1)), local(2011,  0,  4));
 });
 
-test("timeTuesday.count(start, end) counts Tuesdays after start (exclusive) and before end (inclusive)", () => {
+it("timeTuesday.count(start, end) counts Tuesdays after start (exclusive) and before end (inclusive)", () => {
   //     January 2014
   // Su Mo Tu We Th Fr Sa
   //           1  2  3  4
@@ -41,7 +41,7 @@ test("timeTuesday.count(start, end) counts Tuesdays after start (exclusive) and 
   assert.strictEqual(timeTuesday.count(local(2013,  0,  1), local(2013,  0,  9)), 1);
 });
 
-test("timeTuesday.count(start, end) observes daylight saving", () => {
+it("timeTuesday.count(start, end) observes daylight saving", () => {
   assert.strictEqual(timeTuesday.count(local(2011,  0,  1), local(2011,  2, 13,  1)), 10);
   assert.strictEqual(timeTuesday.count(local(2011,  0,  1), local(2011,  2, 13,  3)), 10);
   assert.strictEqual(timeTuesday.count(local(2011,  0,  1), local(2011,  2, 13,  4)), 10);

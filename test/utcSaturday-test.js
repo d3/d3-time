@@ -1,13 +1,13 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {utcSaturday, utcSaturdays} from "../src/index.js";
 import {utc} from "./date.js";
 
-test("utcSaturdays in an alias for utcSaturday.range", () => {
+it("utcSaturdays in an alias for utcSaturday.range", () => {
   assert.strictEqual(utcSaturdays, utcSaturday.range);
 });
 
-test("utcSaturday.floor(date) returns Saturdays", () => {
+it("utcSaturday.floor(date) returns Saturdays", () => {
   assert.deepStrictEqual(utcSaturday.floor(utc(2011,  0,  6, 23, 59, 59)), utc(2011,  0,  1));
   assert.deepStrictEqual(utcSaturday.floor(utc(2011,  0,  7,  0,  0,  0)), utc(2011,  0,  1));
   assert.deepStrictEqual(utcSaturday.floor(utc(2011,  0,  7,  0,  0,  1)), utc(2011,  0,  1));
@@ -16,7 +16,7 @@ test("utcSaturday.floor(date) returns Saturdays", () => {
   assert.deepStrictEqual(utcSaturday.floor(utc(2011,  0,  8,  0,  0,  1)), utc(2011,  0,  8));
 });
 
-test("utcSaturday.count(start, end) counts Saturdays after start (exclusive) and before end (inclusive)", () => {
+it("utcSaturday.count(start, end) counts Saturdays after start (exclusive) and before end (inclusive)", () => {
   //       January 2012
   // Su Mo Tu We Th Fr Sa
   //  1  2  3  4  5  6  7
@@ -42,7 +42,7 @@ test("utcSaturday.count(start, end) counts Saturdays after start (exclusive) and
   assert.strictEqual(utcSaturday.count(utc(2011,  0,  1), utc(2011,  0,  9)), 1);
 });
 
-test("utcSaturday.count(start, end) does not observe daylight saving", () => {
+it("utcSaturday.count(start, end) does not observe daylight saving", () => {
   assert.strictEqual(utcSaturday.count(utc(2011,  0,  1), utc(2011,  2, 13,  1)), 10);
   assert.strictEqual(utcSaturday.count(utc(2011,  0,  1), utc(2011,  2, 13,  3)), 10);
   assert.strictEqual(utcSaturday.count(utc(2011,  0,  1), utc(2011,  2, 13,  4)), 10);

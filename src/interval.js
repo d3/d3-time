@@ -20,7 +20,10 @@ export function timeInterval(floori, offseti, count, field) {
   };
 
   interval.offset = (date, step) => {
-    return offseti(date = new Date(+date), step == null ? 1 : Math.floor(step)), date;
+    date = new Date(+date);
+    step = step == null ? 1 : Math.floor(step);
+    if (step !== 0) offseti(date, step);
+    return date;
   };
 
   interval.range = (start, stop, step) => {

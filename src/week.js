@@ -8,7 +8,8 @@ function timeWeekday(i) {
   }, (date, step) => {
     date.setDate(date.getDate() + step * 7);
   }, (start, end) => {
-    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationWeek;
+    // A boundary may be after midnight when daylight saving time skips it.
+    return Math.round((end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationWeek);
   });
 }
 

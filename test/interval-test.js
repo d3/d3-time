@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {timeDay, timeHour, timeInterval, timeMinute, timeSecond, timeYear} from "d3-time";
+import {timeDay, timeHour, timeInterval, timeMinute, timeMonth, timeSecond, timeWeek, timeYear} from "d3-time";
 import {local, utc} from "./date.js";
 
 it("timeInterval() is equivalent to timeInterval.floor(new Date)", () => {
@@ -106,4 +106,16 @@ it("timeInterval.every(…).offset(date, step) returns the expected value when s
   const i = timeMinute.every(15);
   assert.deepStrictEqual(i.offset(local(2015, 0, 1, 12, 34), 1.2), local(2015, 0, 1, 12, 45));
   assert.deepStrictEqual(i.offset(local(2015, 0, 1, 12, 34), -0.8), local(2015, 0, 1, 12, 30));
+});
+
+it("timeInterval.offset(date, 0) preserves the second occurrence of a repeated local time", () => {
+  const date = new Date("2024-11-03T09:30:00.000Z"); // 01:30 PST in America/Los_Angeles
+  for (const interval of [timeDay, timeWeek, timeMonth, timeYear, timeYear.every(10)]) {
+    for (const step of [0, -0, "0", 0.8]) {
+      const result = interval.offset(date, step);
+      assert.deepStrictEqual(result, new Date("2024-11-03T09:30:00.000Z"));
+      assert.notStrictEqual(result, date);
+    }
+  }
+  assert.deepStrictEqual(date, new Date("2024-11-03T09:30:00.000Z"));
 });

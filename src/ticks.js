@@ -41,6 +41,7 @@ function ticker(year, month, week, day, hour, minute) {
   }
 
   function tickInterval(start, stop, count) {
+    if (stop < start) [start, stop] = [stop, start];
     const target = Math.abs(stop - start) / count;
     const i = bisector(([,, step]) => step).right(tickIntervals, target);
     if (i === tickIntervals.length) return year.every(tickStep(start / durationYear, stop / durationYear, count));

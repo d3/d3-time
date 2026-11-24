@@ -1,4 +1,5 @@
 import assert from "node:assert";
+import process from "node:process";
 import {it} from "vitest";
 import {timeDay, timeDays, timeYear} from "d3-time";
 import {local, utc} from "./date.js";
@@ -186,6 +187,22 @@ it("timeDay.count(start, end) observes daylight saving", () => {
   assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011, 10,  6,  0)), 309);
   assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011, 10,  6,  1)), 309);
   assert.strictEqual(timeDay.count(local(2011,  0,  1), local(2011, 10,  6,  2)), 309);
+});
+
+it("timeDay.count(start, end) counts boundaries when the start day's midnight is skipped by DST", () => {
+  const TZ = process.env.TZ;
+  process.env.TZ = "America/Santiago";
+  try {
+    // In America/Santiago DST starts at midnight on 2025-09-07, so
+    // timeDay.floor of that day is 01:00 rather than 00:00.
+    const start = timeDay.floor(new Date(2025, 8, 7, 12));
+    assert.strictEqual(start.getHours(), 1);
+    assert.strictEqual(timeDay.count(start, timeDay.floor(new Date(2025, 8, 8, 12))), 1);
+    assert.strictEqual(timeDay.count(start, new Date(2025, 8, 17)), 10);
+    assert.strictEqual(timeDay.count(timeDay.floor(new Date(2025, 8, 8, 12)), new Date(2025, 8, 17)), 9);
+  } finally {
+    process.env.TZ = TZ;
+  }
 });
 
 it("timeDay.count(start, stop) does not exhibit floating-point rounding error", () => {

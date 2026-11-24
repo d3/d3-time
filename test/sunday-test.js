@@ -1,4 +1,5 @@
 import assert from "node:assert";
+import process from "node:process";
 import {it} from "vitest";
 import {timeSunday, timeSundays} from "d3-time";
 import {local} from "./date.js";
@@ -153,4 +154,17 @@ it("timeSunday.count(start, end) observes daylight saving", () => {
   assert.strictEqual(timeSunday.count(local(2011,  0,  1), local(2011, 10,  6,  0)), 45);
   assert.strictEqual(timeSunday.count(local(2011,  0,  1), local(2011, 10,  6,  1)), 45);
   assert.strictEqual(timeSunday.count(local(2011,  0,  1), local(2011, 10,  6,  2)), 45);
+});
+
+it("timeSunday.count(start, end) counts boundaries when the start day's midnight is skipped by DST", () => {
+  const TZ = process.env.TZ;
+  process.env.TZ = "America/Santiago";
+  try {
+    const start = timeSunday.floor(new Date(2025, 8, 7, 12));
+    assert.strictEqual(start.getHours(), 1);
+    assert.strictEqual(timeSunday.count(start, new Date(2025, 8, 17)), 1);
+    assert.strictEqual(timeSunday.count(start, new Date(2025, 8, 21)), 2);
+  } finally {
+    process.env.TZ = TZ;
+  }
 });

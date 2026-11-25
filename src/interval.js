@@ -52,7 +52,7 @@ export function timeInterval(floori, offseti, count, field) {
     interval.count = (start, end) => {
       t0.setTime(+start), t1.setTime(+end);
       floori(t0), floori(t1);
-      return Math.floor(count(t0, t1));
+      return Math.round(count(t0, t1));
     };
 
     interval.every = (step) => {
